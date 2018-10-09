@@ -92,7 +92,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"text-align:center\">\r\n  <h1>\r\n    Welcome to {{ title }}!\r\n  </h1>\r\n  <nav>\r\n    <a routerLink=\"register\">Register your first account</a>\r\n    <a routerLink=\"login\">  Sign in</a>\r\n  </nav> -->\r\n<app-menu-bar></app-menu-bar>\r\n<router-outlet></router-outlet>\r\n\r\n"
+module.exports = "<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <nav>\n    <a routerLink=\"register\">Register your first account</a>\n    <a routerLink=\"login\">  Sign in</a>\n  </nav> -->\n<app-menu-bar></app-menu-bar>\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
@@ -260,7 +260,7 @@ var AuthenticateService = /** @class */ (function () {
         localStorage.setItem(this.storageKey, token);
     };
     AuthenticateService.prototype.getToken = function () {
-        console.log('getting token');
+        //console.log('getting token');
         return localStorage.getItem(this.storageKey);
     };
     AuthenticateService.prototype.isLoggedIn = function () {
@@ -306,7 +306,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"ui cards\">\r\n  <div class=\"card\">\r\n    <div class=\"content\">\r\n     \r\n      <div class=\"header\">\r\n        {{customer.firstName}} {{customer.lastName}}\r\n      </div>\r\n      <div class=\"meta\">\r\n        {{customer.phone}}\r\n      </div>\r\n      <div class=\"description\">\r\n        {{customer.email}}\r\n      </div>\r\n    </div>\r\n    <div class=\"extra content\">\r\n      <div class=\"ui two buttons\">\r\n        <button class=\"ui basic green button\">Approve</button>\r\n        <button class=\"ui basic red button\">Decline</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n"
+module.exports = "\n<div class=\"ui cards\">\n  <div class=\"card\">\n    <div class=\"content\">\n     \n      <div class=\"header\">\n        {{customer.firstName}} {{customer.lastName}}\n      </div>\n      <div class=\"meta\">\n        {{customer.phone}}\n      </div>\n      <div class=\"description\">\n        {{customer.email}}\n      </div>\n    </div>\n    <ng-content select=\"[buttons]\"></ng-content>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -321,6 +321,7 @@ module.exports = "\r\n<div class=\"ui cards\">\r\n  <div class=\"card\">\r\n    
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomerItemComponent", function() { return CustomerItemComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _customer_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../customer.service */ "./src/app/customer.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -331,8 +332,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var CustomerItemComponent = /** @class */ (function () {
-    function CustomerItemComponent() {
+    function CustomerItemComponent(customers) {
+        this.customers = customers;
+        // @Output() deleted = new EventEmitter();
         this.columnClass = 'four wide column';
     }
     CustomerItemComponent.prototype.ngOnInit = function () {
@@ -351,7 +355,7 @@ var CustomerItemComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./customer-item.component.html */ "./src/app/customer-item/customer-item.component.html"),
             styles: [__webpack_require__(/*! ./customer-item.component.css */ "./src/app/customer-item/customer-item.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_customer_service__WEBPACK_IMPORTED_MODULE_1__["CustomerService"]])
     ], CustomerItemComponent);
     return CustomerItemComponent;
 }());
@@ -367,7 +371,7 @@ var CustomerItemComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\r\n  margin-top: 50px;\r\n}\r\n/* .selected {\r\n    background-color: #CFD8DC !important;\r\n    color: white;\r\n  }\r\n  .customers {\r\n    margin: 0 0 2em 0;\r\n    list-style-type: none;\r\n    padding: 0;\r\n    width: 15em;\r\n  }\r\n  .customers li {\r\n    cursor: pointer;\r\n    position: relative;\r\n    left: 0;\r\n    background-color: #EEE;\r\n    margin: .5em;\r\n    padding: .3em 0;\r\n    height: 1.6em;\r\n    border-radius: 4px;\r\n  }\r\n  .customers li.selected:hover {\r\n    background-color: #BBD8DC !important;\r\n    color: white;\r\n  }\r\n  .customers li:hover {\r\n    color: #607D8B;\r\n    background-color: #DDD;\r\n    left: .1em;\r\n  }\r\n  .customers .text {\r\n    position: relative;\r\n    top: -3px;\r\n  }\r\n  .customers .badge {\r\n    display: inline-block;\r\n    font-size: small;\r\n    color: white;\r\n    padding: 0.8em 0.7em 0 0.7em;\r\n    background-color: #607D8B;\r\n    line-height: 1em;\r\n    position: relative;\r\n    left: -1px;\r\n    top: -4px;\r\n    height: 1.8em;\r\n    margin-right: .8em;\r\n    border-radius: 4px 0 0 4px;\r\n  } */\r\n \r\n  "
+module.exports = ".container {\n  margin-top: 50px;\n}\n/* .selected {\n    background-color: #CFD8DC !important;\n    color: white;\n  }\n  .customers {\n    margin: 0 0 2em 0;\n    list-style-type: none;\n    padding: 0;\n    width: 15em;\n  }\n  .customers li {\n    cursor: pointer;\n    position: relative;\n    left: 0;\n    background-color: #EEE;\n    margin: .5em;\n    padding: .3em 0;\n    height: 1.6em;\n    border-radius: 4px;\n  }\n  .customers li.selected:hover {\n    background-color: #BBD8DC !important;\n    color: white;\n  }\n  .customers li:hover {\n    color: #607D8B;\n    background-color: #DDD;\n    left: .1em;\n  }\n  .customers .text {\n    position: relative;\n    top: -3px;\n  }\n  .customers .badge {\n    display: inline-block;\n    font-size: small;\n    color: white;\n    padding: 0.8em 0.7em 0 0.7em;\n    background-color: #607D8B;\n    line-height: 1em;\n    position: relative;\n    left: -1px;\n    top: -4px;\n    height: 1.8em;\n    margin-right: .8em;\n    border-radius: 4px 0 0 4px;\n  } */\n \n  "
 
 /***/ }),
 
@@ -378,7 +382,7 @@ module.exports = ".container {\r\n  margin-top: 50px;\r\n}\r\n/* .selected {\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui container\">\r\n  <div class=\"ui grid\">\r\n    <app-customer-item *ngFor=\"let customer of customers | async\" [customer]=\"customer\"></app-customer-item>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"ui container\">\n    <div class=\"ui grid\">\n          <app-customer-item *ngFor=\"let customer of customers\" [customer]=\"customer\">\n            <div class=\"extra content\" buttons>\n              <div class=\"ui three buttons\">\n              <button class=\"ui basic green button\">Approve</button>\n              <a routerLink=\"/login\"><button class=\"ui basic blue button\">Modify</button></a>\n              <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n              </div>\n           </div>\n          </app-customer-item>\n          <p>test out</p>\n      </div>\n  <!-- <div class=\"ui grid\">\n    <app-customer-item *ngFor=\"let customer of customers | async\" [customer]=\"customer\">\n      <p>test</p>\n      <div class=\"extra content\">\n         <div class=\"ui three buttons\">\n         <button class=\"ui basic green button\">Approve</button>\n         <a routerLink=\"/login\"><button class=\"ui basic blue button\">Modify</button></a>\n         <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Decline</button>\n         </div>\n      </div>\n    </app-customer-item>\n  </div> -->\n</div>"
 
 /***/ }),
 
@@ -410,10 +414,22 @@ var CustomerListComponent = /** @class */ (function () {
         this.customerService = customerService;
     }
     CustomerListComponent.prototype.getCustomers = function () {
-        this.customers = this.customerService.getCustomers();
+        var _this = this;
+        console.log("getting customers!");
+        this.customerService.getCustomers().subscribe(function (customers) { return _this.customers = customers; });
     };
     CustomerListComponent.prototype.ngOnInit = function () {
         this.getCustomers();
+    };
+    CustomerListComponent.prototype.deleteCustomer = function (id) {
+        var _this = this;
+        console.log("customer id: " + id);
+        // this.customerService.deleteCustomer(id).subscribe();
+        this.customerService.deleteCustomer(id).subscribe(function (data) {
+            console.log("esdf");
+            _this.getCustomers();
+        });
+        console.log("blabla");
     };
     CustomerListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -476,6 +492,14 @@ var CustomerService = /** @class */ (function () {
     CustomerService.prototype.postCustomers = function (customer) {
         return this.http.post(this.registerUrl, customer, this.httpOptions);
     };
+    CustomerService.prototype.deleteCustomer = function (id) {
+        var url = this.uri + "/" + id; // DELETE api/heroes/42
+        console.log(url);
+        return this.http.delete(url, this.httpOptions);
+        // .pipe(
+        //   catchError(this.handleError('deleteHero'))
+        // );
+    };
     CustomerService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -507,7 +531,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"join-container\">\r\n  <Form>\r\n    <div class=\"field\">\r\n      <label>First Name</label>\r\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\r\n    </div>\r\n    <div class=\"field\">\r\n      <label>Last Name</label>\r\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\r\n    </div>\r\n    <div class=\"field\">\r\n      <label>Phone</label>\r\n      <input type=\"text\" name=\"Phone\" placeholder=\"Phone\" ngModel>\r\n    </div>\r\n    <div class=\"field\">\r\n      <label>Email</label>\r\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel>\r\n    </div>\r\n    <div class=\"field\">\r\n      <label>Address</label>\r\n      <input type=\"text\" name=\"address\" placeholder=\"Address\" ngModel>\r\n    </div>\r\n    <div class=\"field\">\r\n      <label>Date of Birth</label>\r\n      <input type=\"text\" name=\"dob\" placeholder=\"DOB\" ngModel>\r\n    </div>\r\n\r\n    <button type=\"submit\" class=\"btn-success\">Regster</button>\r\n    \r\n  </Form>\r\n</div>"
+module.exports = "<div class=\"join-container\">\n  <Form>\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"Phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Address</label>\n      <input type=\"text\" name=\"address\" placeholder=\"Address\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Date of Birth</label>\n      <input type=\"text\" name=\"dob\" placeholder=\"DOB\" ngModel>\n    </div>\n\n    <button type=\"submit\" class=\"btn-success\">Regster</button>\n    \n  </Form>\n</div>"
 
 /***/ }),
 
@@ -559,7 +583,7 @@ var JoinMemberFormComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".login-container {\r\n    max-width: 500px;\r\n    margin: 50px auto;\r\n  }"
+module.exports = ".login-container {\n    max-width: 500px;\n    margin: 50px auto;\n  }"
 
 /***/ }),
 
@@ -570,7 +594,7 @@ module.exports = ".login-container {\r\n    max-width: 500px;\r\n    margin: 50p
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"login-container\">\r\n  <form class=\"ui big form\" #loginForm=\"ngForm\" (ngSubmit)=\"onSubmit(loginForm)\">\r\n    <div class=\"field\">\r\n    <label>Username</label>\r\n    <input type=\"text\" name=\"username\" placeholder=\"Enter your username\" ngModel>\r\n  </div>\r\n  <div class=\"field\">\r\n    <label>Password</label>\r\n    <input type=\"password\" name=\"password\" placeholder=\"Enter your password\" ngModel>\r\n  </div>\r\n  \r\n  <button type=\"submit\" class=\"ui primary button float right floated\">Login</button>\r\n  </form>\r\n  </div>\r\n  "
+module.exports = "<div class=\"login-container\">\n  <form class=\"ui big form\" #loginForm=\"ngForm\" (ngSubmit)=\"onSubmit(loginForm)\">\n    <div class=\"field\">\n    <label>Username</label>\n    <input type=\"text\" name=\"username\" placeholder=\"Enter your username\" ngModel>\n  </div>\n  <div class=\"field\">\n    <label>Password</label>\n    <input type=\"password\" name=\"password\" placeholder=\"Enter your password\" ngModel>\n  </div>\n  \n  <button type=\"submit\" class=\"ui primary button float right floated\">Login</button>\n  </form>\n  </div>\n  "
 
 /***/ }),
 
@@ -658,7 +682,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui menu header\">\r\n  <div class=\"ui container\">\r\n    <div class=\"item\">\r\n      <a routerLink=\"../customers\" aria-label=\"Customer Dashboard\">\r\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\r\n      </a>\r\n    </div>\r\n      <div class=\"header item\">\r\n        <h1>Customer Dashboard</h1>\r\n      </div>\r\n      <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\">\r\n        <a routerLink=\"../register\">\r\n        <button class=\"ui basic button\">\r\n          <i class=\"add user icon\" aria-hideen=\"true\">\r\n            Sign Up\r\n          </i>\r\n        </button>\r\n        </a>\r\n        <!-- <div class=\"item\"> -->\r\n          <a routerLink=\"../login\">\r\n          <button class=\"ui basic button\">\r\n            <i class=\"add user icon\" aria-hideen=\"true\">\r\n              Sign In\r\n            </i>\r\n          </button>\r\n          </a>\r\n      <!-- </div> -->\r\n    </div>\r\n    <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\">\r\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\r\n    </div>\r\n  </div>\r\n  </div>\r\n\r\n"
+module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container\">\n    <div class=\"item\">\n      <a routerLink=\"../customers\" aria-label=\"Customer Dashboard\">\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n      </a>\n    </div>\n      <div class=\"header item\">\n        <h1>Customer Dashboard</h1>\n      </div>\n      <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\">\n        <a routerLink=\"../register\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign Up\n          </i>\n        </button>\n        </a>\n        <!-- <div class=\"item\"> -->\n          <a routerLink=\"../login\">\n          <button class=\"ui basic button\">\n            <i class=\"add user icon\" aria-hideen=\"true\">\n              Sign In\n            </i>\n          </button>\n          </a>\n      <!-- </div> -->\n    </div>\n    <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\">\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n    </div>\n  </div>\n  </div>\n\n"
 
 /***/ }),
 
@@ -716,7 +740,7 @@ var MenuBarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".register-container {\r\n    max-width: 500px;\r\n    margin: 50px auto;\r\n  }"
+module.exports = ".register-container {\n    max-width: 500px;\n    margin: 50px auto;\n  }"
 
 /***/ }),
 
@@ -727,7 +751,7 @@ module.exports = ".register-container {\r\n    max-width: 500px;\r\n    margin: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"register-container\">\r\n  <form class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\r\n    <div class=\"field\">\r\n      <label>First Name</label>\r\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\r\n    </div>\r\n    <div class=\"field\">\r\n      <label>Last Name</label>\r\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\r\n    </div>\r\n    <div class=\"field\">\r\n      <label>Phone</label>\r\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\r\n    </div>\r\n    <div class=\"field\">\r\n      <label>Email</label>\r\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel>\r\n    </div>\r\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\r\n  </form>\r\n</div>"
+module.exports = "<div class=\"register-container\">\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email>\n      \n    </div>\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n  </form>\n\n</div>"
 
 /***/ }),
 
@@ -856,7 +880,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\samh1\Desktop\aipSam\GymApp\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/newAIP/AIP/NewAIP/aip/src/main.ts */"./src/main.ts");
 
 
 /***/ })

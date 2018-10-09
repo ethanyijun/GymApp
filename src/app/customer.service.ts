@@ -36,12 +36,15 @@ export class CustomerService {
     return this.http.post<Customer>(this.registerUrl, customer, this.httpOptions);
   }
 
-  // deleteCustomer (id: number): Observable<{}> {
-  //   const url = `${this.uri}/${id}`; // DELETE api/heroes/42
-  //   return this.http.delete(url, this.httpOptions);
-  //     // .pipe(
-  //     //   catchError(this.handleError('deleteHero'))
-  //     // );
-  // }
+  deleteCustomer (id: string): Observable<{}> {
+    const url = `${this.uri}/${id}`; // DELETE api/heroes/42
+    console.log(url);
+    return this.http.delete(url, this.httpOptions);
+    
+      // .pipe(
+      //   catchError(this.handleError('deleteHero'))
+      // );
+  }
 
+  
 }

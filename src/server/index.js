@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectID;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const checkJwt = require('express-jwt');
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 require('dotenv').config();
 
 let database;
+//fvar ObjectId = require('mongodb').ObjectID;
 
 MongoClient.connect(process.env.DB_CONN, (err, client) => {
 
@@ -25,15 +27,16 @@ MongoClient.connect(process.env.DB_CONN, (err, client) => {
         app.listen(4200, () => {
         const myAwesomeDB = client.db();
 
+        
         database = myAwesomeDB;
         console.log('listenning on port 4200...');
 
     });
 });
 
-app.use(checkJwt({ secret: process.env.JWT_SECRET })
-.unless({ path: ['/login','/register']
-          }));
+// app.use(checkJwt({ secret: process.env.JWT_SECRET })
+// .unless({ path: ['/login','/register', '/customer/:id']
+//           }));
 
 app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
@@ -99,15 +102,15 @@ app.get('*', (req, res) => {
     return res.sendFile(path.join(__dirname, 'public/index.html'));
   });
 
-// app.delete('/customers/:id', (req, res) => {
-//     let query = {_id: req.params.id};
+app.delete('/customers/:id', (req, res) => {
+ // let query = {_id: this.ObjectID(req.param.id)};
 
-//     const customersCollection = database.collection('customers');
-
-//     customersCollection.remove(query, (err, customer) => {
-//         if(err){
-//         return res.send(err);
-//         }
-//         return res.json(customer);
-//     });
-// });
+    const customersCollection = database.collection('customers');
+    //console.log("id in js: " + req.params.id);
+    customersCollection.deleteOne({ _id : ObjectId(req.params.id)},function(err,customer){
+        if(err){
+            res.send(err);
+        }
+        res.json(customer);
+    });
+});

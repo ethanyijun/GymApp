@@ -40,7 +40,7 @@ export class AuthenticateService {
   }
 
   getToken() {
-    console.log('getting token');
+    //console.log('getting token');
     return localStorage.getItem(this.storageKey);
   }
 

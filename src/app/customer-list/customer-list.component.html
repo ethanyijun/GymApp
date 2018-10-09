@@ -1,5 +1,25 @@
 <div class="ui container">
-  <div class="ui grid">
-    <app-customer-item *ngFor="let customer of customers | async" [customer]="customer"></app-customer-item>
-  </div>
+    <div class="ui grid">
+          <app-customer-item *ngFor="let customer of customers" [customer]="customer">
+            <div class="extra content" buttons>
+              <div class="ui three buttons">
+              <button class="ui basic green button">Approve</button>
+              <a routerLink="/login"><button class="ui basic blue button">Modify</button></a>
+              <button class="ui basic red button" (click)="deleteCustomer(customer._id)">Delete</button>
+              </div>
+           </div>
+          </app-customer-item>
+      </div>
+  <!-- <div class="ui grid">
+    <app-customer-item *ngFor="let customer of customers | async" [customer]="customer">
+      <p>test</p>
+      <div class="extra content">
+         <div class="ui three buttons">
+         <button class="ui basic green button">Approve</button>
+         <a routerLink="/login"><button class="ui basic blue button">Modify</button></a>
+         <button class="ui basic red button" (click)="deleteCustomer(customer._id)">Decline</button>
+         </div>
+      </div>
+    </app-customer-item>
+  </div> -->
 </div>
