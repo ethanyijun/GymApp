@@ -8,7 +8,8 @@
     "start:server": "node src/server/index.js",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
@@ -26,11 +27,12 @@
     "core-js": "^2.5.4",
     "dotenv": "^6.0.0",
     "eslint": "^5.5.0",
-    "express": "^5.0.0-alpha.2",
+    "express": "^5.0.0-alpha.6",
     "express-jwt": "^5.3.1",
     "jsonwebtoken": "^8.3.0",
     "mongodb": "^3.1.4",
     "ng2-semantic-ui": "^0.9.7",
+    "path": "^0.12.7",
     "rxjs": "^6.0.0",
     "watch": "^1.0.2",
     "zone.js": "~0.8.26"
@@ -44,6 +46,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "enhanced-resolve": "^3.3.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
@@ -55,5 +58,9 @@
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
     "typescript": "~2.7.2"
+  },
+  "engines": {
+    "node": "8.11.3",
+    "npm": "6.4.1"
   }
 }
