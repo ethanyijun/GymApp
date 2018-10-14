@@ -36,7 +36,13 @@ export class CustomerItemComponent implements OnInit {
   }
 
   save(): void {
-    this.customers.updateCustomer(this.customer)
+    let id;
+    this.route.params.subscribe(params => {
+       id = params['id'];
+      console.log(params['id']) //log the value of id
+    });
+   //console.log("customer to be updated: "+this.customer.firstName);
+    this.customers.updateCustomer(this.customer,id)
       .subscribe(() => this.goBack());
   }
   // this.customerService.deleteCustomer(customer.id).subscribe();

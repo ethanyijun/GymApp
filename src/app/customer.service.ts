@@ -55,8 +55,10 @@ export class CustomerService {
     );
   }
 
-  updateCustomer(customer: Customer): Observable<Customer> {
-    return this.http.put(this.url, customer, this.httpOptions).pipe(
+  updateCustomer(customer: Customer, id: string): Observable<Customer> {
+    const url = `${this.url}/${id}`;
+    console.log("======"+url);
+    return this.http.put(url, customer, this.httpOptions).pipe(
       tap(_ => this.log(`updated Customer`)),
       catchError(this.handleError<any>('updateCustomer'))
     );

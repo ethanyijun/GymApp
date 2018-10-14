@@ -12,7 +12,10 @@ const checkJwt = require('express-jwt');
 //const buildExpress = require('./express');
 
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 require('dotenv').config();
 
@@ -56,9 +59,23 @@ app.get('/customers', (req, res) => {
 // get one customer
 app.get('/customers/:id', (req, res) => {
     const customersCollection = database.collection('customers');
-    console.log("js: "+req.params.id);
+   // console.log("js: "+req.params.id);
     customersCollection.findOne({ _id : ObjectId(req.params.id)},function(err,customer){
-        console.log("js: "+req.params.id);
+     //   console.log("js: "+req.params.id);
+        return res.json(customer);
+    });
+});
+
+// update one customer
+app.put('/customers/:id', (req, res) => {
+    const customersCollection = database.collection('customers');
+    const updatedCustomer = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email
+      };
+
+    customersCollection.findOneAndUpdate({ _id : ObjectId(req.params.id)}, { $set: updatedCustomer } ,function(err,customer){
         return res.json(customer);
     });
 });

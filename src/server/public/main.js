@@ -364,7 +364,13 @@ var CustomerItemComponent = /** @class */ (function () {
     };
     CustomerItemComponent.prototype.save = function () {
         var _this = this;
-        this.customers.updateCustomer(this.customer)
+        var id;
+        this.route.params.subscribe(function (params) {
+            id = params['id'];
+            console.log(params['id']); //log the value of id
+        });
+        //console.log("customer to be updated: "+this.customer.firstName);
+        this.customers.updateCustomer(this.customer, id)
             .subscribe(function () { return _this.goBack(); });
     };
     __decorate([
@@ -540,9 +546,11 @@ var CustomerService = /** @class */ (function () {
         console.log("getting: " + url);
         return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("fetched customer id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError("getCustomer id=" + id)));
     };
-    CustomerService.prototype.updateCustomer = function (customer) {
+    CustomerService.prototype.updateCustomer = function (customer, id) {
         var _this = this;
-        return this.http.put(this.url, customer, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("updated Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('updateCustomer')));
+        var url = this.url + "/" + id;
+        console.log("======" + url);
+        return this.http.put(url, customer, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("updated Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('updateCustomer')));
     };
     CustomerService.prototype.handleError = function (operation, result) {
         var _this = this;
