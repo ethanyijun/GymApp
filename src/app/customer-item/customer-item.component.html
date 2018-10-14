@@ -1,18 +1,26 @@
 
-<div class="ui cards">
-  <div class="card">
-    <div class="content">
-     
-      <div class="header">
-        {{customer.firstName}} {{customer.lastName}}
-      </div>
-      <div class="meta">
-        {{customer.phone}}
-      </div>
-      <div class="description">
-        {{customer.email}}
-      </div>
-    </div>
-    <ng-content select="[buttons]"></ng-content>
-  </div>
+<div class="ui container">
+        <div *ngIf="customer">
+            <h2> {{customer.firstName}} {{customer.lastName}} Details</h2>
+            <div>
+              <label>First name:
+                <input [(ngModel)]="customer.firstName" placeholder="firstName"/>
+              </label>
+            </div>
+            <div>
+                <label>Last name:
+                  <input [(ngModel)]="customer.lastName" placeholder="lastName"/>
+                </label>
+              </div>
+            <div>
+                <label>email:
+                  <input [(ngModel)]="customer.email" placeholder="email"/>
+                </label>
+            </div>
+
+            <button (click)="goBack()">go back</button>
+            <button (click)="save()">save</button>
+          </div>
 </div>
+      
+        

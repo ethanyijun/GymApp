@@ -38,6 +38,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
 /* harmony import */ var _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./customer-list/customer-list.component */ "./src/app/customer-list/customer-list.component.ts");
+/* harmony import */ var _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./customer-item/customer-item.component */ "./src/app/customer-item/customer-item.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -49,14 +50,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     { path: '', redirectTo: 'register', pathMatch: 'full' },
     { path: 'register', component: _register_register_component__WEBPACK_IMPORTED_MODULE_2__["RegisterComponent"] },
     { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
-    { path: 'customers', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] }
-    // {path: 'member-form', component: JoinMemberFormComponent}
-    // {path: 'customer-item', component: CustomerItemComponent}
-    // {path: 'customers', component: CustomerListComponent},
+    { path: 'customers', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] },
+    { path: 'detail/:id', component: _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_5__["CustomerItemComponent"] },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -306,7 +306,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui cards\">\n  <div class=\"card\">\n    <div class=\"content\">\n     \n      <div class=\"header\">\n        {{customer.firstName}} {{customer.lastName}}\n      </div>\n      <div class=\"meta\">\n        {{customer.phone}}\n      </div>\n      <div class=\"description\">\n        {{customer.email}}\n      </div>\n    </div>\n    <ng-content select=\"[buttons]\"></ng-content>\n  </div>\n</div>\n"
+module.exports = "\n<div class=\"ui container\">\n        <div *ngIf=\"customer\">\n            <h2> {{customer.firstName}} {{customer.lastName}} Details</h2>\n            <div>\n              <label>First name:\n                <input [(ngModel)]=\"customer.firstName\" placeholder=\"firstName\"/>\n              </label>\n            </div>\n            <div>\n                <label>Last name:\n                  <input [(ngModel)]=\"customer.lastName\" placeholder=\"lastName\"/>\n                </label>\n              </div>\n            <div>\n                <label>email:\n                  <input [(ngModel)]=\"customer.email\" placeholder=\"email\"/>\n                </label>\n            </div>\n\n            <button (click)=\"goBack()\">go back</button>\n            <button (click)=\"save()\">save</button>\n          </div>\n</div>\n      \n        "
 
 /***/ }),
 
@@ -322,6 +322,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomerItemComponent", function() { return CustomerItemComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _customer_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../customer.service */ "./src/app/customer.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -333,13 +335,37 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var CustomerItemComponent = /** @class */ (function () {
-    function CustomerItemComponent(customers) {
+    function CustomerItemComponent(customers, route, location) {
         this.customers = customers;
+        this.route = route;
+        this.location = location;
         // @Output() deleted = new EventEmitter();
         this.columnClass = 'four wide column';
     }
     CustomerItemComponent.prototype.ngOnInit = function () {
+        this.getCustomer();
+    };
+    CustomerItemComponent.prototype.getCustomer = function () {
+        var _this = this;
+        var id;
+        this.route.params.subscribe(function (params) {
+            id = params['id'];
+            console.log(params['id']); //log the value of id
+        });
+        //  console.log("getting customer id: "+id);
+        this.customers.getCustomer(id)
+            .subscribe(function (customer) { return _this.customer = customer; });
+    };
+    CustomerItemComponent.prototype.goBack = function () {
+        this.location.back();
+    };
+    CustomerItemComponent.prototype.save = function () {
+        var _this = this;
+        this.customers.updateCustomer(this.customer)
+            .subscribe(function () { return _this.goBack(); });
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -351,11 +377,12 @@ var CustomerItemComponent = /** @class */ (function () {
     ], CustomerItemComponent.prototype, "columnClass", void 0);
     CustomerItemComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-customer-item',
             template: __webpack_require__(/*! ./customer-item.component.html */ "./src/app/customer-item/customer-item.component.html"),
             styles: [__webpack_require__(/*! ./customer-item.component.css */ "./src/app/customer-item/customer-item.component.css")]
         }),
-        __metadata("design:paramtypes", [_customer_service__WEBPACK_IMPORTED_MODULE_1__["CustomerService"]])
+        __metadata("design:paramtypes", [_customer_service__WEBPACK_IMPORTED_MODULE_1__["CustomerService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"]])
     ], CustomerItemComponent);
     return CustomerItemComponent;
 }());
@@ -382,7 +409,7 @@ module.exports = ".container {\n  margin-top: 50px;\n}\n/* .selected {\n    back
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui container\">\n    <div class=\"ui grid\">\n          <app-customer-item *ngFor=\"let customer of customers\" [customer]=\"customer\">\n            <div class=\"extra content\" buttons>\n              <div class=\"ui three buttons\">\n              <button class=\"ui basic green button\">Approve</button>\n              <a routerLink=\"/login\"><button class=\"ui basic blue button\">Modify</button></a>\n              <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n              </div>\n           </div>\n          </app-customer-item>\n          <p>test out</p>\n      </div>\n  <!-- <div class=\"ui grid\">\n    <app-customer-item *ngFor=\"let customer of customers | async\" [customer]=\"customer\">\n      <p>test</p>\n      <div class=\"extra content\">\n         <div class=\"ui three buttons\">\n         <button class=\"ui basic green button\">Approve</button>\n         <a routerLink=\"/login\"><button class=\"ui basic blue button\">Modify</button></a>\n         <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Decline</button>\n         </div>\n      </div>\n    </app-customer-item>\n  </div> -->\n</div>"
+module.exports = "<div class=\"ui container\">\n    <div class=\"ui grid\">\n      <div *ngFor=\"let customer of customers\">         \n        <div class=\"ui cards\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <div class=\"meta\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <div class=\"description\">\n                  {{customer.email}}\n            </div>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui three buttons\">\n                  <button class=\"ui basic green button\">Approve</button>\n                <a routerLink=\"/detail/{{customer._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                  <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n                </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -457,8 +484,11 @@ var CustomerListComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomerService", function() { return CustomerService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _authenticate_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./authenticate.service */ "./src/app/authenticate.service.ts");
+/* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message.service */ "./src/app/message.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _authenticate_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./authenticate.service */ "./src/app/authenticate.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -472,39 +502,70 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-// import 'rxjs/add/operator/map';
+
+
+
+// import 'rxjs/add/operator/map';import { catchError, map, tap } from 'rxjs/operators';
 // import { Http, Response } from '@angular/http';
 var CustomerService = /** @class */ (function () {
-    function CustomerService(http, authenticate) {
+    function CustomerService(http, authenticate, messageService) {
         this.http = http;
         this.authenticate = authenticate;
-        this.uri = 'http://localhost:4200/customers';
+        this.messageService = messageService;
+        this.url = 'http://localhost:4200/customers';
         this.registerUrl = '/register';
         this.httpOptions = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
                 'Content-Type': 'application/json'
             })
         };
     }
     CustomerService.prototype.getCustomers = function () {
-        return this.http.get(this.uri, this.authenticate.getAuthorizationOptions());
+        return this.http.get(this.url, this.authenticate.getAuthorizationOptions());
     };
     CustomerService.prototype.postCustomers = function (customer) {
         return this.http.post(this.registerUrl, customer, this.httpOptions);
     };
     CustomerService.prototype.deleteCustomer = function (id) {
-        var url = this.uri + "/" + id; // DELETE api/heroes/42
+        var url = this.url + "/" + id; // DELETE api/heroes/42
         console.log(url);
         return this.http.delete(url, this.httpOptions);
         // .pipe(
         //   catchError(this.handleError('deleteHero'))
         // );
     };
+    CustomerService.prototype.getCustomer = function (id) {
+        var _this = this;
+        var url = this.url + "/" + id;
+        console.log("getting: " + url);
+        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("fetched customer id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError("getCustomer id=" + id)));
+    };
+    CustomerService.prototype.updateCustomer = function (customer) {
+        var _this = this;
+        return this.http.put(this.url, customer, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("updated Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('updateCustomer')));
+    };
+    CustomerService.prototype.handleError = function (operation, result) {
+        var _this = this;
+        if (operation === void 0) { operation = 'operation'; }
+        return function (error) {
+            // TODO: send the error to remote logging infrastructure
+            console.error(error); // log to console instead
+            // TODO: better job of transforming error for user consumption
+            _this.log(operation + " failed: " + error.message);
+            // Let the app keep running by returning an empty result.
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(result);
+        };
+    };
+    /** Log a HeroService message with the MessageService */
+    CustomerService.prototype.log = function (message) {
+        this.messageService.add("HeroService: " + message);
+    };
     CustomerService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _authenticate_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticateService"]])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], _authenticate_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticateService"],
+            _message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"]])
     ], CustomerService);
     return CustomerService;
 }());
@@ -727,6 +788,44 @@ var MenuBarComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_authenticate_service__WEBPACK_IMPORTED_MODULE_1__["AuthenticateService"]])
     ], MenuBarComponent);
     return MenuBarComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/message.service.ts":
+/*!************************************!*\
+  !*** ./src/app/message.service.ts ***!
+  \************************************/
+/*! exports provided: MessageService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageService", function() { return MessageService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var MessageService = /** @class */ (function () {
+    function MessageService() {
+        this.messages = [];
+    }
+    MessageService.prototype.add = function (message) {
+        this.messages.push(message);
+    };
+    MessageService.prototype.clear = function () {
+        this.messages = [];
+    };
+    MessageService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' })
+    ], MessageService);
+    return MessageService;
 }());
 
 

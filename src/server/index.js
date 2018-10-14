@@ -53,6 +53,16 @@ app.get('/customers', (req, res) => {
     })
 });
 
+// get one customer
+app.get('/customers/:id', (req, res) => {
+    const customersCollection = database.collection('customers');
+    console.log("js: "+req.params.id);
+    customersCollection.findOne({ _id : ObjectId(req.params.id)},function(err,customer){
+        console.log("js: "+req.params.id);
+        return res.json(customer);
+    });
+});
+
 //register a new customer card
 app.post('/register', (req, res) => {
     const customer = req.body;

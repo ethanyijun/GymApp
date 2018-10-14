@@ -15,8 +15,9 @@ const routes: Routes = [
 
   {path: 'login', component: LoginComponent },
 
-  {path: 'customers', component: CustomerListComponent }
+  {path: 'customers', component: CustomerListComponent },
 
+  { path: 'detail/:id', component: CustomerItemComponent },
 // {path: 'member-form', component: JoinMemberFormComponent}
 
  // {path: 'customer-item', component: CustomerItemComponent}
