@@ -81,7 +81,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ":host {\n    display: flex;\n    font-family: Arial, Helvetica, sans-serif;\n    min-height: 100%;\n  }\n  nav {\n    display: flex;\n    flex-direction: column;\n    width: 68px;\n    background-color: #53ace4;\n  }\n  nav .icon {\n    width: 48px;\n    height: 48px;\n    margin: 10px;\n  }\n  section {\n    width: 100%;\n    background-color: #32435b;\n  }\n  section > header {\n    color: #ffffff;\n    padding: 10px;\n  }\n  section > header > h1 {\n    font-size: 2em;\n  }\n  section > header .description {\n    font-style: italic;\n  }"
 
 /***/ }),
 
@@ -92,7 +92,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <nav>\n    <a routerLink=\"register\">Register your first account</a>\n    <a routerLink=\"login\">  Sign in</a>\n  </nav> -->\n<app-menu-bar></app-menu-bar>\n<router-outlet></router-outlet>\n\n"
+module.exports = "<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <nav>\n    <a routerLink=\"register\">Register your first account</a>\n    <a routerLink=\"login\">  Sign in</a>\n  </nav> -->\n  <nav>\n    <a routerLink=\"/lose_weight\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a>\n    <a routerLink=\"/gain_weight\">\n      <img src=\"../assets/media/2.png\" class=\"icon\" />\n    </a>\n    <a routerLink=\"/yoga\">\n      <img src=\"../assets/media/3.png\" class=\"icon\" />\n    </a>\n  </nav>\n  <!-- <section>\n    <header>\n      <h1>Customer Watch List</h1>\n      <p class=\"description\">Keeping track of the customer.</p>\n    </header>\n  </section> -->\n<app-menu-bar></app-menu-bar>\n\n<!-- \n<app-menu-bar></app-menu-bar>\n<router-outlet></router-outlet> -->\n\n"
 
 /***/ }),
 
@@ -751,7 +751,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container\">\n    <div class=\"item\">\n      <a routerLink=\"../customers\" aria-label=\"Customer Dashboard\">\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n      </a>\n    </div>\n      <div class=\"header item\">\n        <h1>Customer Dashboard</h1>\n      </div>\n      <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\">\n        <a routerLink=\"../register\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign Up\n          </i>\n        </button>\n        </a>\n        <!-- <div class=\"item\"> -->\n          <a routerLink=\"../login\">\n          <button class=\"ui basic button\">\n            <i class=\"add user icon\" aria-hideen=\"true\">\n              Sign In\n            </i>\n          </button>\n          </a>\n      <!-- </div> -->\n    </div>\n    <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\">\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n    </div>\n  </div>\n  </div>\n\n"
+module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container\">\n\n        <div class=\"item\">\n            <a routerLink=\"../customers\" aria-label=\"Customer Dashboard\">\n              <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n            </a>\n          </div>\n            <div class=\"header item\">\n              <h1>Customer Dashboard</h1>\n            </div>\n            <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\">\n              <a routerLink=\"../register\">\n              <button class=\"ui basic button\">\n                <i class=\"add user icon\" aria-hideen=\"true\">\n                  Sign Up\n                </i>\n              </button>\n              </a>\n              <!-- <div class=\"item\"> -->\n                <a routerLink=\"../login\">\n                <button class=\"ui basic button\">\n                  <i class=\"add user icon\" aria-hideen=\"true\">\n                    Sign In\n                  </i>\n                </button>\n                </a>\n            <!-- </div> -->\n          </div>\n          <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\">\n            <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n          </div>\n  \n\n  </div>\n\n   \n</div>\n\n<div class=\"ui container\">\n    <router-outlet></router-outlet> \n</div>\n\n"
 
 /***/ }),
 
@@ -858,7 +858,7 @@ module.exports = ".register-container {\n    max-width: 500px;\n    margin: 50px
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"register-container\">\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email>\n      \n    </div>\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n  </form>\n\n</div>"
+module.exports = "<div class=\"register-container\">\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email>\n      \n    </div>\n    <div class=\"inline fields\">\n        <label>Interested training plan:</label>\n          <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n          <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n          <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n    </div>\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n  </form>\n\n</div>"
 
 /***/ }),
 

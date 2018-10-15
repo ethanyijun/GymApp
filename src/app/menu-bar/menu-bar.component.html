@@ -1,34 +1,43 @@
 <div class="ui menu header">
   <div class="ui container">
-    <div class="item">
-      <a routerLink="../customers" aria-label="Customer Dashboard">
-        <i class="icon users large blue" aria-hidden="true"></i>
-      </a>
-    </div>
-      <div class="header item">
-        <h1>Customer Dashboard</h1>
-      </div>
-      <div class="item" *ngIf="authenticate.isLoggedOut()">
-        <a routerLink="../register">
-        <button class="ui basic button">
-          <i class="add user icon" aria-hideen="true">
-            Sign Up
-          </i>
-        </button>
-        </a>
-        <!-- <div class="item"> -->
-          <a routerLink="../login">
-          <button class="ui basic button">
-            <i class="add user icon" aria-hideen="true">
-              Sign In
-            </i>
-          </button>
-          </a>
-      <!-- </div> -->
-    </div>
-    <div class="right menu" *ngIf="authenticate.isLoggedIn()">
-      <button class="ui primary button logout" (click)="logout()">logout</button>
-    </div>
+
+        <div class="item">
+            <a routerLink="../customers" aria-label="Customer Dashboard">
+              <i class="icon users large blue" aria-hidden="true"></i>
+            </a>
+          </div>
+            <div class="header item">
+              <h1>Customer Dashboard</h1>
+            </div>
+            <div class="item" *ngIf="authenticate.isLoggedOut()">
+              <a routerLink="../register">
+              <button class="ui basic button">
+                <i class="add user icon" aria-hideen="true">
+                  Sign Up
+                </i>
+              </button>
+              </a>
+              <!-- <div class="item"> -->
+                <a routerLink="../login">
+                <button class="ui basic button">
+                  <i class="add user icon" aria-hideen="true">
+                    Sign In
+                  </i>
+                </button>
+                </a>
+            <!-- </div> -->
+          </div>
+          <div class="right menu" *ngIf="authenticate.isLoggedIn()">
+            <button class="ui primary button logout" (click)="logout()">logout</button>
+          </div>
+  
+
   </div>
-  </div>
+
+   
+</div>
+
+<div class="ui container">
+    <router-outlet></router-outlet> 
+</div>
 
