@@ -3,12 +3,20 @@ import { Customer } from '../customer';
 import { CustomerService } from '../customer.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Plan } from '../Plan';
 
 @Component({
   templateUrl: './customer-item.component.html',
   styleUrls: ['./customer-item.component.css']
 })
 export class CustomerItemComponent implements OnInit {
+  selectedValue: string;
+  plans: Plan[] = [
+    {name: 'Yoga', description: 'Yoga description'},
+    {name: 'Gain weight', description: 'Gain weight description'},
+    {name: 'Lose weight', description: 'Lose weight description'}
+  ];
+
 
   @Input() customer: Customer;
 // @Output() deleted = new EventEmitter();
@@ -19,6 +27,8 @@ export class CustomerItemComponent implements OnInit {
 
   ngOnInit() {
     this.getCustomer();
+    console.log(this.customer);
+  //  this.selectedValue = this.customer.plan;
   }
   getCustomer(): void {
     let id;
@@ -28,7 +38,9 @@ export class CustomerItemComponent implements OnInit {
     });
   //  console.log("getting customer id: "+id);
     this.customers.getCustomer(id)
-      .subscribe(customer => this.customer = customer);
+      .subscribe(customer => {this.customer = customer;
+        this.selectedValue = this.customer.plan});
+      
   }
 
   goBack(): void {
