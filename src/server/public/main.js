@@ -307,7 +307,7 @@ var AuthenticateService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".customer-item{\n    padding-left: 35px;\n    padding-bottom: 25px;\n  }\n  "
 
 /***/ }),
 
@@ -318,7 +318,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui container\">\n  \n        <div *ngIf=\"customer\" class=\"ui big form\">\n            <br>\n            <h2> {{customer.firstName}} {{customer.lastName}} Details</h2>\n            <div class=\"field\">\n              <label>First name:\n                <input [(ngModel)]=\"customer.firstName\" placeholder=\"firstName\"/>\n              </label>\n            </div>\n            <div class=\"field\">\n                <label>Last name:\n                  <input [(ngModel)]=\"customer.lastName\" placeholder=\"lastName\"/>\n                </label>\n              </div>\n            <div class=\"field\">\n                <label>email:\n                  <input [(ngModel)]=\"customer.email\" placeholder=\"email\"/>\n                </label>\n            </div>\n            <!-- <div class=\"field\"> -->\n              <mat-form-field>  \n                <mat-select placeholder=\"Plan selection\" [(ngModel)]=\"selectedValue\" name = \"plans\" (change)=\"changePlan($event.value)\">\n                    <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.name\">\n                      {{plan.name}}\n                    </mat-option>\n                  </mat-select>\n              </mat-form-field>\n                <!-- <label>plan:\n                  <input [(ngModel)]=\"customer.plan\" placeholder=\"plan\"/>\n                </label> -->\n            <!-- </div> -->\n            <br>\n            <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n            <button class=\"ui primary button\" (click)=\"save()\">save</button>\n        </div>\n</div>\n      "
+module.exports = "\n<div class=\"ui container\">\n  \n        <div *ngIf=\"customer\" class=\"ui big form customer-item\">\n            <br>\n            <h2> {{customer.firstName}} {{customer.lastName}} Details</h2>\n            <div class=\"field\">\n              <label>First name:\n                <input [(ngModel)]=\"customer.firstName\" placeholder=\"firstName\"/>\n              </label>\n            </div>\n            <div class=\"field\">\n                <label>Last name:\n                  <input [(ngModel)]=\"customer.lastName\" placeholder=\"lastName\"/>\n                </label>\n              </div>\n            <div class=\"field\">\n                <label>email:\n                  <input [(ngModel)]=\"customer.email\" placeholder=\"email\"/>\n                </label>\n            </div>\n            <!-- <div class=\"field\"> -->\n              <mat-form-field>  \n                <mat-select placeholder=\"Plan selection\" [(ngModel)]=\"selectedValue\" name = \"plans\" (change)=\"changePlan($event.value)\">\n                    <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.name\">\n                      {{plan.name}}\n                    </mat-option>\n                  </mat-select>\n              </mat-form-field>\n                <!-- <label>plan:\n                  <input [(ngModel)]=\"customer.plan\" placeholder=\"plan\"/>\n                </label> -->\n            <!-- </div> -->\n            <br>\n            <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n            <button class=\"ui primary button\" (click)=\"save()\">save</button>\n        </div>\n</div>\n      "
 
 /***/ }),
 
@@ -427,7 +427,7 @@ var CustomerItemComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n  margin-top: 50px;\n}\n/* .selected {\n    background-color: #CFD8DC !important;\n    color: white;\n  }\n  .customers {\n    margin: 0 0 2em 0;\n    list-style-type: none;\n    padding: 0;\n    width: 15em;\n  }\n  .customers li {\n    cursor: pointer;\n    position: relative;\n    left: 0;\n    background-color: #EEE;\n    margin: .5em;\n    padding: .3em 0;\n    height: 1.6em;\n    border-radius: 4px;\n  }\n  .customers li.selected:hover {\n    background-color: #BBD8DC !important;\n    color: white;\n  }\n  .customers li:hover {\n    color: #607D8B;\n    background-color: #DDD;\n    left: .1em;\n  }\n  .customers .text {\n    position: relative;\n    top: -3px;\n  }\n  .customers .badge {\n    display: inline-block;\n    font-size: small;\n    color: white;\n    padding: 0.8em 0.7em 0 0.7em;\n    background-color: #607D8B;\n    line-height: 1em;\n    position: relative;\n    left: -1px;\n    top: -4px;\n    height: 1.8em;\n    margin-right: .8em;\n    border-radius: 4px 0 0 4px;\n  } */\n \n  "
+module.exports = ".container {\n  margin-top: 50px;\n}\n\n.customer-item{\n  padding-left: 35px;\n  padding-bottom: 25px;\n}\n\n/* .selected {\n    background-color: #CFD8DC !important;\n    color: white;\n  }\n  .customers {\n    margin: 0 0 2em 0;\n    list-style-type: none;\n    padding: 0;\n    width: 15em;\n  }\n  .customers li {\n    cursor: pointer;\n    position: relative;\n    left: 0;\n    background-color: #EEE;\n    margin: .5em;\n    padding: .3em 0;\n    height: 1.6em;\n    border-radius: 4px;\n  }\n  .customers li.selected:hover {\n    background-color: #BBD8DC !important;\n    color: white;\n  }\n  .customers li:hover {\n    color: #607D8B;\n    background-color: #DDD;\n    left: .1em;\n  }\n  .customers .text {\n    position: relative;\n    top: -3px;\n  }\n  .customers .badge {\n    display: inline-block;\n    font-size: small;\n    color: white;\n    padding: 0.8em 0.7em 0 0.7em;\n    background-color: #607D8B;\n    line-height: 1em;\n    position: relative;\n    left: -1px;\n    top: -4px;\n    height: 1.8em;\n    margin-right: .8em;\n    border-radius: 4px 0 0 4px;\n  } */\n \n  "
 
 /***/ }),
 
@@ -438,7 +438,7 @@ module.exports = ".container {\n  margin-top: 50px;\n}\n/* .selected {\n    back
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui container\">\n    <div class=\"ui grid\">\n      <div *ngFor=\"let customer of customers\">         \n        <div class=\"ui cards\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <div class=\"meta\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <div class=\"description\">\n                  {{customer.email}}\n                </div>\n                <div class=\"description\">\n                  {{customer.plan}}\n                  </div>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui three buttons\">\n                  <button class=\"ui basic green button\">Approve</button>\n                  <a routerLink=\"/detail/{{customer._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                  <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n                </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n"
+module.exports = "<div class=\"ui container\">\n    <div class=\"ui grid\">\n      <div *ngFor=\"let customer of customers\">         \n        <div class=\"ui cards customer-item\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <div class=\"meta\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <div class=\"description\">\n                  {{customer.email}}\n                </div>\n                <div class=\"description\">\n                  {{customer.plan}}\n                  </div>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui three buttons\">\n                  <button class=\"ui basic green button\">Approve</button>\n                  <a routerLink=\"/detail/{{customer._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                  <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n                </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -541,7 +541,7 @@ var CustomerService = /** @class */ (function () {
         this.http = http;
         this.authenticate = authenticate;
         this.messageService = messageService;
-        this.url = 'http://localhost:4200/customers';
+        this.url = 'http://localhost:4200/api/customers';
         this.registerUrl = '/register';
         this.httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
@@ -550,6 +550,7 @@ var CustomerService = /** @class */ (function () {
         };
     }
     CustomerService.prototype.getCustomers = function () {
+        console.log("get customers in js" + this.url);
         return this.http.get(this.url, this.authenticate.getAuthorizationOptions());
     };
     CustomerService.prototype.postCustomer = function (customer) {
@@ -1031,7 +1032,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/newAIP/AIP/NewAIP/aip/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/aip/GymApp/src/main.ts */"./src/main.ts");
 
 
 /***/ })

@@ -13,7 +13,7 @@ import { map, catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CustomerService {
-  url = 'http://localhost:4200/customers';
+  url = 'http://localhost:4200/api/customers';
   registerUrl = '/register';
 
     customers: Customer[];
@@ -30,6 +30,7 @@ export class CustomerService {
 
 
   getCustomers(): Observable<Customer[]> {
+    console.log("get customers in js"+this.url);
     return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
   }
 

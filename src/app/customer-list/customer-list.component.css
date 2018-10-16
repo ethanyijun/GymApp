@@ -1,6 +1,13 @@
 .container {
   margin-top: 50px;
 }
+
+.customer-item{
+  padding-left: 35px;
+  padding-bottom: 25px;
+}
+
+
 /* .selected {
     background-color: #CFD8DC !important;
     color: white;

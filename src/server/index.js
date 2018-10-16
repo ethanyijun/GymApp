@@ -48,7 +48,8 @@ app.use((err, req, res, next) => {
     }
 });
 //get all the customer cards
-app.get('/customers', (req, res) => {
+app.get('/api/customers', (req, res) => {
+    console.log("getting customers in js");
     const customersCollection = database.collection('customers');
 
     customersCollection.find({}).toArray((err, docs) => {
@@ -57,17 +58,17 @@ app.get('/customers', (req, res) => {
 });
 
 // get one customer
-app.get('/customers/:id', (req, res) => {
+app.get('/api/customers/:id', (req, res) => {
     const customersCollection = database.collection('customers');
    // console.log("js: "+req.params.id);
     customersCollection.findOne({ _id : ObjectId(req.params.id)},function(err,customer){
-     //   console.log("js: "+req.params.id);
+        console.log("customer plan: "+customer.plan);
         return res.json(customer);
     });
 });
 
 // update one customer
-app.put('/customers/:id', (req, res) => {
+app.put('/api/customers/:id', (req, res) => {
     const customersCollection = database.collection('customers');
     const updatedCustomer = {
         firstName: req.body.firstName,
@@ -130,7 +131,7 @@ app.get('*', (req, res) => {
     return res.sendFile(path.join(__dirname, 'public/index.html'));
   });
 
-app.delete('/customers/:id', (req, res) => {
+app.delete('/api/customers/:id', (req, res) => {
  // let query = {_id: this.ObjectID(req.param.id)};
 
     const customersCollection = database.collection('customers');
