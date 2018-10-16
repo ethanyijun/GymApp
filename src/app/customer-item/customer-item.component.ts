@@ -27,7 +27,7 @@ export class CustomerItemComponent implements OnInit {
 
   ngOnInit() {
     this.getCustomer();
-    console.log(this.customer);
+    console.log("on init");
   //  this.selectedValue = this.customer.plan;
   }
   getCustomer(): void {
@@ -50,10 +50,11 @@ export class CustomerItemComponent implements OnInit {
   save(): void {
     let id;
     this.route.params.subscribe(params => {
-       id = params['id'];
-      console.log(params['id']) //log the value of id
+       id = params['id'];      
+     //log the value of id
     });
-   //console.log("customer to be updated: "+this.customer.firstName);
+    this.customer.plan = this.selectedValue;
+    console.log("-=-=-=-=: " + this.customer.plan) 
     this.customers.updateCustomer(this.customer,id)
       .subscribe(() => this.goBack());
   }

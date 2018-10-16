@@ -72,7 +72,8 @@ app.put('/customers/:id', (req, res) => {
     const updatedCustomer = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        email: req.body.email
+        email: req.body.email,
+        plan: req.body.plan
       };
 
     customersCollection.findOneAndUpdate({ _id : ObjectId(req.params.id)}, { $set: updatedCustomer } ,function(err,customer){
