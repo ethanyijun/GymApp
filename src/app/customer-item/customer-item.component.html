@@ -1,26 +1,39 @@
 
 <div class="ui container">
-        <div *ngIf="customer">
+  
+        <div *ngIf="customer" class="ui big form">
+            <br>
             <h2> {{customer.firstName}} {{customer.lastName}} Details</h2>
-            <div>
+            <div class="field">
               <label>First name:
                 <input [(ngModel)]="customer.firstName" placeholder="firstName"/>
               </label>
             </div>
-            <div>
+            <div class="field">
                 <label>Last name:
                   <input [(ngModel)]="customer.lastName" placeholder="lastName"/>
                 </label>
               </div>
-            <div>
+            <div class="field">
                 <label>email:
                   <input [(ngModel)]="customer.email" placeholder="email"/>
                 </label>
             </div>
-
-            <button (click)="goBack()">go back</button>
-            <button (click)="save()">save</button>
-          </div>
+            <!-- <div class="field"> -->
+              <mat-form-field>  
+                <mat-select placeholder="Plan selection" [(ngModel)]="selectedValue" name = "plans" (change)="changePlan($event.value)">
+                    <mat-option *ngFor="let plan of plans" [value]="plan.name">
+                      {{plan.name}}
+                    </mat-option>
+                  </mat-select>
+              </mat-form-field>
+                <!-- <label>plan:
+                  <input [(ngModel)]="customer.plan" placeholder="plan"/>
+                </label> -->
+            <!-- </div> -->
+            <br>
+            <button class="ui button" (click)="goBack()">go back</button>
+            <button class="ui primary button" (click)="save()">save</button>
+        </div>
 </div>
       
-        

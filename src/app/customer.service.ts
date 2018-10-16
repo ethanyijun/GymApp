@@ -33,7 +33,7 @@ export class CustomerService {
     return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
   }
 
-  postCustomers(customer: Customer): Observable<Customer> {
+  postCustomer(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(this.registerUrl, customer, this.httpOptions);
   }
 

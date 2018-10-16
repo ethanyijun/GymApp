@@ -15,7 +15,8 @@ import { SuiModule } from 'ng2-semantic-ui';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { CustomerService } from './customer.service';
 import { AuthenticateService } from './authenticate.service';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatOptionModule,MatSelectModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,15 @@ import { AuthenticateService } from './authenticate.service';
     AppRoutingModule,
     HttpClientModule,
     SuiModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
+    MatOptionModule
+  ],
+    exports: [
+      MatSelectModule,
+      BrowserAnimationsModule,
+      MatOptionModule
   ],
   providers: [CustomerService, AuthenticateService],
   bootstrap: [AppComponent]

@@ -18,11 +18,7 @@ const routes: Routes = [
   {path: 'customers', component: CustomerListComponent },
 
   { path: 'detail/:id', component: CustomerItemComponent },
-// {path: 'member-form', component: JoinMemberFormComponent}
 
- // {path: 'customer-item', component: CustomerItemComponent}
-
-  // {path: 'customers', component: CustomerListComponent},
 
 ];
 

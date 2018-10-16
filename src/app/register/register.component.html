@@ -14,10 +14,23 @@
     </div>
     <div class="field">
       <label>Email</label>
-      <input type="text" name="email" placeholder="Email" ngModel email>
-      
+      <input type="text" name="email" placeholder="Email" ngModel email> 
     </div>
-    <button type="submit" class="ui primary button float right floated">Register</button>
+    <br> 
+    <button type="submit" class="ui primary button float left floated">Register</button>
   </form>
-
+  <!-- <mat-form-field>
+      <mat-select placeholder="Plan selection" [(ngModel)]="selectedValue" name = "plans" (change)="changePlan($event.value)">
+        <mat-option *ngFor="let plan of plans" [value]="plan.name">
+          {{plan.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> -->
+    <mat-form-field>
+        <mat-select placeholder="Plan selection" [(ngModel)]="selectedValue" name = "plans" (change)="changePlan($event.value)">
+          <mat-option *ngFor="let plan of plans" [value]="plan.name">
+            {{plan.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 </div>
