@@ -4,12 +4,16 @@ import { CustomerService } from '../customer.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Plan } from '../Plan';
+import {FormControl, Validators} from '@angular/forms';
+
 
 @Component({
   templateUrl: './customer-item.component.html',
   styleUrls: ['./customer-item.component.css']
 })
 export class CustomerItemComponent implements OnInit {
+
+//planControl = new FormControl('', [Validators.required]);
   selectedValue: string;
   plans: Plan[] = [
     {name: 'Yoga', description: 'Yoga description'},

@@ -204,12 +204,14 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatSelectModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__["BrowserAnimationsModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatOptionModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatOptionModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"]
             ],
             exports: [
                 _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatSelectModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__["BrowserAnimationsModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatOptionModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatOptionModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"]
             ],
             providers: [_customer_service__WEBPACK_IMPORTED_MODULE_13__["CustomerService"], _authenticate_service__WEBPACK_IMPORTED_MODULE_14__["AuthenticateService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
@@ -318,7 +320,7 @@ module.exports = ".customer-item{\n    padding-left: 35px;\n    padding-bottom: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui container\">\n  \n        <div *ngIf=\"customer\" class=\"ui big form customer-item\">\n            <br>\n            <h2> {{customer.firstName}} {{customer.lastName}} Details</h2>\n            <div class=\"field\">\n              <label>First name:\n                <input [(ngModel)]=\"customer.firstName\" placeholder=\"firstName\"/>\n              </label>\n            </div>\n            <div class=\"field\">\n                <label>Last name:\n                  <input [(ngModel)]=\"customer.lastName\" placeholder=\"lastName\"/>\n                </label>\n              </div>\n            <div class=\"field\">\n                <label>email:\n                  <input [(ngModel)]=\"customer.email\" placeholder=\"email\"/>\n                </label>\n            </div>\n            <!-- <div class=\"field\"> -->\n              <mat-form-field>  \n                <mat-select placeholder=\"Plan selection\" [(ngModel)]=\"selectedValue\" name = \"plans\" (change)=\"changePlan($event.value)\">\n                    <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.name\">\n                      {{plan.name}}\n                    </mat-option>\n                  </mat-select>\n              </mat-form-field>\n                <!-- <label>plan:\n                  <input [(ngModel)]=\"customer.plan\" placeholder=\"plan\"/>\n                </label> -->\n            <!-- </div> -->\n            <br>\n            <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n            <button class=\"ui primary button\" (click)=\"save()\">save</button>\n        </div>\n</div>\n      "
+module.exports = "\n<div class=\"ui container\">\n  \n        <div *ngIf=\"customer\" class=\"ui big form customer-item\">\n            <br>\n            <h2> {{customer.firstName}} {{customer.lastName}} Details</h2>\n            <div class=\"field\">\n              <label>First name:\n                <input [(ngModel)]=\"customer.firstName\" placeholder=\"firstName\"/>\n              </label>\n            </div>\n            <div class=\"field\">\n                <label>Last name:\n                  <input [(ngModel)]=\"customer.lastName\" placeholder=\"lastName\"/>\n                </label>\n              </div>\n            <div class=\"field\">\n                <label>email:\n                  <input [(ngModel)]=\"customer.email\" placeholder=\"email\"/>\n                </label>\n            </div>\n\n              <mat-form-field>  \n                <mat-select placeholder=\"Plan selection\" [(ngModel)]=\"selectedValue\" name = \"plans\">\n                    <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.name\">\n                      {{plan.name}}\n                    </mat-option>\n                  </mat-select>\n              </mat-form-field>\n\n\n            <br>\n            <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n            <button class=\"ui primary button\" (click)=\"save()\">save</button>\n        </div>\n</div>\n      "
 
 /***/ }),
 
@@ -438,7 +440,7 @@ module.exports = ".container {\n  margin-top: 50px;\n}\n\n.customer-item{\n  pad
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui container\">\n    <div class=\"ui grid\">\n      <div *ngFor=\"let customer of customers\">         \n        <div class=\"ui cards customer-item\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <div class=\"meta\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <div class=\"description\">\n                  {{customer.email}}\n                </div>\n                <div class=\"description\">\n                  {{customer.plan}}\n                  </div>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui three buttons\">\n                  <button class=\"ui basic green button\">Approve</button>\n                  <a routerLink=\"/detail/{{customer._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                  <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n                </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n"
+module.exports = "<div class=\"ui container\">\n    <div class=\"ui grid\">\n      <div *ngFor=\"let customer of customers\">         \n        <div class=\"ui cards customer-item\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <!-- <div class=\"meta\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div> -->\n                <br>\n                <div class=\"description\">\n                  <label class=\"header\">Email: </label>\n                  {{customer.email}}\n                </div>\n                <div class=\"description\">\n                  <label class=\"header\">Plan: </label>\n                  {{customer.plan}}\n                </div>\n                <br>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui three buttons\">\n                  <button class=\"ui basic green button\">Approve</button>\n                  <a routerLink=\"/detail/{{customer._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                  <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n                </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -882,7 +884,7 @@ module.exports = ".register-container {\n    max-width: 500px;\n    margin: 50px
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"register-container\">\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email> \n    </div>\n\n    <!-- <div class=\"inline fields\">\n        <label>Interested training plan:</label>\n          <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n          <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n          <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n    </div> -->\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n\n  </form>\n  <!-- <mat-form-field>\n      <mat-select placeholder=\"Plan selection\" [(ngModel)]=\"selectedValue\" name = \"plans\" (change)=\"changePlan($event.value)\">\n        <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.name\">\n          {{plan.name}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field> -->\n    <mat-form-field>\n        <mat-select placeholder=\"Plan selection\" [(ngModel)]=\"selectedValue\" name = \"plans\">\n          <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.name\">\n            {{plan.name}}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n</div>"
+module.exports = "<div class=\"register-container\">\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email> \n    </div>\n\n    <!-- <div class=\"inline fields\">\n        <label>Interested training plan:</label>\n          <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n          <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n          <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n    </div> -->\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n\n  </form>\n\n    <mat-form-field>\n        <mat-select placeholder=\"Plan selection\" [formControl]=\"planControl\" [(ngModel)]=\"selectedValue\" name = \"plans\">\n          <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.name\">\n            {{plan.name}}\n          </mat-option>\n        </mat-select>\n        <!-- <mat-hint>{{planControl.value?.name}}</mat-hint> -->\n    </mat-form-field>\n</div>"
 
 /***/ }),
 
@@ -899,6 +901,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _customer_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../customer.service */ "./src/app/customer.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -908,6 +911,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -921,7 +925,7 @@ var RegisterComponent = /** @class */ (function () {
             { name: 'Gain weight', description: 'Gain weight description' },
             { name: 'Lose weight', description: 'Lose weight description' }
         ];
-        // animalControl = new FormControl('', [Validators.required]);
+        this.planControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]);
         // animals: Customer[] = [
         //   {firstName: "Leo", lastName: "Zheng", email:"123@123.com", plan: "yoga", phone:"123"},
         //   {firstName: "Huey", lastName: "Kong", email:"123@123.com", plan: "gain weight", phone:"123"},

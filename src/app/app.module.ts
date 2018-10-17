@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -36,12 +36,14 @@ import {MatOptionModule,MatSelectModule} from '@angular/material';
     FormsModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    MatOptionModule
+    MatOptionModule,
+    ReactiveFormsModule
   ],
     exports: [
       MatSelectModule,
       BrowserAnimationsModule,
-      MatOptionModule
+      MatOptionModule,
+      FormsModule
   ],
   providers: [CustomerService, AuthenticateService],
   bootstrap: [AppComponent]

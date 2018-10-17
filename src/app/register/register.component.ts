@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
     {name: 'Lose weight', description: 'Lose weight description'}
   ];
 
-  // animalControl = new FormControl('', [Validators.required]);
+  planControl = new FormControl('', [Validators.required]);
   // animals: Customer[] = [
   //   {firstName: "Leo", lastName: "Zheng", email:"123@123.com", plan: "yoga", phone:"123"},
   //   {firstName: "Huey", lastName: "Kong", email:"123@123.com", plan: "gain weight", phone:"123"},
