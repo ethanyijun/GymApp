@@ -49,7 +49,8 @@ app.use((err, req, res, next) => {
 });
 //get all the customer cards
 app.get('/api/customers', (req, res) => {
-    console.log("getting customers in js");
+    let plan = req.query.plan;
+    console.log("----getting customers' plan: " + plan);
     const customersCollection = database.collection('customers');
 
     customersCollection.find({}).toArray((err, docs) => {

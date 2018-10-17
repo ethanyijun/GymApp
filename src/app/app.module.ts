@@ -17,6 +17,8 @@ import { CustomerService } from './customer.service';
 import { AuthenticateService } from './authenticate.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatOptionModule,MatSelectModule} from '@angular/material';
+import { MessageService } from './message.service';
+//import { PlanService } from './plan.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,7 @@ import {MatOptionModule,MatSelectModule} from '@angular/material';
       MatOptionModule,
       FormsModule
   ],
-  providers: [CustomerService, AuthenticateService],
+  providers: [CustomerService, AuthenticateService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

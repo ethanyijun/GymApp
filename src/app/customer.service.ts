@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthenticateService } from './authenticate.service';
 import { map, catchError, tap } from 'rxjs/operators';
+import { URLSearchParams } from '@angular/http';
+import {  HttpParams } from '@angular/common/http';
 // import 'rxjs/add/operator/map';import { catchError, map, tap } from 'rxjs/operators';
 // import { Http, Response } from '@angular/http';
 
@@ -29,9 +31,19 @@ export class CustomerService {
 
 
 
-  getCustomers(): Observable<Customer[]> {
+  getCustomers(plan): Observable<Customer[]> {
     console.log("get customers in js"+this.url);
-    return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
+    let params = new HttpParams().set('plan', plan);
+
+    // return this._HttpClient.get(`${API_URL}/api/v1/data/logs`, { params: params })
+    // let searchParams = new URLSearchParams();
+    // searchParams.append('plan', plan);
+    return this.http.get<Customer[]>(this.url, { params: params });
+      // .map(response => {
+      //   return response.json().mediaItems;
+      // });
+
+ //   return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
   }
 
   postCustomer(customer: Customer): Observable<Customer> {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../customer';
-
+import { ActivatedRoute } from '@angular/router';
 import { CustomerService } from '../customer.service';
 import { Observable } from 'rxjs';
 import { getRandomString } from 'selenium-webdriver/safari';
@@ -13,21 +13,37 @@ import { getRandomString } from 'selenium-webdriver/safari';
 export class CustomerListComponent implements OnInit {
 
   customers: Customer[];
-
+  paramsSubscription;
   selectedCustomer: Customer;
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService,
+    private activatedRoute: ActivatedRoute) { }
 
-  getCustomers(): void {
+
+
+
+
+  getCustomers(plan): void {
     console.log("getting customers!");
-    this.customerService.getCustomers().subscribe(
+    this.customerService.getCustomers(plan).subscribe(
       customers => this.customers = customers
     );
-  
+
   }
 
   ngOnInit() {
-    this.getCustomers();
+
+    this.paramsSubscription = this.activatedRoute.params
+      .subscribe(params => {
+       // let plan = params['plan'];
+        // if(plan.toLowerCase() === 'all') {
+        //   plan = '';
+        // }
+        let plan = "yoga";
+        this.getCustomers(plan);
+      });
+
+   // this.getCustomers();
   }
   
   deleteCustomer(id: string) {
@@ -35,7 +51,10 @@ export class CustomerListComponent implements OnInit {
    // this.customerService.deleteCustomer(id).subscribe();
     this.customerService.deleteCustomer(id).subscribe(data=>{
       console.log("esdf");
-      this.getCustomers();
+
+
+
+   //---------------------->need to be changed:   this.getCustomers();
     });
 
     console.log("blabla");
