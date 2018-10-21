@@ -15,7 +15,6 @@ export class CustomerListComponent implements OnInit {
   customers: Customer[];
   paramsSubscription;
   selectedCustomer: Customer;
-
   constructor(private customerService: CustomerService,
     private activatedRoute: ActivatedRoute) { }
 
@@ -32,18 +31,15 @@ export class CustomerListComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.paramsSubscription = this.activatedRoute.params
-      .subscribe(params => {
-       // let plan = params['plan'];
-        // if(plan.toLowerCase() === 'all') {
-        //   plan = '';
-        // }
-        let plan = "yoga";
+    console.log(this.activatedRoute.snapshot.params.plan);
+    this.activatedRoute.params.subscribe(
+      params => {
+        var plan = this.activatedRoute.snapshot.params.plan;
         this.getCustomers(plan);
-      });
+        console.log("on init" + plan);
+      }
+  );
 
-   // this.getCustomers();
   }
   
   deleteCustomer(id: string) {
@@ -51,15 +47,9 @@ export class CustomerListComponent implements OnInit {
    // this.customerService.deleteCustomer(id).subscribe();
     this.customerService.deleteCustomer(id).subscribe(data=>{
       console.log("esdf");
-
-
-
-   //---------------------->need to be changed:   this.getCustomers();
+      this.getCustomers("all");
     });
 
-    console.log("blabla");
   }
-//   regetCustomers(): void{
-
 
 }

@@ -31,20 +31,37 @@ export class CustomerService {
 
 
 
-  getCustomers(plan): Observable<Customer[]> {
-    console.log("get customers in js"+this.url);
-    let params = new HttpParams().set('plan', plan);
+    getCustomers(plan: string): Observable<Customer[]> {
+      //console.log("get customers in js"+this.url);
+      let params = new HttpParams().set('plan', plan);
+      //const url = `${this.url}/${plan}`; 
+      console.log("url in js: " + this.url);
+      // return this._HttpClient.get(`${API_URL}/api/v1/data/logs`, { params: params })
+      // let searchParams = new URLSearchParams();
+      // searchParams.append('plan', plan);
 
-    // return this._HttpClient.get(`${API_URL}/api/v1/data/logs`, { params: params })
-    // let searchParams = new URLSearchParams();
-    // searchParams.append('plan', plan);
-    return this.http.get<Customer[]>(this.url, { params: params });
-      // .map(response => {
-      //   return response.json().mediaItems;
-      // });
+      return this.http.get<Customer[]>(this.url, { params: params });
+        // .map(response => {
+        //   return response.json().mediaItems;
+        // });
+  
+   //   return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
+    }  
 
- //   return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
-  }
+//   getCustomers(plan): Observable<Customer[]> {
+//     console.log("get customers in js"+this.url);
+//     let params = new HttpParams().set('plan', plan);
+
+//     // return this._HttpClient.get(`${API_URL}/api/v1/data/logs`, { params: params })
+//     // let searchParams = new URLSearchParams();
+//     // searchParams.append('plan', plan);
+//     return this.http.get<Customer[]>(this.url, { params: params });
+//       // .map(response => {
+//       //   return response.json().mediaItems;
+//       // });
+
+//  //   return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
+//   }
 
   postCustomer(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(this.registerUrl, customer, this.httpOptions);

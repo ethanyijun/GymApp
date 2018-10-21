@@ -57,6 +57,8 @@ var routes = [
     { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: 'customers', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] },
     { path: 'detail/:id', component: _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_5__["CustomerItemComponent"] },
+    // {path: 'customers/:plan', component: CustomerListComponent },
+    { path: ':plan', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -92,7 +94,7 @@ module.exports = ".mat-elevation-z0{box-shadow:0 0 0 0 rgba(0,0,0,.2),0 0 0 0 rg
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <nav>\n    <a routerLink=\"register\">Register your first account</a>\n    <a routerLink=\"login\">  Sign in</a>\n  </nav> -->\n  <nav>\n    <a routerLink=\"/lose_weight\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a>\n    <a routerLink=\"/gain_weight\">\n      <img src=\"../assets/media/2.png\" class=\"icon\" />\n    </a>\n    <a routerLink=\"/yoga\">\n      <img src=\"../assets/media/3.png\" class=\"icon\" />\n    </a>\n  </nav>\n  <!-- <section>\n    <header>\n      <h1>Customer Watch List</h1>\n      <p class=\"description\">Keeping track of the customer.</p>\n    </header>\n  </section> -->\n<app-menu-bar></app-menu-bar>\n\n<!-- \n<app-menu-bar></app-menu-bar>\n<router-outlet></router-outlet> -->\n"
+module.exports = "<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <nav>\n    <a routerLink=\"register\">Register your first account</a>\n    <a routerLink=\"login\">  Sign in</a>\n  </nav> -->\n  <nav>\n    <a [routerLink]=\"['/yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a>\n    <!-- <a [routerLink]=\"['/customers', 'yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a> -->\n    <a [routerLink]=\"['/gain_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/2.png\" class=\"icon\" />\n    </a>\n    <a [routerLink]=\"['/lose_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/3.png\" class=\"icon\" />\n    </a>\n  </nav>\n  <!-- <section>\n    <header>\n      <h1>Customer Watch List</h1>\n      <p class=\"description\">Keeping track of the customer.</p>\n    </header>\n  </section> -->\n<app-menu-bar></app-menu-bar>\n\n<!-- \n<app-menu-bar></app-menu-bar>\n<router-outlet></router-outlet> -->\n"
 
 /***/ }),
 
@@ -146,26 +148,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
-/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! .//app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./customer-list/customer-list.component */ "./src/app/customer-list/customer-list.component.ts");
-/* harmony import */ var _join_member_form_join_member_form_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./join-member-form/join-member-form.component */ "./src/app/join-member-form/join-member-form.component.ts");
-/* harmony import */ var _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./customer-item/customer-item.component */ "./src/app/customer-item/customer-item.component.ts");
-/* harmony import */ var ng2_semantic_ui__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ng2-semantic-ui */ "./node_modules/ng2-semantic-ui/dist/public.js");
-/* harmony import */ var _menu_bar_menu_bar_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./menu-bar/menu-bar.component */ "./src/app/menu-bar/menu-bar.component.ts");
-/* harmony import */ var _customer_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./customer.service */ "./src/app/customer.service.ts");
-/* harmony import */ var _authenticate_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./authenticate.service */ "./src/app/authenticate.service.ts");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./message.service */ "./src/app/message.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
+/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! .//app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./customer-list/customer-list.component */ "./src/app/customer-list/customer-list.component.ts");
+/* harmony import */ var _join_member_form_join_member_form_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./join-member-form/join-member-form.component */ "./src/app/join-member-form/join-member-form.component.ts");
+/* harmony import */ var _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./customer-item/customer-item.component */ "./src/app/customer-item/customer-item.component.ts");
+/* harmony import */ var ng2_semantic_ui__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ng2-semantic-ui */ "./node_modules/ng2-semantic-ui/dist/public.js");
+/* harmony import */ var _menu_bar_menu_bar_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./menu-bar/menu-bar.component */ "./src/app/menu-bar/menu-bar.component.ts");
+/* harmony import */ var _customer_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./customer.service */ "./src/app/customer.service.ts");
+/* harmony import */ var _authenticate_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./authenticate.service */ "./src/app/authenticate.service.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./message.service */ "./src/app/message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -191,33 +195,34 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
-                _register_register_component__WEBPACK_IMPORTED_MODULE_5__["RegisterComponent"],
-                _login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"],
-                _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_8__["CustomerListComponent"],
-                _join_member_form_join_member_form_component__WEBPACK_IMPORTED_MODULE_9__["JoinMemberFormComponent"],
-                _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_10__["CustomerItemComponent"],
-                _menu_bar_menu_bar_component__WEBPACK_IMPORTED_MODULE_12__["MenuBarComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
+                _register_register_component__WEBPACK_IMPORTED_MODULE_6__["RegisterComponent"],
+                _login_login_component__WEBPACK_IMPORTED_MODULE_7__["LoginComponent"],
+                _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_9__["CustomerListComponent"],
+                _join_member_form_join_member_form_component__WEBPACK_IMPORTED_MODULE_10__["JoinMemberFormComponent"],
+                _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_11__["CustomerItemComponent"],
+                _menu_bar_menu_bar_component__WEBPACK_IMPORTED_MODULE_13__["MenuBarComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"],
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
-                ng2_semantic_ui__WEBPACK_IMPORTED_MODULE_11__["SuiModule"],
+                ng2_semantic_ui__WEBPACK_IMPORTED_MODULE_12__["SuiModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatSelectModule"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__["BrowserAnimationsModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatOptionModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatSelectModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__["BrowserAnimationsModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatOptionModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"]
             ],
             exports: [
-                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatSelectModule"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__["BrowserAnimationsModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatOptionModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatSelectModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__["BrowserAnimationsModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatOptionModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"]
             ],
-            providers: [_customer_service__WEBPACK_IMPORTED_MODULE_13__["CustomerService"], _authenticate_service__WEBPACK_IMPORTED_MODULE_14__["AuthenticateService"], _message_service__WEBPACK_IMPORTED_MODULE_17__["MessageService"]],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
+            providers: [_customer_service__WEBPACK_IMPORTED_MODULE_14__["CustomerService"], _authenticate_service__WEBPACK_IMPORTED_MODULE_15__["AuthenticateService"], _message_service__WEBPACK_IMPORTED_MODULE_18__["MessageService"]],
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -443,7 +448,7 @@ module.exports = ".container {\n  margin-top: 50px;\n}\n\n.customer-item{\n  pad
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui container\">\n    <div class=\"ui grid\">\n      <div *ngFor=\"let customer of customers\">         \n        <div class=\"ui cards customer-item\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <!-- <div class=\"meta\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div> -->\n                <br>\n                <div class=\"description\">\n                  <label class=\"header\">Email: </label>\n                  {{customer.email}}\n                </div>\n                <div class=\"description\">\n                  <label class=\"header\">Plan: </label>\n                  {{customer.plan}}\n                </div>\n                <br>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui three buttons\">\n                  <button class=\"ui basic green button\">Approve</button>\n                  <a routerLink=\"/detail/{{customer._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                  <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n                </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n"
+module.exports = "<div class=\"ui container\">\n    <div class=\"ui grid\">\n      <div *ngFor=\"let customer of customers\">         \n        <div class=\"ui cards customer-item\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <br>\n                <div class=\"description\">\n                  <label class=\"header\">Email: </label>\n                  {{customer.email}}\n                </div>\n                <div class=\"description\">\n                  <label class=\"header\">Plan: </label>\n                  {{customer.plan}}\n                </div>\n                <br>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui three buttons\">\n                  <button class=\"ui basic green button\">Approve</button>\n                  <a routerLink=\"/detail/{{customer._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                  <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n                </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -484,25 +489,21 @@ var CustomerListComponent = /** @class */ (function () {
     };
     CustomerListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.paramsSubscription = this.activatedRoute.params
-            .subscribe(function (params) {
-            // let plan = params['plan'];
-            // if(plan.toLowerCase() === 'all') {
-            //   plan = '';
-            // }
-            var plan = "yoga";
+        console.log(this.activatedRoute.snapshot.params.plan);
+        this.activatedRoute.params.subscribe(function (params) {
+            var plan = _this.activatedRoute.snapshot.params.plan;
             _this.getCustomers(plan);
+            console.log("on init" + plan);
         });
-        // this.getCustomers();
     };
     CustomerListComponent.prototype.deleteCustomer = function (id) {
+        var _this = this;
         console.log("customer id: " + id);
         // this.customerService.deleteCustomer(id).subscribe();
         this.customerService.deleteCustomer(id).subscribe(function (data) {
             console.log("esdf");
-            //---------------------->need to be changed:   this.getCustomers();
+            _this.getCustomers("all");
         });
-        console.log("blabla");
     };
     CustomerListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -569,8 +570,10 @@ var CustomerService = /** @class */ (function () {
         };
     }
     CustomerService.prototype.getCustomers = function (plan) {
-        console.log("get customers in js" + this.url);
+        //console.log("get customers in js"+this.url);
         var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]().set('plan', plan);
+        //const url = `${this.url}/${plan}`; 
+        console.log("url in js: " + this.url);
         // return this._HttpClient.get(`${API_URL}/api/v1/data/logs`, { params: params })
         // let searchParams = new URLSearchParams();
         // searchParams.append('plan', plan);
@@ -580,6 +583,18 @@ var CustomerService = /** @class */ (function () {
         // });
         //   return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
     };
+    //   getCustomers(plan): Observable<Customer[]> {
+    //     console.log("get customers in js"+this.url);
+    //     let params = new HttpParams().set('plan', plan);
+    //     // return this._HttpClient.get(`${API_URL}/api/v1/data/logs`, { params: params })
+    //     // let searchParams = new URLSearchParams();
+    //     // searchParams.append('plan', plan);
+    //     return this.http.get<Customer[]>(this.url, { params: params });
+    //       // .map(response => {
+    //       //   return response.json().mediaItems;
+    //       // });
+    //  //   return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
+    //   }
     CustomerService.prototype.postCustomer = function (customer) {
         return this.http.post(this.registerUrl, customer, this.httpOptions);
     };
@@ -802,7 +817,7 @@ module.exports = "button.ui.primary.button.logout {\n    width: 125px;\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container\">\n    <div class=\"item\">\n      <a routerLink=\"../customers\" aria-label=\"Customer Dashboard\">\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n      </a>\n    </div>\n    <div class=\"header item\">\n      <h1>Customer Dashboard</h1>\n    </div>\n      <!-- <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\"> -->\n    <div class=\"item\">\n      <a routerLink=\"../register\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign Up\n          </i>\n        </button>\n      </a>\n        <!-- <div class=\"item\"> -->\n          <a routerLink=\"../login\">\n          <button class=\"ui basic button\">\n            <i class=\"add user icon\" aria-hideen=\"true\">\n              Sign In\n            </i>\n          </button>\n          </a>\n      <!-- </div> -->\n    </div>\n    <!-- <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\"> -->\n    <div class=\"right menu\">\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n    </div>\n  </div>\n \n</div>\n\n<div class=\"ui container\">\n    <router-outlet></router-outlet> \n</div>\n\n"
+module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container\">\n    <div class=\"item\">\n      <a [routerLink]=\"['/all']\" aria-label=\"Customer Dashboard\">\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n      </a>\n    </div>\n    <div class=\"header item\">\n      <h1>Customer Dashboard</h1>\n    </div>\n      <!-- <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\"> -->\n    <div class=\"item\">\n      <a routerLink=\"../register\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign Up\n          </i>\n        </button>\n      </a>\n        <!-- <div class=\"item\"> -->\n          <a routerLink=\"../login\">\n          <button class=\"ui basic button\">\n            <i class=\"add user icon\" aria-hideen=\"true\">\n              Sign In\n            </i>\n          </button>\n          </a>\n      <!-- </div> -->\n    </div>\n    <!-- <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\"> -->\n    <div class=\"right menu\">\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n    </div>\n  </div>\n \n</div>\n\n<div class=\"ui container\">\n    <router-outlet></router-outlet> \n</div>\n\n"
 
 /***/ }),
 

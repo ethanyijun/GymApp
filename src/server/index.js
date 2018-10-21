@@ -47,15 +47,37 @@ app.use((err, req, res, next) => {
         res.status(401).send({ error: err.message});
     }
 });
+
 //get all the customer cards
 app.get('/api/customers', (req, res) => {
     let plan = req.query.plan;
-    console.log("----getting customers' plan: " + plan);
+    var plan_db;
+    switch(plan) {
+        case "yoga":
+            plan_db = "Yoga";
+            break;
+        case "gain_weight":
+            plan_db = "Gain weight";
+            break;
+        case "lose_weight":
+            plan_db = "Lose weight";
+            break;
+        default:
+            break;
+    }
+    console.log("getting customers' plan: " + plan_db);
     const customersCollection = database.collection('customers');
 
-    customersCollection.find({}).toArray((err, docs) => {
-        return res.json(docs);
-    })
+    if(plan == "all"){
+        customersCollection.find({ }).toArray((err, docs) => {
+            return res.json(docs);
+        })        
+    }else{
+        customersCollection.find({ "plan": plan_db }).toArray((err, docs) => {
+            return res.json(docs);
+        })
+    }
+
 });
 
 // get one customer

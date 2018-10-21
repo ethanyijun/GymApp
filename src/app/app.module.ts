@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
@@ -39,7 +39,8 @@ import { MessageService } from './message.service';
     MatSelectModule,
     BrowserAnimationsModule,
     MatOptionModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
     exports: [
       MatSelectModule,

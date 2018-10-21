@@ -7,13 +7,16 @@
     <a routerLink="login">  Sign in</a>
   </nav> -->
   <nav>
-    <a routerLink="/lose_weight">
+    <a [routerLink]="['/yoga']" routerLinkActive="active">
       <img src="../assets/media/1.png" class="icon" />
     </a>
-    <a routerLink="/gain_weight">
+    <!-- <a [routerLink]="['/customers', 'yoga']" routerLinkActive="active">
+      <img src="../assets/media/1.png" class="icon" />
+    </a> -->
+    <a [routerLink]="['/gain_weight']" routerLinkActive="active">
       <img src="../assets/media/2.png" class="icon" />
     </a>
-    <a routerLink="/yoga">
+    <a [routerLink]="['/lose_weight']" routerLinkActive="active">
       <img src="../assets/media/3.png" class="icon" />
     </a>
   </nav>

@@ -19,6 +19,9 @@ const routes: Routes = [
 
   { path: 'detail/:id', component: CustomerItemComponent },
 
+  // {path: 'customers/:plan', component: CustomerListComponent },
+
+  { path: ':plan', component: CustomerListComponent }
 
 ];
 
