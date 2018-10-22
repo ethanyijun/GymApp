@@ -25,9 +25,9 @@ let database;
 MongoClient.connect(process.env.DB_CONN, (err, client) => {
 
     console.log('connected to mongodb...');
-
+ 
     //buildExpress(client)
-        app.listen(4200, () => {
+        app.listen(process.env.PORT||4200, () => {
         const myAwesomeDB = client.db();
 
         
