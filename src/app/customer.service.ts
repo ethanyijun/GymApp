@@ -15,7 +15,7 @@ import {  HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CustomerService {
-  url = 'http://localhost:4200/api/customers';
+  url = '/api/customers';
   registerUrl = '/register';
 
     customers: Customer[];

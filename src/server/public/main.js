@@ -562,7 +562,7 @@ var CustomerService = /** @class */ (function () {
         this.http = http;
         this.authenticate = authenticate;
         this.messageService = messageService;
-        this.url = 'http://localhost:4200/api/customers';
+        this.url = '/api/customers';
         this.registerUrl = '/register';
         this.httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
