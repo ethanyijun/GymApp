@@ -21,7 +21,9 @@ const routes: Routes = [
 
   // {path: 'customers/:plan', component: CustomerListComponent },
 
-  { path: ':plan', component: CustomerListComponent }
+  { path: ':plan', component: CustomerListComponent },
+
+  { path: '**', component: LoginComponent }
 
 ];
 

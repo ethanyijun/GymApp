@@ -58,7 +58,8 @@ var routes = [
     { path: 'customers', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] },
     { path: 'detail/:id', component: _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_5__["CustomerItemComponent"] },
     // {path: 'customers/:plan', component: CustomerListComponent },
-    { path: ':plan', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] }
+    { path: ':plan', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] },
+    { path: '**', component: _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -994,7 +995,7 @@ var RegisterComponent = /** @class */ (function () {
             _this.newCustomer = data;
             console.log('new data posted');
         });
-        this.router.navigateByUrl('/customers');
+        this.router.navigateByUrl('/all');
     };
     RegisterComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

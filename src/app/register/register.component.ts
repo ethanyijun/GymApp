@@ -66,6 +66,6 @@ export class RegisterComponent implements OnInit {
       console.log('new data posted');
     });
 
-    this.router.navigateByUrl('/customers');
+    this.router.navigateByUrl('/all');
   }
 }
