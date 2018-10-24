@@ -1,0 +1,30 @@
+<div class="ui container">
+  <div class="ui grid">
+    <div *ngFor="let plan of plans">         
+      <div class="ui cards plan-item">
+        <div class="card">
+          <div class="content">
+              <div class="header">
+                {{plan.title}}
+              </div>
+              <br>
+              <div class="description">
+                <label class="header">coach: </label>
+                {{plan.coach}}
+              </div>
+              <div class="description">
+                <label class="header">type: </label>
+                {{plan.type}}
+              </div>
+              <br>
+            <div class="extra content" buttons>
+              <div class="ui two buttons">
+                <a routerLink="/detail/{{plan._id}}"><button class="ui basic blue button">Modify</button></a>
+                <button class="ui basic red button" (click)="deletePlan(plan._id)">Delete</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
