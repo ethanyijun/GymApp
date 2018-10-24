@@ -34,5 +34,14 @@ export class PlanService {
         // let params = new HttpParams().set('plan', plan);
         console.log("url in js: " + this.url);
         return this.http.get<Plan[]>(this.url);
-    }  
+    }
+
+    deletePlan (id: string): Observable<{}> {
+      const url = `${this.url}/${id}`; // DELETE api/heroes/42
+      console.log(url);
+      return this.http.delete(url, this.httpOptions);  
+        // .pipe(
+        //   catchError(this.handleError('deleteHero'))
+        // );
+    }
 }

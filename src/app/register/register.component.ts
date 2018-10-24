@@ -5,8 +5,8 @@ import { Customer } from '../customer';
 import { Router } from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 import { Plan } from '../Plan';
-
-
+import { PlanService } from '../plan.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,19 +15,15 @@ import { Plan } from '../Plan';
 })
 export class RegisterComponent implements OnInit {
 
-
+  plans: Plan[];
   selectedValue: string;
-  plans: Plan[] = [
-    {name: 'Yoga', description: 'Yoga description'},
-    {name: 'Gain weight', description: 'Gain weight description'},
-    {name: 'Lose weight', description: 'Lose weight description'}
-  ];
+  // plans: Plan[] = [
+  //   {name: 'Yoga', description: 'Yoga description'},
+  //   {name: 'Gain weight', description: 'Gain weight description'},
+  //   {name: 'Lose weight', description: 'Lose weight description'}
+  // ];
 
   planControl = new FormControl('', [Validators.required]);
-  // animals: Customer[] = [
-  //   {firstName: "Leo", lastName: "Zheng", email:"123@123.com", plan: "yoga", phone:"123"},
-  //   {firstName: "Huey", lastName: "Kong", email:"123@123.com", plan: "gain weight", phone:"123"},
-  // ];
 
 
   loading = false;
@@ -35,14 +31,27 @@ export class RegisterComponent implements OnInit {
  // customers: Customer[];
 
   constructor(private customerService: CustomerService,
+    private planservice: PlanService,
+    private activatedRoute: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
-
+    this.activatedRoute.params.subscribe(
+      params => {
+        //var plan = this.activatedRoute.snapshot.params.plan;
+        this.getPlans();
+      });
 
   }
 
-
+  getPlans(): void {
+    console.log("getting plans!");
+    this.planservice.getPlans().subscribe(
+      plans => this.plans = plans
+    );
+  
+  }
+  
   onSubmit(form: NgForm) {
 
     //console.log("====="+this.selectedValue);

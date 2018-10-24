@@ -60,6 +60,7 @@ var routes = [
     { path: 'customers', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] },
     { path: 'plans', component: _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_6__["PlanListComponent"] },
     { path: 'detail/:id', component: _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_5__["CustomerItemComponent"] },
+    { path: 'plan-detail/:id', component: _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_5__["CustomerItemComponent"] },
     // {path: 'customers/:plan', component: CustomerListComponent },
     { path: ':plan', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] },
     { path: '**', component: _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] }
@@ -168,12 +169,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./message.service */ "./src/app/message.service.ts");
 /* harmony import */ var _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./plan-list/plan-list.component */ "./src/app/plan-list/plan-list.component.ts");
+/* harmony import */ var _plan_item_plan_item_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./plan-item/plan-item.component */ "./src/app/plan-item/plan-item.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -208,7 +211,8 @@ var AppModule = /** @class */ (function () {
                 _join_member_form_join_member_form_component__WEBPACK_IMPORTED_MODULE_10__["JoinMemberFormComponent"],
                 _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_11__["CustomerItemComponent"],
                 _menu_bar_menu_bar_component__WEBPACK_IMPORTED_MODULE_13__["MenuBarComponent"],
-                _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_19__["PlanListComponent"]
+                _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_19__["PlanListComponent"],
+                _plan_item_plan_item_component__WEBPACK_IMPORTED_MODULE_20__["PlanItemComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -913,6 +917,69 @@ var MessageService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/plan-item/plan-item.component.css":
+/*!***************************************************!*\
+  !*** ./src/app/plan-item/plan-item.component.css ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/plan-item/plan-item.component.html":
+/*!****************************************************!*\
+  !*** ./src/app/plan-item/plan-item.component.html ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  plan-item works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/plan-item/plan-item.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/plan-item/plan-item.component.ts ***!
+  \**************************************************/
+/*! exports provided: PlanItemComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlanItemComponent", function() { return PlanItemComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PlanItemComponent = /** @class */ (function () {
+    function PlanItemComponent() {
+    }
+    PlanItemComponent.prototype.ngOnInit = function () {
+    };
+    PlanItemComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-plan-item',
+            template: __webpack_require__(/*! ./plan-item.component.html */ "./src/app/plan-item/plan-item.component.html"),
+            styles: [__webpack_require__(/*! ./plan-item.component.css */ "./src/app/plan-item/plan-item.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PlanItemComponent);
+    return PlanItemComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/plan-list/plan-list.component.css":
 /*!***************************************************!*\
   !*** ./src/app/plan-list/plan-list.component.css ***!
@@ -931,7 +998,7 @@ module.exports = ".container {\n    margin-top: 50px;\n  }\n  \n  .plan-item{\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui container\">\n  <div class=\"ui grid\">\n    <div *ngFor=\"let plan of plans\">         \n      <div class=\"ui cards plan-item\">\n        <div class=\"card\">\n          <div class=\"content\">\n              <div class=\"header\">\n                {{plan.title}}\n              </div>\n              <br>\n              <div class=\"description\">\n                <label class=\"header\">coach: </label>\n                {{plan.coach}}\n              </div>\n              <div class=\"description\">\n                <label class=\"header\">type: </label>\n                {{plan.type}}\n              </div>\n              <br>\n            <div class=\"extra content\" buttons>\n              <div class=\"ui two buttons\">\n                <a routerLink=\"/detail/{{plan._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                <button class=\"ui basic red button\" (click)=\"deletePlan(plan._id)\">Delete</button>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"ui container\">\n  <div class=\"ui grid\">\n    <div *ngFor=\"let plan of plans\">         \n      <div class=\"ui cards plan-item\">\n        <div class=\"card\">\n          <div class=\"content\">\n              <div class=\"header\">\n                {{plan.title}}\n              </div>\n              <br>\n              <div class=\"description\">\n                <label class=\"header\">coach: </label>\n                {{plan.coach}}\n              </div>\n              <div class=\"description\">\n                <label class=\"header\">type: </label>\n                {{plan.type}}\n              </div>\n              <br>\n            <div class=\"extra content\" buttons>\n              <div class=\"ui two buttons\">\n                <a routerLink=\"/plan-detail/{{plan._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                <button class=\"ui basic red button\" (click)=\"deletePlan(plan._id)\">Delete</button>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -971,7 +1038,6 @@ var PlanListComponent = /** @class */ (function () {
         this.activatedRoute.params.subscribe(function (params) {
             //var plan = this.activatedRoute.snapshot.params.plan;
             _this.getPlans();
-            //  console.log("on init" + plan);
         });
     };
     PlanListComponent.prototype.getPlans = function () {
@@ -980,6 +1046,10 @@ var PlanListComponent = /** @class */ (function () {
         this.planservice.getPlans().subscribe(function (plans) { return _this.plans = plans; });
     };
     PlanListComponent.prototype.deletePlan = function (id) {
+        var _this = this;
+        this.planservice.deletePlan(id).subscribe(function (data) {
+            _this.getPlans();
+        });
     };
     PlanListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1042,6 +1112,14 @@ var PlanService = /** @class */ (function () {
         console.log("url in js: " + this.url);
         return this.http.get(this.url);
     };
+    PlanService.prototype.deletePlan = function (id) {
+        var url = this.url + "/" + id; // DELETE api/heroes/42
+        console.log(url);
+        return this.http.delete(url, this.httpOptions);
+        // .pipe(
+        //   catchError(this.handleError('deleteHero'))
+        // );
+    };
     PlanService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' }),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _authenticate_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticateService"],
@@ -1072,7 +1150,7 @@ module.exports = ".register-container {\n    max-width: 500px;\n    margin: 50px
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"register-container\">\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email> \n    </div>\n\n    <!-- <div class=\"inline fields\">\n        <label>Interested training plan:</label>\n          <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n          <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n          <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n    </div> -->\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n\n  </form>\n\n    <mat-form-field>\n        <mat-select placeholder=\"Plan selection\" [formControl]=\"planControl\" [(ngModel)]=\"selectedValue\" name = \"plans\">\n          <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.name\">\n            {{plan.name}}\n          </mat-option>\n        </mat-select>\n        <!-- <mat-hint>{{planControl.value?.name}}</mat-hint> -->\n    </mat-form-field>\n</div>"
+module.exports = "<div class=\"register-container\">\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email> \n    </div>\n\n    <!-- <div class=\"inline fields\">\n        <label>Interested training plan:</label>\n          <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n          <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n          <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n    </div> -->\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n\n  </form>\n\n    <mat-form-field>\n        <mat-select placeholder=\"Plan selection\" [formControl]=\"planControl\" [(ngModel)]=\"selectedValue\" name = \"plans\">\n          <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.name\">\n            {{plan.title}}\n          </mat-option>\n        </mat-select>\n        <!-- <mat-hint>{{planControl.value?.name}}</mat-hint> -->\n    </mat-form-field>\n</div>"
 
 /***/ }),
 
@@ -1090,6 +1168,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customer_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../customer.service */ "./src/app/customer.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _plan_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../plan.service */ "./src/app/plan.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1103,24 +1182,34 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var RegisterComponent = /** @class */ (function () {
     // customers: Customer[];
-    function RegisterComponent(customerService, router) {
+    function RegisterComponent(customerService, planservice, activatedRoute, router) {
         this.customerService = customerService;
+        this.planservice = planservice;
+        this.activatedRoute = activatedRoute;
         this.router = router;
-        this.plans = [
-            { name: 'Yoga', description: 'Yoga description' },
-            { name: 'Gain weight', description: 'Gain weight description' },
-            { name: 'Lose weight', description: 'Lose weight description' }
-        ];
-        this.planControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]);
-        // animals: Customer[] = [
-        //   {firstName: "Leo", lastName: "Zheng", email:"123@123.com", plan: "yoga", phone:"123"},
-        //   {firstName: "Huey", lastName: "Kong", email:"123@123.com", plan: "gain weight", phone:"123"},
+        // plans: Plan[] = [
+        //   {name: 'Yoga', description: 'Yoga description'},
+        //   {name: 'Gain weight', description: 'Gain weight description'},
+        //   {name: 'Lose weight', description: 'Lose weight description'}
         // ];
+        this.planControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]);
         this.loading = false;
     }
     RegisterComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activatedRoute.params.subscribe(function (params) {
+            //var plan = this.activatedRoute.snapshot.params.plan;
+            _this.getPlans();
+        });
+    };
+    RegisterComponent.prototype.getPlans = function () {
+        var _this = this;
+        console.log("getting plans!");
+        this.planservice.getPlans().subscribe(function (plans) { return _this.plans = plans; });
     };
     RegisterComponent.prototype.onSubmit = function (form) {
         var _this = this;
@@ -1151,6 +1240,8 @@ var RegisterComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./register.component.css */ "./src/app/register/register.component.css")]
         }),
         __metadata("design:paramtypes", [_customer_service__WEBPACK_IMPORTED_MODULE_1__["CustomerService"],
+            _plan_service__WEBPACK_IMPORTED_MODULE_4__["PlanService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], RegisterComponent);
     return RegisterComponent;

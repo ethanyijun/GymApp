@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PlanListComponent implements OnInit {
   plans: Plan[];
   constructor(private planservice: PlanService,
-    private activatedRoute: ActivatedRoute) { }
+  private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
    // console.log(this.activatedRoute.snapshot.params.plan);
@@ -20,9 +20,7 @@ export class PlanListComponent implements OnInit {
       params => {
         //var plan = this.activatedRoute.snapshot.params.plan;
         this.getPlans();
-      //  console.log("on init" + plan);
-      }
-  );
+      });
   }
 
   getPlans(): void {
@@ -34,6 +32,9 @@ export class PlanListComponent implements OnInit {
   }
   deletePlan(id: string): void{
 
+     this.planservice.deletePlan(id).subscribe(data=>{
+       this.getPlans();
+     });
   }
 
 }

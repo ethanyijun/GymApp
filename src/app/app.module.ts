@@ -19,6 +19,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatOptionModule,MatSelectModule} from '@angular/material';
 import { MessageService } from './message.service';
 import { PlanListComponent } from './plan-list/plan-list.component';
+import { PlanItemComponent } from './plan-item/plan-item.component';
 //import { PlanService } from './plan.service';
 
 @NgModule({
@@ -30,7 +31,8 @@ import { PlanListComponent } from './plan-list/plan-list.component';
     JoinMemberFormComponent,
     CustomerItemComponent,
     MenuBarComponent,
-    PlanListComponent
+    PlanListComponent,
+    PlanItemComponent
   ],
   imports: [
     BrowserModule,
