@@ -48,6 +48,18 @@ app.use((err, req, res, next) => {
     }
 });
 
+//get all plans
+app.get('/api/plans', (req, res) => {
+
+    console.log("getting customers' plans");
+    const plansCollection = database.collection('plans');
+
+    plansCollection.find({ }).toArray((err, docs) => {
+        return res.json(docs)
+    })   
+});
+
+
 //get all the customer cards
 app.get('/api/customers', (req, res) => {
     let plan = req.query.plan;
@@ -150,19 +162,25 @@ app.post('/login', (req, res) => {
     });
 });
 
+app.delete('/api/customers/:id', (req, res) => {
+    // let query = {_id: this.ObjectID(req.param.id)};
+   
+       const customersCollection = database.collection('customers');
+       //console.log("id in js: " + req.params.id);
+       customersCollection.deleteOne({ _id : ObjectId(req.params.id)},function(err,customer){
+           if(err){
+               res.send(err);
+           }
+           res.json(customer);
+       });
+   });
+
 app.get('*', (req, res) => {
     return res.sendFile(path.join(__dirname, 'public/index.html'));
   });
 
-app.delete('/api/customers/:id', (req, res) => {
- // let query = {_id: this.ObjectID(req.param.id)};
 
-    const customersCollection = database.collection('customers');
-    //console.log("id in js: " + req.params.id);
-    customersCollection.deleteOne({ _id : ObjectId(req.params.id)},function(err,customer){
-        if(err){
-            res.send(err);
-        }
-        res.json(customer);
-    });
-});
+
+
+
+

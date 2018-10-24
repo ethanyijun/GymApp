@@ -39,6 +39,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
 /* harmony import */ var _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./customer-list/customer-list.component */ "./src/app/customer-list/customer-list.component.ts");
 /* harmony import */ var _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./customer-item/customer-item.component */ "./src/app/customer-item/customer-item.component.ts");
+/* harmony import */ var _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./plan-list/plan-list.component */ "./src/app/plan-list/plan-list.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -51,11 +52,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     { path: '', redirectTo: 'register', pathMatch: 'full' },
     { path: 'register', component: _register_register_component__WEBPACK_IMPORTED_MODULE_2__["RegisterComponent"] },
     { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: 'customers', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] },
+    { path: 'plans', component: _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_6__["PlanListComponent"] },
     { path: 'detail/:id', component: _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_5__["CustomerItemComponent"] },
     // {path: 'customers/:plan', component: CustomerListComponent },
     { path: ':plan', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] },
@@ -164,12 +167,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./message.service */ "./src/app/message.service.ts");
+/* harmony import */ var _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./plan-list/plan-list.component */ "./src/app/plan-list/plan-list.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -202,7 +207,8 @@ var AppModule = /** @class */ (function () {
                 _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_9__["CustomerListComponent"],
                 _join_member_form_join_member_form_component__WEBPACK_IMPORTED_MODULE_10__["JoinMemberFormComponent"],
                 _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_11__["CustomerItemComponent"],
-                _menu_bar_menu_bar_component__WEBPACK_IMPORTED_MODULE_13__["MenuBarComponent"]
+                _menu_bar_menu_bar_component__WEBPACK_IMPORTED_MODULE_13__["MenuBarComponent"],
+                _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_19__["PlanListComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -818,7 +824,7 @@ module.exports = "button.ui.primary.button.logout {\n    width: 125px;\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container\">\n    <div class=\"item\">\n      <a [routerLink]=\"['/all']\" aria-label=\"Customer Dashboard\">\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n      </a>\n    </div>\n    <div class=\"header item\">\n      <h1>Customer Dashboard</h1>\n    </div>\n      <!-- <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\"> -->\n    <div class=\"item\">\n      <a routerLink=\"../register\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign Up\n          </i>\n        </button>\n      </a>\n        <!-- <div class=\"item\"> -->\n          <a routerLink=\"../login\">\n          <button class=\"ui basic button\">\n            <i class=\"add user icon\" aria-hideen=\"true\">\n              Sign In\n            </i>\n          </button>\n          </a>\n      <!-- </div> -->\n    </div>\n    <!-- <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\"> -->\n    <div class=\"right menu\">\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n    </div>\n  </div>\n \n</div>\n\n<div class=\"ui container\">\n    <router-outlet></router-outlet> \n</div>\n\n"
+module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container\">\n    <div class=\"item\">\n      <a [routerLink]=\"['/all']\" aria-label=\"Customer Dashboard\">\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n      </a>\n    </div>\n    <div class=\"header item\">\n      <h1>Customer Dashboard</h1>\n    </div>\n      <!-- <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\"> -->\n    <div class=\"item\">\n      <a routerLink=\"../register\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign Up\n          </i>\n        </button>\n      </a>\n        <!-- <div class=\"item\"> -->\n      <a routerLink=\"../login\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign In\n          </i>\n        </button>\n      </a>\n      <a routerLink=\"../plans\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Plan list\n          </i>\n        </button>\n      </a>\n      <!-- </div> -->\n    </div>\n    <!-- <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\"> -->\n    <div class=\"right menu\">\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n    </div>\n  </div>\n \n</div>\n\n<div class=\"ui container\">\n    <router-outlet></router-outlet> \n</div>\n\n"
 
 /***/ }),
 
@@ -901,6 +907,147 @@ var MessageService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' })
     ], MessageService);
     return MessageService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/plan-list/plan-list.component.css":
+/*!***************************************************!*\
+  !*** ./src/app/plan-list/plan-list.component.css ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".container {\n    margin-top: 50px;\n  }\n  \n  .plan-item{\n    padding-left: 35px;\n    padding-bottom: 25px;\n  }\n  "
+
+/***/ }),
+
+/***/ "./src/app/plan-list/plan-list.component.html":
+/*!****************************************************!*\
+  !*** ./src/app/plan-list/plan-list.component.html ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"ui container\">\n  <div class=\"ui grid\">\n    <div *ngFor=\"let plan of plans\">         \n      <div class=\"ui cards plan-item\">\n        <div class=\"card\">\n          <div class=\"content\">\n              <div class=\"header\">\n                {{plan.title}}\n              </div>\n              <br>\n              <div class=\"description\">\n                <label class=\"header\">coach: </label>\n                {{plan.coach}}\n              </div>\n              <div class=\"description\">\n                <label class=\"header\">type: </label>\n                {{plan.type}}\n              </div>\n              <br>\n            <div class=\"extra content\" buttons>\n              <div class=\"ui two buttons\">\n                <a routerLink=\"/detail/{{plan._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                <button class=\"ui basic red button\" (click)=\"deletePlan(plan._id)\">Delete</button>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/plan-list/plan-list.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/plan-list/plan-list.component.ts ***!
+  \**************************************************/
+/*! exports provided: PlanListComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlanListComponent", function() { return PlanListComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _plan_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../plan.service */ "./src/app/plan.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var PlanListComponent = /** @class */ (function () {
+    function PlanListComponent(planservice, activatedRoute) {
+        this.planservice = planservice;
+        this.activatedRoute = activatedRoute;
+    }
+    PlanListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        // console.log(this.activatedRoute.snapshot.params.plan);
+        this.activatedRoute.params.subscribe(function (params) {
+            //var plan = this.activatedRoute.snapshot.params.plan;
+            _this.getPlans();
+            //  console.log("on init" + plan);
+        });
+    };
+    PlanListComponent.prototype.getPlans = function () {
+        var _this = this;
+        console.log("getting plans!");
+        this.planservice.getPlans().subscribe(function (plans) { return _this.plans = plans; });
+    };
+    PlanListComponent.prototype.deletePlan = function (id) {
+    };
+    PlanListComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-plan-list',
+            template: __webpack_require__(/*! ./plan-list.component.html */ "./src/app/plan-list/plan-list.component.html"),
+            styles: [__webpack_require__(/*! ./plan-list.component.css */ "./src/app/plan-list/plan-list.component.css")]
+        }),
+        __metadata("design:paramtypes", [_plan_service__WEBPACK_IMPORTED_MODULE_1__["PlanService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+    ], PlanListComponent);
+    return PlanListComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/plan.service.ts":
+/*!*********************************!*\
+  !*** ./src/app/plan.service.ts ***!
+  \*********************************/
+/*! exports provided: PlanService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlanService", function() { return PlanService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message.service */ "./src/app/message.service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _authenticate_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./authenticate.service */ "./src/app/authenticate.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var PlanService = /** @class */ (function () {
+    function PlanService(http, authenticate, messageService) {
+        this.http = http;
+        this.authenticate = authenticate;
+        this.messageService = messageService;
+        this.url = '/api/plans';
+        this.httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        };
+    }
+    PlanService.prototype.getPlans = function () {
+        // let params = new HttpParams().set('plan', plan);
+        console.log("url in js: " + this.url);
+        return this.http.get(this.url);
+    };
+    PlanService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _authenticate_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticateService"],
+            _message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"]])
+    ], PlanService);
+    return PlanService;
 }());
 
 
@@ -1077,7 +1224,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/newAIP/AIP/NewAIP/aip/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/aip/GymApp/src/main.ts */"./src/main.ts");
 
 
 /***/ })
