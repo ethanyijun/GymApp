@@ -16,6 +16,19 @@ export class PlanItemComponent implements OnInit {
   private location: Location) { }
   @Input() plan: Plan;
   ngOnInit() {
+    this.getPlan();
+  }
+
+  getPlan(): void {
+    let id;
+    this.route.params.subscribe(params => {
+       id = params['id'];
+      console.log(params['id']) //log the value of id
+    });
+  //  console.log("getting customer id: "+id);
+    this.plans.getPlan(id)
+    .subscribe(plan => {this.plan = plan;});
+      
   }
 
   goBack(): void {

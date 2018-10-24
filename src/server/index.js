@@ -9,8 +9,6 @@ const bcrypt = require('bcrypt');
 const checkJwt = require('express-jwt');
 
 
-//const buildExpress = require('./express');
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json());
@@ -20,7 +18,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 require('dotenv').config();
 
 let database;
-//fvar ObjectId = require('mongodb').ObjectID;
 
 MongoClient.connect(process.env.DB_CONN, (err, client) => {
 
@@ -175,6 +172,15 @@ app.delete('/api/customers/:id', (req, res) => {
        });
    });
 
+app.get('/api/plans/:id', (req, res) => {
+    const plansCollection = database.collection('plans');
+   // console.log("js: "+req.params.id);
+    plansCollection.findOne({ _id : ObjectId(req.params.id)},function(err,plan){
+        return res.json(plan);
+    });
+});
+
+
 // update one plan
 app.put('/api/plans/:id', (req, res) => {
     const plansCollection = database.collection('plans');
@@ -189,6 +195,18 @@ app.put('/api/plans/:id', (req, res) => {
     });
 });
 
+app.delete('/api/plans/:id', (req, res) => {
+    // let query = {_id: this.ObjectID(req.param.id)};
+   
+       const plansCollection = database.collection('plans');
+       //console.log("id in js: " + req.params.id);
+       plansCollection.deleteOne({ _id : ObjectId(req.params.id)},function(err,plan){
+           if(err){
+               res.send(err);
+           }
+           res.json(plan);
+       });
+   });
 
 app.get('*', (req, res) => {
     return res.sendFile(path.join(__dirname, 'public/index.html'));

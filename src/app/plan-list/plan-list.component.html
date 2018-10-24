@@ -19,8 +19,9 @@
               <br>
             <div class="extra content" buttons>
               <div class="ui two buttons">
-                <a routerLink="/plan-detail/{{plan._id}}"><button class="ui basic blue button">Modify</button></a>
-                <button class="ui basic red button" (click)="deletePlan(plan._id)">Delete</button>
+                <div><a class="modify-button" routerLink="/plan-detail/{{plan._id}}"><button class="ui positive basic button">Modify</button></a>
+                </div>
+                <div><button class="ui negative basic button" (click)="deletePlan(plan._id)">Delete</button></div>
               </div>
           </div>
         </div>

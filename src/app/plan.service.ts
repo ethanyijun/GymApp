@@ -54,6 +54,15 @@ export class PlanService {
       );
     }
 
+    getPlan(id: string): Observable<Plan> {
+      const url = `${this.url}/${id}`;
+      console.log("getting: "+url);
+      return this.http.get<Plan>(url).pipe(
+        tap(_ => this.log(`fetched plan id=${id}`)),
+        catchError(this.handleError<Plan>(`getPlan id=${id}`))
+      );
+    }
+
     private handleError<T> (operation = 'operation', result?: T) {
       return (error: any): Observable<T> => {
   

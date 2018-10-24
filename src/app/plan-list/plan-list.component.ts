@@ -28,8 +28,8 @@ export class PlanListComponent implements OnInit {
     this.planservice.getPlans().subscribe(
       plans => this.plans = plans
     );
-  
   }
+  
   deletePlan(id: string): void{
 
      this.planservice.deletePlan(id).subscribe(data=>{

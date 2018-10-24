@@ -35,8 +35,9 @@ export class CustomerItemComponent implements OnInit {
     this.route.params.subscribe(
       params => {
         this.getPlans();
+        this.getCustomer();
       });
-    this.getCustomer();
+
     console.log("on init");
   }
 

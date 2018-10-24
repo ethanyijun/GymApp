@@ -2,8 +2,16 @@
     margin-top: 50px;
   }
   
-  .plan-item{
-    padding-left: 35px;
-    padding-bottom: 25px;
-  }
-  
+.plan-item{
+  padding-left: 35px;
+  padding-bottom: 25px;
+}
+
+.modify-button {
+  text-decoration: none;
+}
+
+.buttons {
+  display: flex;
+}
+

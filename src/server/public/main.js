@@ -341,7 +341,7 @@ module.exports = ".customer-item{\n    padding-left: 35px;\n    padding-bottom: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui container\">\n  \n        <div *ngIf=\"customer\" class=\"ui big form customer-item\">\n            <br>\n            <h2> {{customer.firstName}} {{customer.lastName}} Details</h2>\n            <div class=\"field\">\n              <label>First name:\n                <input [(ngModel)]=\"customer.firstName\" placeholder=\"firstName\"/>\n              </label>\n            </div>\n            <div class=\"field\">\n                <label>Last name:\n                  <input [(ngModel)]=\"customer.lastName\" placeholder=\"lastName\"/>\n                </label>\n              </div>\n            <div class=\"field\">\n                <label>email:\n                  <input [(ngModel)]=\"customer.email\" placeholder=\"email\"/>\n                </label>\n            </div>\n\n              <mat-form-field>  \n                <mat-select placeholder=\"Plan selection\" [(ngModel)]=\"selectedValue\" name = \"plans\">\n                    <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.name\">\n                      {{plan.name}}\n                    </mat-option>\n                  </mat-select>\n              </mat-form-field>\n\n\n            <br>\n            <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n            <button class=\"ui primary button\" (click)=\"save()\">save</button>\n        </div>\n</div>\n      "
+module.exports = "\n<div class=\"ui container\">\n  \n        <div *ngIf=\"customer\" class=\"ui big form customer-item\">\n            <br>\n            <h2> {{customer.firstName}} {{customer.lastName}} Details</h2>\n            <div class=\"field\">\n              <label>First name:\n                <input [(ngModel)]=\"customer.firstName\" placeholder=\"firstName\"/>\n              </label>\n            </div>\n            <div class=\"field\">\n                <label>Last name:\n                  <input [(ngModel)]=\"customer.lastName\" placeholder=\"lastName\"/>\n                </label>\n              </div>\n            <div class=\"field\">\n                <label>email:\n                  <input [(ngModel)]=\"customer.email\" placeholder=\"email\"/>\n                </label>\n            </div>\n\n              <mat-form-field>  \n                <mat-select placeholder=\"Plan selection\" [(ngModel)]=\"selectedValue\" name = \"plans\">\n                    <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.title\">\n                      {{plan.title}}\n                    </mat-option>\n                  </mat-select>\n              </mat-form-field>\n\n\n            <br>\n            <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n            <button class=\"ui primary button\" (click)=\"save()\">save</button>\n        </div>\n</div>\n      "
 
 /***/ }),
 
@@ -387,8 +387,8 @@ var CustomerItemComponent = /** @class */ (function () {
         var _this = this;
         this.route.params.subscribe(function (params) {
             _this.getPlans();
+            _this.getCustomer();
         });
-        this.getCustomer();
         console.log("on init");
     };
     CustomerItemComponent.prototype.getCustomer = function () {
@@ -933,7 +933,7 @@ var MessageService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".plan-item{\n    padding-left: 35px;\n    padding-bottom: 25px;\n  }\n  "
 
 /***/ }),
 
@@ -982,6 +982,18 @@ var PlanItemComponent = /** @class */ (function () {
         this.location = location;
     }
     PlanItemComponent.prototype.ngOnInit = function () {
+        this.getPlan();
+    };
+    PlanItemComponent.prototype.getPlan = function () {
+        var _this = this;
+        var id;
+        this.route.params.subscribe(function (params) {
+            id = params['id'];
+            console.log(params['id']); //log the value of id
+        });
+        //  console.log("getting customer id: "+id);
+        this.plans.getPlan(id)
+            .subscribe(function (plan) { _this.plan = plan; });
     };
     PlanItemComponent.prototype.goBack = function () {
         this.location.back();
@@ -1024,7 +1036,7 @@ var PlanItemComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n    margin-top: 50px;\n  }\n  \n  .plan-item{\n    padding-left: 35px;\n    padding-bottom: 25px;\n  }\n  "
+module.exports = ".container {\n    margin-top: 50px;\n  }\n  \n.plan-item{\n  padding-left: 35px;\n  padding-bottom: 25px;\n}\n  \n.modify-button {\n  text-decoration: none;\n}\n  \n.buttons {\n  display: flex;\n}\n\n"
 
 /***/ }),
 
@@ -1035,7 +1047,7 @@ module.exports = ".container {\n    margin-top: 50px;\n  }\n  \n  .plan-item{\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui container\">\n  <div class=\"ui grid\">\n    <div *ngFor=\"let plan of plans\">         \n      <div class=\"ui cards plan-item\">\n        <div class=\"card\">\n          <div class=\"content\">\n              <div class=\"header\">\n                {{plan.title}}\n              </div>\n              <br>\n              <div class=\"description\">\n                <label class=\"header\">coach: </label>\n                {{plan.coach}}\n              </div>\n              <div class=\"description\">\n                <label class=\"header\">type: </label>\n                {{plan.type}}\n              </div>\n              <br>\n            <div class=\"extra content\" buttons>\n              <div class=\"ui two buttons\">\n                <a routerLink=\"/plan-detail/{{plan._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                <button class=\"ui basic red button\" (click)=\"deletePlan(plan._id)\">Delete</button>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"ui container\">\n  <div class=\"ui grid\">\n    <div *ngFor=\"let plan of plans\">         \n      <div class=\"ui cards plan-item\">\n        <div class=\"card\">\n          <div class=\"content\">\n              <div class=\"header\">\n                {{plan.title}}\n              </div>\n              <br>\n              <div class=\"description\">\n                <label class=\"header\">coach: </label>\n                {{plan.coach}}\n              </div>\n              <div class=\"description\">\n                <label class=\"header\">type: </label>\n                {{plan.type}}\n              </div>\n              <br>\n            <div class=\"extra content\" buttons>\n              <div class=\"ui two buttons\">\n                <div><a class=\"modify-button\" routerLink=\"/plan-detail/{{plan._id}}\"><button class=\"ui positive basic button\">Modify</button></a>\n                </div>\n                <div><button class=\"ui negative basic button\" (click)=\"deletePlan(plan._id)\">Delete</button></div>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1166,6 +1178,12 @@ var PlanService = /** @class */ (function () {
         var url = this.url + "/" + id;
         console.log("======" + url);
         return this.http.put(url, plan, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("updated Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('updateCustomer')));
+    };
+    PlanService.prototype.getPlan = function (id) {
+        var _this = this;
+        var url = this.url + "/" + id;
+        console.log("getting: " + url);
+        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("fetched plan id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError("getPlan id=" + id)));
     };
     PlanService.prototype.handleError = function (operation, result) {
         var _this = this;
@@ -1378,7 +1396,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/newAIP/AIP/NewAIP/aip/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/aip/GymApp/src/main.ts */"./src/main.ts");
 
 
 /***/ })
