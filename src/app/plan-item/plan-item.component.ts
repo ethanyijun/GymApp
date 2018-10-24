@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { Plan } from '../Plan';
+import { PlanService } from '../plan.service';
 
 @Component({
   selector: 'app-plan-item',
@@ -7,9 +11,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanItemComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private plans: PlanService, 
+  private route: ActivatedRoute,
+  private location: Location) { }
+  @Input() plan: Plan;
   ngOnInit() {
   }
 
+  goBack(): void {
+    this.location.back();
+  }
+
+  save(): void {
+    let id;
+    this.route.params.subscribe(params => {
+       id = params['id'];      
+     //log the value of id
+    });
+
+    this.plans.updatePlan(this.plan,id)
+      .subscribe(() => this.goBack());
+  }
 }

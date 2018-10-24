@@ -1,3 +1,31 @@
-<p>
-  plan-item works!
-</p>
+
+<div class="ui container">
+  
+  <div *ngIf="plan" class="ui big form plan-item">
+      <br>
+      <h2> {{plan.title}} Details</h2>
+
+
+      <div class="field">
+          <label>Title:
+            <input [(ngModel)]="plan.title" placeholder="title"/>
+          </label>
+      </div>
+      <div class="field">
+        <label>Coach:
+          <input [(ngModel)]="plan.coach" placeholder="coach"/>
+        </label>
+      </div>
+
+      <div class="field">
+          <label>Type:
+            <input [(ngModel)]="plan.type" placeholder="type"/>
+          </label>
+      </div>
+
+
+      <br>
+      <button class="ui button" (click)="goBack()">go back</button>
+      <button class="ui primary button" (click)="save()">save</button>
+  </div>
+</div>

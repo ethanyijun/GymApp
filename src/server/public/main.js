@@ -40,12 +40,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./customer-list/customer-list.component */ "./src/app/customer-list/customer-list.component.ts");
 /* harmony import */ var _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./customer-item/customer-item.component */ "./src/app/customer-item/customer-item.component.ts");
 /* harmony import */ var _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./plan-list/plan-list.component */ "./src/app/plan-list/plan-list.component.ts");
+/* harmony import */ var _plan_item_plan_item_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./plan-item/plan-item.component */ "./src/app/plan-item/plan-item.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -60,7 +62,7 @@ var routes = [
     { path: 'customers', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] },
     { path: 'plans', component: _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_6__["PlanListComponent"] },
     { path: 'detail/:id', component: _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_5__["CustomerItemComponent"] },
-    { path: 'plan-detail/:id', component: _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_5__["CustomerItemComponent"] },
+    { path: 'plan-detail/:id', component: _plan_item_plan_item_component__WEBPACK_IMPORTED_MODULE_7__["PlanItemComponent"] },
     // {path: 'customers/:plan', component: CustomerListComponent },
     { path: ':plan', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] },
     { path: '**', component: _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] }
@@ -357,6 +359,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customer_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../customer.service */ "./src/app/customer.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _plan_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../plan.service */ "./src/app/plan.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -370,23 +373,23 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var CustomerItemComponent = /** @class */ (function () {
-    function CustomerItemComponent(customers, route, location) {
+    function CustomerItemComponent(customers, route, location, planservice) {
         this.customers = customers;
         this.route = route;
         this.location = location;
-        this.plans = [
-            { name: 'Yoga', description: 'Yoga description' },
-            { name: 'Gain weight', description: 'Gain weight description' },
-            { name: 'Lose weight', description: 'Lose weight description' }
-        ];
+        this.planservice = planservice;
         // @Output() deleted = new EventEmitter();
         this.columnClass = 'four wide column';
     }
     CustomerItemComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.subscribe(function (params) {
+            _this.getPlans();
+        });
         this.getCustomer();
         console.log("on init");
-        //  this.selectedValue = this.customer.plan;
     };
     CustomerItemComponent.prototype.getCustomer = function () {
         var _this = this;
@@ -417,6 +420,11 @@ var CustomerItemComponent = /** @class */ (function () {
         this.customers.updateCustomer(this.customer, id)
             .subscribe(function () { return _this.goBack(); });
     };
+    CustomerItemComponent.prototype.getPlans = function () {
+        var _this = this;
+        console.log("getting plans!");
+        this.planservice.getPlans().subscribe(function (plans) { return _this.plans = plans; });
+    };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
@@ -432,7 +440,8 @@ var CustomerItemComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_customer_service__WEBPACK_IMPORTED_MODULE_1__["CustomerService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-            _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"]])
+            _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"],
+            _plan_service__WEBPACK_IMPORTED_MODULE_4__["PlanService"]])
     ], CustomerItemComponent);
     return CustomerItemComponent;
 }());
@@ -935,7 +944,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  plan-item works!\n</p>\n"
+module.exports = "\n<div class=\"ui container\">\n  \n  <div *ngIf=\"plan\" class=\"ui big form plan-item\">\n      <br>\n      <h2> {{plan.title}} Details</h2>\n\n\n      <div class=\"field\">\n          <label>Title:\n            <input [(ngModel)]=\"plan.title\" placeholder=\"title\"/>\n          </label>\n      </div>\n      <div class=\"field\">\n        <label>Coach:\n          <input [(ngModel)]=\"plan.coach\" placeholder=\"coach\"/>\n        </label>\n      </div>\n\n      <div class=\"field\">\n          <label>Type:\n            <input [(ngModel)]=\"plan.type\" placeholder=\"type\"/>\n          </label>\n      </div>\n\n\n      <br>\n      <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n      <button class=\"ui primary button\" (click)=\"save()\">save</button>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -950,6 +959,9 @@ module.exports = "<p>\n  plan-item works!\n</p>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlanItemComponent", function() { return PlanItemComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _plan_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../plan.service */ "./src/app/plan.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -960,18 +972,43 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var PlanItemComponent = /** @class */ (function () {
-    function PlanItemComponent() {
+    function PlanItemComponent(plans, route, location) {
+        this.plans = plans;
+        this.route = route;
+        this.location = location;
     }
     PlanItemComponent.prototype.ngOnInit = function () {
     };
+    PlanItemComponent.prototype.goBack = function () {
+        this.location.back();
+    };
+    PlanItemComponent.prototype.save = function () {
+        var _this = this;
+        var id;
+        this.route.params.subscribe(function (params) {
+            id = params['id'];
+            //log the value of id
+        });
+        this.plans.updatePlan(this.plan, id)
+            .subscribe(function () { return _this.goBack(); });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], PlanItemComponent.prototype, "plan", void 0);
     PlanItemComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-plan-item',
             template: __webpack_require__(/*! ./plan-item.component.html */ "./src/app/plan-item/plan-item.component.html"),
             styles: [__webpack_require__(/*! ./plan-item.component.css */ "./src/app/plan-item/plan-item.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_plan_service__WEBPACK_IMPORTED_MODULE_3__["PlanService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_1__["Location"]])
     ], PlanItemComponent);
     return PlanItemComponent;
 }());
@@ -1079,8 +1116,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlanService", function() { return PlanService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message.service */ "./src/app/message.service.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _authenticate_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./authenticate.service */ "./src/app/authenticate.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _authenticate_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./authenticate.service */ "./src/app/authenticate.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1095,6 +1134,8 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var PlanService = /** @class */ (function () {
     function PlanService(http, authenticate, messageService) {
         this.http = http;
@@ -1102,7 +1143,7 @@ var PlanService = /** @class */ (function () {
         this.messageService = messageService;
         this.url = '/api/plans';
         this.httpOptions = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
                 'Content-Type': 'application/json'
             })
         };
@@ -1120,9 +1161,31 @@ var PlanService = /** @class */ (function () {
         //   catchError(this.handleError('deleteHero'))
         // );
     };
+    PlanService.prototype.updatePlan = function (plan, id) {
+        var _this = this;
+        var url = this.url + "/" + id;
+        console.log("======" + url);
+        return this.http.put(url, plan, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("updated Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('updateCustomer')));
+    };
+    PlanService.prototype.handleError = function (operation, result) {
+        var _this = this;
+        if (operation === void 0) { operation = 'operation'; }
+        return function (error) {
+            // TODO: send the error to remote logging infrastructure
+            console.error(error); // log to console instead
+            // TODO: better job of transforming error for user consumption
+            _this.log(operation + " failed: " + error.message);
+            // Let the app keep running by returning an empty result.
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(result);
+        };
+    };
+    /** Log a HeroService message with the MessageService */
+    PlanService.prototype.log = function (message) {
+        this.messageService.add("HeroService: " + message);
+    };
     PlanService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _authenticate_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticateService"],
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], _authenticate_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticateService"],
             _message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"]])
     ], PlanService);
     return PlanService;
@@ -1315,7 +1378,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/aip/GymApp/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/newAIP/AIP/NewAIP/aip/src/main.ts */"./src/main.ts");
 
 
 /***/ })

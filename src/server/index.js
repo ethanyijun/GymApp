@@ -175,6 +175,21 @@ app.delete('/api/customers/:id', (req, res) => {
        });
    });
 
+// update one plan
+app.put('/api/plans/:id', (req, res) => {
+    const plansCollection = database.collection('plans');
+    const updatedPlan = {
+        title: req.body.title,
+        coach: req.body.coach,
+        type: req.body.type
+      };
+
+    plansCollection.findOneAndUpdate({ _id : ObjectId(req.params.id)}, { $set: updatedPlan } ,function(err,plan){
+        return res.json(plan);
+    });
+});
+
+
 app.get('*', (req, res) => {
     return res.sendFile(path.join(__dirname, 'public/index.html'));
   });
