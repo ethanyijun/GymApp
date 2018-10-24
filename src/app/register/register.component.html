@@ -29,7 +29,7 @@
 
     <mat-form-field>
         <mat-select placeholder="Plan selection" [formControl]="planControl" [(ngModel)]="selectedValue" name = "plans">
-          <mat-option *ngFor="let plan of plans" [value]="plan.name">
+          <mat-option *ngFor="let plan of plans" [value]="plan.title">
             {{plan.title}}
           </mat-option>
         </mat-select>
