@@ -2,4 +2,7 @@
     padding-left: 35px;
     padding-bottom: 25px;
   }
-  
+.plan-container {
+  max-width: 500px;
+  margin: 50px auto;
+}

@@ -63,6 +63,10 @@ export class PlanService {
       );
     }
 
+    postPlan(plan: Plan): Observable<Plan> {
+      return this.http.post<Plan>(this.url, plan, this.httpOptions);
+    }
+
     private handleError<T> (operation = 'operation', result?: T) {
       return (error: any): Observable<T> => {
   

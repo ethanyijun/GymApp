@@ -3,6 +3,8 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Plan } from '../Plan';
 import { PlanService } from '../plan.service';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-plan-item',
@@ -13,18 +15,17 @@ export class PlanItemComponent implements OnInit {
 
   constructor(private plans: PlanService, 
   private route: ActivatedRoute,
-  private location: Location) { }
+  private location: Location,
+  private router: Router) { }
   @Input() plan: Plan;
-  @Input() isDone: boolean;
+ // @Input() isDone: boolean;
   ngOnInit() {
     let id;
     this.route.params.subscribe(params => {
       id = params['id'];
       if(id === undefined){
-        this.isDone = false;
         console.log("undddd");
       }else{
-        this.isDone = true;
         this.getPlan(id);
         console.log("deeeee");
       }
@@ -43,14 +44,50 @@ export class PlanItemComponent implements OnInit {
     this.location.back();
   }
 
-  save(): void {
+  save(title: string): void {
+    console.log("000-"+title);
     let id;
     this.route.params.subscribe(params => {
-       id = params['id'];      
+        id = params['id'];      
+        if(id === undefined) {
+         
+        }
+        else {
+          this.plans.updatePlan(this.plan,id)
+          .subscribe(() => this.goBack());
+      }
      //log the value of id
     });
 
+    // this.plans.updatePlan(this.plan,id)
+    //   .subscribe(() => this.goBack());
     this.plans.updatePlan(this.plan,id)
-      .subscribe(() => this.goBack());
+    .subscribe(() => this.router.navigateByUrl('/plans'));
+      
+  }
+
+  onSubmit(form: NgForm) {
+
+    //console.log("====="+this.selectedValue);
+    //this.loading = true;
+    
+    const formInput = Object.assign({}, form.value);
+    // console.log("---",formInput.plans);
+    const plan: Plan = {
+      title: formInput.title,
+      coach: formInput.coach,
+      type: formInput.type,
+    };
+
+    this.plans.postPlan(plan)
+    .subscribe(data => {
+      console.log('posting new plan');
+      form.reset();
+      this.plan = data;
+      console.log('new plan posted');
+      this.router.navigateByUrl('/plans');
+    });
+
+    
   }
 }

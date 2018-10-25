@@ -934,7 +934,7 @@ var MessageService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".plan-item{\n    padding-left: 35px;\n    padding-bottom: 25px;\n  }\n  "
+module.exports = ".plan-item{\n    padding-left: 35px;\n    padding-bottom: 25px;\n  }\n.plan-container {\n  max-width: 500px;\n  margin: 50px auto;\n}"
 
 /***/ }),
 
@@ -945,7 +945,7 @@ module.exports = ".plan-item{\n    padding-left: 35px;\n    padding-bottom: 25px
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui container\">\n  \n<!-- <ng-template *ngIf=\"isDone;then showPlan; else notShowPlan\">\n</ng-template> -->\n\n<div *ngIf=\"plan; else notshow\">\n  <div class=\"ui big form plan-item\">\n    <br>\n    <h2> {{plan.title}} Details</h2>\n\n\n    <div class=\"field\">\n        <label>Title:\n          <input [(ngModel)]=\"plan.title\" placeholder=\"title\"/>\n        </label>\n    </div>\n    <div class=\"field\">\n      <label>Coach:\n        <input [(ngModel)]=\"plan.coach\" placeholder=\"coach\"/>\n      </label>\n    </div>\n\n    <div class=\"field\">\n        <label>Type:\n          <input [(ngModel)]=\"plan.type\" placeholder=\"type\"/>\n        </label>\n    </div>\n\n\n    <br>\n    <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n    <button class=\"ui primary button\" (click)=\"save()\">save</button>\n  </div>\n</div>\n\n<ng-template #notshow>\n  <div class=\"ui big form plan-item\">\n    <br>\n    <h2>New plan: </h2>\n\n    <div class=\"field\">\n      <label>Title</label>\n      <input type=\"text\" name=\"title\" placeholder=\"title\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Coach</label>\n      <input type=\"text\" name=\"coach\" placeholder=\"coach\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Type</label>\n      <input type=\"text\" name=\"type\" placeholder=\"type\" ngModel>\n    </div>\n\n    <!-- <div class=\"field\">\n        <label>Title:\n          <input [(ngModel)]=\"plan.title\" placeholder=\"title\"/>\n        </label>\n    </div> -->\n    <!-- <div class=\"field\">\n      <label>Coach:\n        <input [(ngModel)]=\"plan.coach\" placeholder=\"coach\"/>\n      </label>\n    </div>\n\n    <div class=\"field\">\n        <label>Type:\n          <input [(ngModel)]=\"plan.type\" placeholder=\"type\"/>\n        </label>\n    </div> -->\n\n\n    <br>\n    <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n    <button class=\"ui primary button\" (click)=\"save()\">save</button>\n  </div>\n</ng-template>\n</div>\n"
+module.exports = "\n<div class=\"ui container\">\n  \n  <!-- <ng-template *ngIf=\"isDone;then showPlan; else notShowPlan\">\n  </ng-template> -->\n\n  <div *ngIf=\"plan; else notshow\">\n    <div class=\"ui big form plan-item\">\n      <br>\n      <h2> {{plan.title}} Details</h2>\n\n\n      <div class=\"field\">\n          <label>Title:\n            <input [(ngModel)]=\"plan.title\" placeholder=\"title\"/>\n          </label>\n      </div>\n      <div class=\"field\">\n        <label>Coach:\n          <input [(ngModel)]=\"plan.coach\" placeholder=\"coach\"/>\n        </label>\n      </div>\n\n      <div class=\"field\">\n          <label>Type:\n            <input [(ngModel)]=\"plan.type\" placeholder=\"type\"/>\n          </label>\n      </div>\n\n\n      <br>\n      <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n      <button class=\"ui primary button\" (click)=\"save()\">save</button>\n    </div>\n  </div>\n\n  <ng-template #notshow>\n    <div class=\"plan-container\">\n      <form name=\"planForm\" class=\"ui big form\" #planForm=\"ngForm\" (ngSubmit)=\"onSubmit(planForm)\">\n          <div class=\"field\">\n            <label>Title</label>\n            <input type=\"text\" name=\"title\" placeholder=\"title\" ngModel>\n          </div>\n          <div class=\"field\">\n            <label>Coach</label>\n            <input type=\"text\" name=\"coach\" placeholder=\"coach\" ngModel>\n          </div>\n          <div class=\"field\">\n            <label>Type</label>\n            <input type=\"text\" name=\"type\" placeholder=\"type\" ngModel>\n          </div>\n      \n          <!-- <div class=\"inline fields\">\n              <label>Interested training plan:</label>\n                <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n                <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n                <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n          </div> -->\n          <button type=\"submit\" class=\"ui primary button float right floated\">Submit</button>\n      \n        </form>\n    </div>\n\n  <!-- \n\n    <div class=\"ui big form plan-item\">\n      <br>\n      <h2>New plan: </h2>\n\n      <div class=\"field\">\n        <label>Title</label>\n        <input type=\"text\" name=\"title\" placeholder=\"title\" ngModel>\n      </div>\n      <div class=\"field\">\n        <label>Coach</label>\n        <input type=\"text\" name=\"coach\" placeholder=\"coach\" ngModel>\n      </div>\n      <div class=\"field\">\n        <label>Type</label>\n        <input type=\"text\" name=\"type\" placeholder=\"type\" ngModel>\n      </div>\n\n\n      <br>\n      <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n      <button class=\"ui primary button\" (click)=\"save(plan.title)\">save</button>\n    </div> -->\n  </ng-template>\n</div>\n"
 
 /***/ }),
 
@@ -976,23 +976,24 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var PlanItemComponent = /** @class */ (function () {
-    function PlanItemComponent(plans, route, location) {
+    function PlanItemComponent(plans, route, location, router) {
         this.plans = plans;
         this.route = route;
         this.location = location;
+        this.router = router;
     }
+    // @Input() isDone: boolean;
     PlanItemComponent.prototype.ngOnInit = function () {
         var _this = this;
         var id;
         this.route.params.subscribe(function (params) {
             id = params['id'];
             if (id === undefined) {
-                _this.isDone = false;
                 console.log("undddd");
             }
             else {
-                _this.isDone = true;
                 _this.getPlan(id);
                 console.log("deeeee");
             }
@@ -1007,24 +1008,49 @@ var PlanItemComponent = /** @class */ (function () {
     PlanItemComponent.prototype.goBack = function () {
         this.location.back();
     };
-    PlanItemComponent.prototype.save = function () {
+    PlanItemComponent.prototype.save = function (title) {
         var _this = this;
+        console.log("000-" + title);
         var id;
         this.route.params.subscribe(function (params) {
             id = params['id'];
+            if (id === undefined) {
+            }
+            else {
+                _this.plans.updatePlan(_this.plan, id)
+                    .subscribe(function () { return _this.goBack(); });
+            }
             //log the value of id
         });
+        // this.plans.updatePlan(this.plan,id)
+        //   .subscribe(() => this.goBack());
         this.plans.updatePlan(this.plan, id)
-            .subscribe(function () { return _this.goBack(); });
+            .subscribe(function () { return _this.router.navigateByUrl('/plans'); });
+    };
+    PlanItemComponent.prototype.onSubmit = function (form) {
+        //console.log("====="+this.selectedValue);
+        //this.loading = true;
+        var _this = this;
+        var formInput = Object.assign({}, form.value);
+        // console.log("---",formInput.plans);
+        var plan = {
+            title: formInput.title,
+            coach: formInput.coach,
+            type: formInput.type,
+        };
+        this.plans.postPlan(plan)
+            .subscribe(function (data) {
+            console.log('posting new plan');
+            form.reset();
+            _this.plan = data;
+            console.log('new plan posted');
+            _this.router.navigateByUrl('/plans');
+        });
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
     ], PlanItemComponent.prototype, "plan", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Boolean)
-    ], PlanItemComponent.prototype, "isDone", void 0);
     PlanItemComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-plan-item',
@@ -1033,7 +1059,8 @@ var PlanItemComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_plan_service__WEBPACK_IMPORTED_MODULE_3__["PlanService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-            _angular_common__WEBPACK_IMPORTED_MODULE_1__["Location"]])
+            _angular_common__WEBPACK_IMPORTED_MODULE_1__["Location"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], PlanItemComponent);
     return PlanItemComponent;
 }());
@@ -1197,6 +1224,9 @@ var PlanService = /** @class */ (function () {
         var url = this.url + "/" + id;
         console.log("getting: " + url);
         return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("fetched plan id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError("getPlan id=" + id)));
+    };
+    PlanService.prototype.postPlan = function (plan) {
+        return this.http.post(this.url, plan, this.httpOptions);
     };
     PlanService.prototype.handleError = function (operation, result) {
         var _this = this;
@@ -1409,7 +1439,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/aip/GymApp/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/newAIP/AIP/NewAIP/aip/src/main.ts */"./src/main.ts");
 
 
 /***/ })

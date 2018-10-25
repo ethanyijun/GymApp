@@ -172,6 +172,22 @@ app.delete('/api/customers/:id', (req, res) => {
        });
    });
 
+   app.post('/api/plans', (req, res) => {
+    const plan = req.body;
+
+    const plansCollection = database.collection('plans');
+
+    plansCollection.insertOne(plan, (err, r) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error when inserting new record.'});
+        }
+
+        const newPlan = r.ops[0];
+
+        return res.status(201).json(newPlan);
+    });
+});
+
 app.get('/api/plans/:id', (req, res) => {
     const plansCollection = database.collection('plans');
    // console.log("js: "+req.params.id);
