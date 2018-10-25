@@ -21,6 +21,8 @@ const routes: Routes = [
   
   { path: 'plans', component: PlanListComponent },
 
+  { path: 'newplan', component: PlanItemComponent },
+
   { path: 'detail/:id', component: CustomerItemComponent },
 
   { path: 'plan-detail/:id', component: PlanItemComponent }, 

@@ -1,31 +1,78 @@
 
 <div class="ui container">
   
-  <div *ngIf="plan" class="ui big form plan-item">
-      <br>
-      <h2> {{plan.title}} Details</h2>
+<!-- <ng-template *ngIf="isDone;then showPlan; else notShowPlan">
+</ng-template> -->
+
+<div *ngIf="plan; else notshow">
+  <div class="ui big form plan-item">
+    <br>
+    <h2> {{plan.title}} Details</h2>
 
 
-      <div class="field">
-          <label>Title:
-            <input [(ngModel)]="plan.title" placeholder="title"/>
-          </label>
-      </div>
-      <div class="field">
-        <label>Coach:
-          <input [(ngModel)]="plan.coach" placeholder="coach"/>
+    <div class="field">
+        <label>Title:
+          <input [(ngModel)]="plan.title" placeholder="title"/>
         </label>
-      </div>
+    </div>
+    <div class="field">
+      <label>Coach:
+        <input [(ngModel)]="plan.coach" placeholder="coach"/>
+      </label>
+    </div>
 
-      <div class="field">
-          <label>Type:
-            <input [(ngModel)]="plan.type" placeholder="type"/>
-          </label>
-      </div>
+    <div class="field">
+        <label>Type:
+          <input [(ngModel)]="plan.type" placeholder="type"/>
+        </label>
+    </div>
 
 
-      <br>
-      <button class="ui button" (click)="goBack()">go back</button>
-      <button class="ui primary button" (click)="save()">save</button>
+    <br>
+    <button class="ui button" (click)="goBack()">go back</button>
+    <button class="ui primary button" (click)="save()">save</button>
   </div>
+</div>
+
+<ng-template #notshow>
+  <div class="ui big form plan-item">
+    <br>
+    <h2>New plan: </h2>
+
+    <div class="field">
+      <label>Title</label>
+      <input type="text" name="title" placeholder="title" ngModel>
+    </div>
+    <div class="field">
+      <label>Coach</label>
+      <input type="text" name="coach" placeholder="coach" ngModel>
+    </div>
+    <div class="field">
+      <label>Type</label>
+      <input type="text" name="type" placeholder="type" ngModel>
+    </div>
+
+    <!-- <div class="field">
+        <label>Title:
+          <input [(ngModel)]="plan.title" placeholder="title"/>
+        </label>
+    </div> -->
+    <!-- <div class="field">
+      <label>Coach:
+        <input [(ngModel)]="plan.coach" placeholder="coach"/>
+      </label>
+    </div>
+
+    <div class="field">
+        <label>Type:
+          <input [(ngModel)]="plan.type" placeholder="type"/>
+        </label>
+    </div> -->
+
+
+    <br>
+    <button class="ui button" (click)="goBack()">go back</button>
+    <button class="ui primary button" (click)="save()">save</button>
+  </div>
+</ng-template>
 </div>

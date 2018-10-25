@@ -61,6 +61,7 @@ var routes = [
     { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: 'customers', component: _customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_4__["CustomerListComponent"] },
     { path: 'plans', component: _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_6__["PlanListComponent"] },
+    { path: 'newplan', component: _plan_item_plan_item_component__WEBPACK_IMPORTED_MODULE_7__["PlanItemComponent"] },
     { path: 'detail/:id', component: _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_5__["CustomerItemComponent"] },
     { path: 'plan-detail/:id', component: _plan_item_plan_item_component__WEBPACK_IMPORTED_MODULE_7__["PlanItemComponent"] },
     // {path: 'customers/:plan', component: CustomerListComponent },
@@ -837,7 +838,7 @@ module.exports = "button.ui.primary.button.logout {\n    width: 125px;\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container\">\n    <div class=\"item\">\n      <a [routerLink]=\"['/all']\" aria-label=\"Customer Dashboard\">\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n      </a>\n    </div>\n    <div class=\"header item\">\n      <h1>Customer Dashboard</h1>\n    </div>\n      <!-- <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\"> -->\n    <div class=\"item\">\n      <a routerLink=\"../register\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign Up\n          </i>\n        </button>\n      </a>\n        <!-- <div class=\"item\"> -->\n      <a routerLink=\"../login\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign In\n          </i>\n        </button>\n      </a>\n      <a routerLink=\"../plans\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Plan list\n          </i>\n        </button>\n      </a>\n      <!-- </div> -->\n    </div>\n    <!-- <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\"> -->\n    <div class=\"right menu\">\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n    </div>\n  </div>\n \n</div>\n\n<div class=\"ui container\">\n    <router-outlet></router-outlet> \n</div>\n\n"
+module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container\">\n    <div class=\"item\">\n      <a [routerLink]=\"['/all']\" aria-label=\"Customer Dashboard\">\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n      </a>\n    </div>\n    <div class=\"header item\">\n      <h1>Customer Dashboard</h1>\n    </div>\n      <!-- <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\"> -->\n    <div class=\"item\">\n      <a routerLink=\"../register\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign Up\n          </i>\n        </button>\n      </a>\n        <!-- <div class=\"item\"> -->\n      <a routerLink=\"../login\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign In\n          </i>\n        </button>\n      </a>\n      <a routerLink=\"../plans\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Plan list\n          </i>\n        </button>\n      </a>\n      <a routerLink=\"../newplan\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            New plan\n          </i>\n        </button>\n      </a>\n      <!-- </div> -->\n    </div>\n    <!-- <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\"> -->\n    <div class=\"right menu\">\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n    </div>\n  </div>\n \n</div>\n\n<div class=\"ui container\">\n    <router-outlet></router-outlet> \n</div>\n\n"
 
 /***/ }),
 
@@ -944,7 +945,7 @@ module.exports = ".plan-item{\n    padding-left: 35px;\n    padding-bottom: 25px
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui container\">\n  \n  <div *ngIf=\"plan\" class=\"ui big form plan-item\">\n      <br>\n      <h2> {{plan.title}} Details</h2>\n\n\n      <div class=\"field\">\n          <label>Title:\n            <input [(ngModel)]=\"plan.title\" placeholder=\"title\"/>\n          </label>\n      </div>\n      <div class=\"field\">\n        <label>Coach:\n          <input [(ngModel)]=\"plan.coach\" placeholder=\"coach\"/>\n        </label>\n      </div>\n\n      <div class=\"field\">\n          <label>Type:\n            <input [(ngModel)]=\"plan.type\" placeholder=\"type\"/>\n          </label>\n      </div>\n\n\n      <br>\n      <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n      <button class=\"ui primary button\" (click)=\"save()\">save</button>\n  </div>\n</div>\n"
+module.exports = "\n<div class=\"ui container\">\n  \n<!-- <ng-template *ngIf=\"isDone;then showPlan; else notShowPlan\">\n</ng-template> -->\n\n<div *ngIf=\"plan; else notshow\">\n  <div class=\"ui big form plan-item\">\n    <br>\n    <h2> {{plan.title}} Details</h2>\n\n\n    <div class=\"field\">\n        <label>Title:\n          <input [(ngModel)]=\"plan.title\" placeholder=\"title\"/>\n        </label>\n    </div>\n    <div class=\"field\">\n      <label>Coach:\n        <input [(ngModel)]=\"plan.coach\" placeholder=\"coach\"/>\n      </label>\n    </div>\n\n    <div class=\"field\">\n        <label>Type:\n          <input [(ngModel)]=\"plan.type\" placeholder=\"type\"/>\n        </label>\n    </div>\n\n\n    <br>\n    <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n    <button class=\"ui primary button\" (click)=\"save()\">save</button>\n  </div>\n</div>\n\n<ng-template #notshow>\n  <div class=\"ui big form plan-item\">\n    <br>\n    <h2>New plan: </h2>\n\n    <div class=\"field\">\n      <label>Title</label>\n      <input type=\"text\" name=\"title\" placeholder=\"title\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Coach</label>\n      <input type=\"text\" name=\"coach\" placeholder=\"coach\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Type</label>\n      <input type=\"text\" name=\"type\" placeholder=\"type\" ngModel>\n    </div>\n\n    <!-- <div class=\"field\">\n        <label>Title:\n          <input [(ngModel)]=\"plan.title\" placeholder=\"title\"/>\n        </label>\n    </div> -->\n    <!-- <div class=\"field\">\n      <label>Coach:\n        <input [(ngModel)]=\"plan.coach\" placeholder=\"coach\"/>\n      </label>\n    </div>\n\n    <div class=\"field\">\n        <label>Type:\n          <input [(ngModel)]=\"plan.type\" placeholder=\"type\"/>\n        </label>\n    </div> -->\n\n\n    <br>\n    <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n    <button class=\"ui primary button\" (click)=\"save()\">save</button>\n  </div>\n</ng-template>\n</div>\n"
 
 /***/ }),
 
@@ -982,15 +983,23 @@ var PlanItemComponent = /** @class */ (function () {
         this.location = location;
     }
     PlanItemComponent.prototype.ngOnInit = function () {
-        this.getPlan();
-    };
-    PlanItemComponent.prototype.getPlan = function () {
         var _this = this;
         var id;
         this.route.params.subscribe(function (params) {
             id = params['id'];
-            console.log(params['id']); //log the value of id
+            if (id === undefined) {
+                _this.isDone = false;
+                console.log("undddd");
+            }
+            else {
+                _this.isDone = true;
+                _this.getPlan(id);
+                console.log("deeeee");
+            }
         });
+    };
+    PlanItemComponent.prototype.getPlan = function (id) {
+        var _this = this;
         //  console.log("getting customer id: "+id);
         this.plans.getPlan(id)
             .subscribe(function (plan) { _this.plan = plan; });
@@ -1012,6 +1021,10 @@ var PlanItemComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
     ], PlanItemComponent.prototype, "plan", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], PlanItemComponent.prototype, "isDone", void 0);
     PlanItemComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-plan-item',

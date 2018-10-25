@@ -15,16 +15,24 @@ export class PlanItemComponent implements OnInit {
   private route: ActivatedRoute,
   private location: Location) { }
   @Input() plan: Plan;
+  @Input() isDone: boolean;
   ngOnInit() {
-    this.getPlan();
-  }
-
-  getPlan(): void {
     let id;
     this.route.params.subscribe(params => {
-       id = params['id'];
-      console.log(params['id']) //log the value of id
+      id = params['id'];
+      if(id === undefined){
+        this.isDone = false;
+        console.log("undddd");
+      }else{
+        this.isDone = true;
+        this.getPlan(id);
+        console.log("deeeee");
+      }
+
     });
+  }
+
+  getPlan(id: string): void {
   //  console.log("getting customer id: "+id);
     this.plans.getPlan(id)
     .subscribe(plan => {this.plan = plan;});
