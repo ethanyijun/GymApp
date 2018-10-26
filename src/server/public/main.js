@@ -495,6 +495,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _customer_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../customer.service */ "./src/app/customer.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../my-dialog/my-dialog.component */ "./src/app/my-dialog/my-dialog.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -507,10 +509,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var CustomerListComponent = /** @class */ (function () {
-    function CustomerListComponent(customerService, activatedRoute) {
+    function CustomerListComponent(customerService, activatedRoute, dialog) {
         this.customerService = customerService;
         this.activatedRoute = activatedRoute;
+        this.dialog = dialog;
     }
     CustomerListComponent.prototype.getCustomers = function (plan) {
         var _this = this;
@@ -526,13 +531,42 @@ var CustomerListComponent = /** @class */ (function () {
             console.log("on init" + plan);
         });
     };
+    //  deleteCustomer(id: string) {
+    //  this.openModal(id);
+    //   console.log("customer id: " + id);
+    //  // this.customerService.deleteCustomer(id).subscribe();
+    //   this.customerService.deleteCustomer(id).subscribe(data=>{
+    //     console.log("esdf");
+    //     this.getCustomers("all");
+    //   });
+    // }
     CustomerListComponent.prototype.deleteCustomer = function (id) {
         var _this = this;
-        console.log("customer id: " + id);
-        // this.customerService.deleteCustomer(id).subscribe();
-        this.customerService.deleteCustomer(id).subscribe(function (data) {
-            console.log("esdf");
-            _this.getCustomers("all");
+        var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
+        var customerName;
+        this.customerService.getCustomer(id).toPromise().then(function (customer) {
+            _this.selectedCustomer = customer;
+            console.log("--");
+            console.log(customer);
+            customerName = "Delete customer: " + customer['firstName'] + ' ' + customer['lastName'];
+        }).then(function () {
+            dialogConfig.disableClose = true;
+            dialogConfig.autoFocus = true;
+            dialogConfig.data = {
+                id: 1,
+                title: customerName
+            };
+        }).then(function () {
+            var dialogRef = _this.dialog.open(_my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_4__["MyDialogComponent"], dialogConfig);
+            dialogRef.afterClosed().subscribe(function (result) {
+                if (result) {
+                    _this.customerService.deleteCustomer(id).subscribe(function (data) {
+                        _this.getCustomers("all");
+                    });
+                }
+                console.log("Dialog was closed!");
+                console.log(result);
+            });
         });
     };
     CustomerListComponent = __decorate([
@@ -542,7 +576,8 @@ var CustomerListComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./customer-list.component.css */ "./src/app/customer-list/customer-list.component.css")]
         }),
         __metadata("design:paramtypes", [_customer_service__WEBPACK_IMPORTED_MODULE_2__["CustomerService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"]])
     ], CustomerListComponent);
     return CustomerListComponent;
 }());
@@ -954,7 +989,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{modalTitle}}</h2>\n<mat-dialog-content>Do you wish to delete current element?</mat-dialog-content>\n<mat-dialog-actions>\n <button mat-button mat-dialog-close>No</button>\n <button mat-button [mat-dialog-close]=\"true\">Yes</button>\n</mat-dialog-actions>"
+module.exports = "<h2 mat-dialog-title>{{modalTitle}}</h2>\n<mat-dialog-content>Are you sure?</mat-dialog-content>\n<mat-dialog-actions>\n <button mat-button mat-dialog-close>No</button>\n <button mat-button [mat-dialog-close]=\"true\">Yes</button>\n</mat-dialog-actions>"
 
 /***/ }),
 
@@ -1220,27 +1255,36 @@ var PlanListComponent = /** @class */ (function () {
         console.log("getting plans!");
         this.planservice.getPlans().subscribe(function (plans) { return _this.plans = plans; });
     };
+    //deletePlan(id: string): void{
+    //   this.openModal(id);
+    //}
     PlanListComponent.prototype.deletePlan = function (id) {
-        this.openModal(id);
-    };
-    PlanListComponent.prototype.openModal = function (id) {
         var _this = this;
         var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
-        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
-        dialogConfig.data = {
-            id: 1,
-            title: "Hi there"
-        };
-        var dialogRef = this.dialog.open(_my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_4__["MyDialogComponent"], dialogConfig);
-        dialogRef.afterClosed().subscribe(function (result) {
-            if (result) {
-                _this.planservice.deletePlan(id).subscribe(function (data) {
-                    _this.getPlans();
-                });
-            }
-            console.log("Dialog was closed!");
-            console.log(result);
+        var planTitle;
+        this.planservice.getPlan(id).toPromise().then(function (plan) {
+            _this.plan = plan;
+            console.log("--");
+            console.log(plan);
+            planTitle = "Delete plan: " + plan['title'];
+        }).then(function () {
+            dialogConfig.disableClose = true;
+            dialogConfig.autoFocus = true;
+            dialogConfig.data = {
+                id: 1,
+                title: planTitle
+            };
+        }).then(function () {
+            var dialogRef = _this.dialog.open(_my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_4__["MyDialogComponent"], dialogConfig);
+            dialogRef.afterClosed().subscribe(function (result) {
+                if (result) {
+                    _this.planservice.deletePlan(id).subscribe(function (data) {
+                        _this.getPlans();
+                    });
+                }
+                console.log("Dialog was closed!");
+                console.log(result);
+            });
         });
     };
     PlanListComponent = __decorate([

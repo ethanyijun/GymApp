@@ -16,7 +16,7 @@ export class PlanListComponent implements OnInit {
   constructor(private planservice: PlanService,
   private activatedRoute: ActivatedRoute,
   public dialog: MatDialog) { }
-
+  plan: Plan;
 
   ngOnInit() {
    // console.log(this.activatedRoute.snapshot.params.plan);
@@ -34,30 +34,40 @@ export class PlanListComponent implements OnInit {
     );
   }
   
-  deletePlan(id: string): void{
-     this.openModal(id);
-  }
+  //deletePlan(id: string): void{
+  //   this.openModal(id);
+  //}
 
 
-  openModal(id: string) {
+  deletePlan(id: string) {
     const dialogConfig = new MatDialogConfig();
-   dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-    id: 1,
-    title: "Hi there"
-    };
-   const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
-   dialogRef.afterClosed().subscribe(result => {
-     if(result){
-        this.planservice.deletePlan(id).subscribe(data=>{
-        this.getPlans();
+    var planTitle: string;
+
+    this.planservice.getPlan(id).toPromise().then(plan => { 
+      this.plan = plan;
+      console.log("--");
+      console.log(plan);
+      planTitle = "Delete plan: " + plan['title'];
+    }).then(()=>{
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      title: planTitle
+      };
+    }).then(()=>{
+      const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(result => {
+        if(result){
+           this.planservice.deletePlan(id).subscribe(data=>{
+           this.getPlans();
+         });
+        }
+       console.log("Dialog was closed!")
+       console.log(result)
       });
-     }
-    console.log("Dialog was closed!")
-    console.log(result)
-   });
-    }
+    });
+  }
 }
 
 
