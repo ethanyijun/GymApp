@@ -173,6 +173,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./message.service */ "./src/app/message.service.ts");
 /* harmony import */ var _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./plan-list/plan-list.component */ "./src/app/plan-list/plan-list.component.ts");
 /* harmony import */ var _plan_item_plan_item_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./plan-item/plan-item.component */ "./src/app/plan-item/plan-item.component.ts");
+/* harmony import */ var _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./my-dialog/my-dialog.component */ "./src/app/my-dialog/my-dialog.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -200,7 +201,8 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-//import { PlanService } from './plan.service';
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -215,7 +217,8 @@ var AppModule = /** @class */ (function () {
                 _customer_item_customer_item_component__WEBPACK_IMPORTED_MODULE_11__["CustomerItemComponent"],
                 _menu_bar_menu_bar_component__WEBPACK_IMPORTED_MODULE_13__["MenuBarComponent"],
                 _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_19__["PlanListComponent"],
-                _plan_item_plan_item_component__WEBPACK_IMPORTED_MODULE_20__["PlanItemComponent"]
+                _plan_item_plan_item_component__WEBPACK_IMPORTED_MODULE_20__["PlanItemComponent"],
+                _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_21__["MyDialogComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -227,7 +230,13 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__["BrowserAnimationsModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatOptionModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"]
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatDialogModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatButtonModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__["BrowserAnimationsModule"]
+            ],
+            entryComponents: [
+                _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_21__["MyDialogComponent"]
             ],
             exports: [
                 _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatSelectModule"],
@@ -927,6 +936,78 @@ var MessageService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/my-dialog/my-dialog.component.css":
+/*!***************************************************!*\
+  !*** ./src/app/my-dialog/my-dialog.component.css ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/my-dialog/my-dialog.component.html":
+/*!****************************************************!*\
+  !*** ./src/app/my-dialog/my-dialog.component.html ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h2 mat-dialog-title>{{modalTitle}}</h2>\n<mat-dialog-content>Do you wish to delete current element?</mat-dialog-content>\n<mat-dialog-actions>\n <button mat-button mat-dialog-close>No</button>\n <button mat-button [mat-dialog-close]=\"true\">Yes</button>\n</mat-dialog-actions>"
+
+/***/ }),
+
+/***/ "./src/app/my-dialog/my-dialog.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/my-dialog/my-dialog.component.ts ***!
+  \**************************************************/
+/*! exports provided: MyDialogComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyDialogComponent", function() { return MyDialogComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+var MyDialogComponent = /** @class */ (function () {
+    function MyDialogComponent(data) {
+        this.data = data;
+        this.modalTitle = data.title;
+        console.log(data);
+    }
+    MyDialogComponent.prototype.ngOnInit = function () {
+    };
+    MyDialogComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-my-dialog',
+            template: __webpack_require__(/*! ./my-dialog.component.html */ "./src/app/my-dialog/my-dialog.component.html"),
+            styles: [__webpack_require__(/*! ./my-dialog.component.css */ "./src/app/my-dialog/my-dialog.component.css")]
+        }),
+        __param(0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [Object])
+    ], MyDialogComponent);
+    return MyDialogComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/plan-item/plan-item.component.css":
 /*!***************************************************!*\
   !*** ./src/app/plan-item/plan-item.component.css ***!
@@ -1104,6 +1185,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _plan_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../plan.service */ "./src/app/plan.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../my-dialog/my-dialog.component */ "./src/app/my-dialog/my-dialog.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1116,10 +1199,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var PlanListComponent = /** @class */ (function () {
-    function PlanListComponent(planservice, activatedRoute) {
+    function PlanListComponent(planservice, activatedRoute, dialog) {
         this.planservice = planservice;
         this.activatedRoute = activatedRoute;
+        this.dialog = dialog;
     }
     PlanListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1135,9 +1221,26 @@ var PlanListComponent = /** @class */ (function () {
         this.planservice.getPlans().subscribe(function (plans) { return _this.plans = plans; });
     };
     PlanListComponent.prototype.deletePlan = function (id) {
+        this.openModal(id);
+    };
+    PlanListComponent.prototype.openModal = function (id) {
         var _this = this;
-        this.planservice.deletePlan(id).subscribe(function (data) {
-            _this.getPlans();
+        var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+            id: 1,
+            title: "Hi there"
+        };
+        var dialogRef = this.dialog.open(_my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_4__["MyDialogComponent"], dialogConfig);
+        dialogRef.afterClosed().subscribe(function (result) {
+            if (result) {
+                _this.planservice.deletePlan(id).subscribe(function (data) {
+                    _this.getPlans();
+                });
+            }
+            console.log("Dialog was closed!");
+            console.log(result);
         });
     };
     PlanListComponent = __decorate([
@@ -1147,7 +1250,8 @@ var PlanListComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./plan-list.component.css */ "./src/app/plan-list/plan-list.component.css")]
         }),
         __metadata("design:paramtypes", [_plan_service__WEBPACK_IMPORTED_MODULE_1__["PlanService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"]])
     ], PlanListComponent);
     return PlanListComponent;
 }());
@@ -1439,7 +1543,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/newAIP/AIP/NewAIP/aip/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/aip/GymApp/src/main.ts */"./src/main.ts");
 
 
 /***/ })

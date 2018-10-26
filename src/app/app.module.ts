@@ -20,7 +20,9 @@ import {MatOptionModule,MatSelectModule} from '@angular/material';
 import { MessageService } from './message.service';
 import { PlanListComponent } from './plan-list/plan-list.component';
 import { PlanItemComponent } from './plan-item/plan-item.component';
-//import { PlanService } from './plan.service';
+import { MyDialogComponent } from './my-dialog/my-dialog.component';
+import { MatDialogModule, MatButtonModule } from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { PlanItemComponent } from './plan-item/plan-item.component';
     CustomerItemComponent,
     MenuBarComponent,
     PlanListComponent,
-    PlanItemComponent
+    PlanItemComponent,
+    MyDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +47,14 @@ import { PlanItemComponent } from './plan-item/plan-item.component';
     BrowserAnimationsModule,
     MatOptionModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    MatDialogModule,
+    MatButtonModule,
+   BrowserAnimationsModule
   ],
+  entryComponents: [
+    MyDialogComponent
+   ],
     exports: [
       MatSelectModule,
       BrowserAnimationsModule,
