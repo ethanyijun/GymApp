@@ -116,7 +116,7 @@ app.put('/api/customers/:id', (req, res) => {
 
 //register a new customer card
 app.post('/register', (req, res) => {
-    const customer = req.body;
+    const customer = req.body.customer;
 
     const customersCollection = database.collection('customers');
 

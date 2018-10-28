@@ -672,8 +672,12 @@ var CustomerService = /** @class */ (function () {
     //       // });
     //  //   return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
     //   }
-    CustomerService.prototype.postCustomer = function (customer) {
-        return this.http.post(this.registerUrl, customer, this.httpOptions);
+    CustomerService.prototype.postCustomer = function (customer, selectedFile) {
+        var Indata = { customer: customer, imageFile: selectedFile };
+        return this.http.post(this.registerUrl, Indata, this.httpOptions);
+    };
+    CustomerService.prototype.saveFile = function (selectedFile) {
+        return null;
     };
     CustomerService.prototype.deleteCustomer = function (id) {
         var url = this.url + "/" + id; // DELETE api/heroes/42
@@ -1073,7 +1077,7 @@ module.exports = ".plan-item{\n    padding-left: 35px;\n    padding-bottom: 25px
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui container\">\n  \n  <!-- <ng-template *ngIf=\"isDone;then showPlan; else notShowPlan\">\n  </ng-template> -->\n\n  <div *ngIf=\"plan; else notshow\">\n    <div class=\"ui big form plan-item\">\n      <br>\n      <h2> {{plan.title}} Details</h2>\n\n\n      <div class=\"field\">\n          <label>Title:\n            <input [(ngModel)]=\"plan.title\" placeholder=\"title\"/>\n          </label>\n      </div>\n      <div class=\"field\">\n        <label>Coach:\n          <input [(ngModel)]=\"plan.coach\" placeholder=\"coach\"/>\n        </label>\n      </div>\n\n      <div class=\"field\">\n          <label>Type:\n            <input [(ngModel)]=\"plan.type\" placeholder=\"type\"/>\n          </label>\n      </div>\n\n\n      <br>\n      <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n      <button class=\"ui primary button\" (click)=\"save()\">save</button>\n    </div>\n  </div>\n\n  <ng-template #notshow>\n    <div class=\"plan-container\">\n      <form name=\"planForm\" class=\"ui big form\" #planForm=\"ngForm\" (ngSubmit)=\"onSubmit(planForm)\">\n          <div class=\"field\">\n            <label>Title</label>\n            <input type=\"text\" name=\"title\" placeholder=\"title\" ngModel>\n          </div>\n          <div class=\"field\">\n            <label>Coach</label>\n            <input type=\"text\" name=\"coach\" placeholder=\"coach\" ngModel>\n          </div>\n          <div class=\"field\">\n            <label>Type</label>\n            <input type=\"text\" name=\"type\" placeholder=\"type\" ngModel>\n          </div>\n          <div class=\"field\">\n            <label>Upload</label>\n            <input \n            style=\"display: none\" \n            type=\"file\" (change)=\"onFileChanged($event)\" \n            #fileInput>\n            <button (click)=\"fileInput.click()\">Select File</button>\n            <button (click)=\"onUpload()\">Upload!</button>        \n          </div>\n          <!-- <div class=\"inline fields\">\n              <label>Interested training plan:</label>\n                <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n                <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n                <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n          </div> -->\n          <button type=\"submit\" class=\"ui primary button float right floated\">Submit</button>\n      \n        </form>\n    </div>\n\n  <!-- \n\n    <div class=\"ui big form plan-item\">\n      <br>\n      <h2>New plan: </h2>\n\n      <div class=\"field\">\n        <label>Title</label>\n        <input type=\"text\" name=\"title\" placeholder=\"title\" ngModel>\n      </div>\n      <div class=\"field\">\n        <label>Coach</label>\n        <input type=\"text\" name=\"coach\" placeholder=\"coach\" ngModel>\n      </div>\n      <div class=\"field\">\n        <label>Type</label>\n        <input type=\"text\" name=\"type\" placeholder=\"type\" ngModel>\n      </div>\n\n\n      <br>\n      <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n      <button class=\"ui primary button\" (click)=\"save(plan.title)\">save</button>\n    </div> -->\n  </ng-template>\n</div>\n"
+module.exports = "\n<div class=\"ui container\">\n  \n  <!-- <ng-template *ngIf=\"isDone;then showPlan; else notShowPlan\">\n  </ng-template> -->\n\n  <div *ngIf=\"plan; else notshow\">\n    <div class=\"ui big form plan-item\">\n      <br>\n      <h2> {{plan.title}} Details</h2>\n\n\n      <div class=\"field\">\n          <label>Title:\n            <input [(ngModel)]=\"plan.title\" placeholder=\"title\"/>\n          </label>\n      </div>\n      <div class=\"field\">\n        <label>Coach:\n          <input [(ngModel)]=\"plan.coach\" placeholder=\"coach\"/>\n        </label>\n      </div>\n\n      <div class=\"field\">\n          <label>Type:\n            <input [(ngModel)]=\"plan.type\" placeholder=\"type\"/>\n          </label>\n      </div>\n\n\n      <br>\n      <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n      <button class=\"ui primary button\" (click)=\"save()\">save</button>\n    </div>\n  </div>\n\n  <ng-template #notshow>\n    <div class=\"plan-container\">\n      <form name=\"planForm\" class=\"ui big form\" #planForm=\"ngForm\" (ngSubmit)=\"onSubmit(planForm)\">\n          <div class=\"field\">\n            <label>Title</label>\n            <input type=\"text\" name=\"title\" placeholder=\"title\" ngModel>\n          </div>\n          <div class=\"field\">\n            <label>Coach</label>\n            <input type=\"text\" name=\"coach\" placeholder=\"coach\" ngModel>\n          </div>\n          <div class=\"field\">\n            <label>Type</label>\n            <input type=\"text\" name=\"type\" placeholder=\"type\" ngModel>\n          </div>\n          <!-- <div class=\"inline fields\">\n              <label>Interested training plan:</label>\n                <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n                <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n                <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n          </div> -->\n          <button type=\"submit\" class=\"ui primary button float right floated\">Submit</button>\n      \n        </form>\n    </div>\n\n  <!-- \n\n    <div class=\"ui big form plan-item\">\n      <br>\n      <h2>New plan: </h2>\n\n      <div class=\"field\">\n        <label>Title</label>\n        <input type=\"text\" name=\"title\" placeholder=\"title\" ngModel>\n      </div>\n      <div class=\"field\">\n        <label>Coach</label>\n        <input type=\"text\" name=\"coach\" placeholder=\"coach\" ngModel>\n      </div>\n      <div class=\"field\">\n        <label>Type</label>\n        <input type=\"text\" name=\"type\" placeholder=\"type\" ngModel>\n      </div>\n\n\n      <br>\n      <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n      <button class=\"ui primary button\" (click)=\"save(plan.title)\">save</button>\n    </div> -->\n  </ng-template>\n</div>\n"
 
 /***/ }),
 
@@ -1128,9 +1132,9 @@ var PlanItemComponent = /** @class */ (function () {
         });
     };
     // upload icon
-    PlanItemComponent.prototype.onFileChanged = function (event) {
-        this.selectedFile = event.target.files[0];
-    };
+    // onFileChanged(event) {
+    //   this.selectedFile = event.target.files[0]
+    // }
     PlanItemComponent.prototype.getPlan = function (id) {
         var _this = this;
         //  console.log("getting customer id: "+id);
@@ -1159,10 +1163,10 @@ var PlanItemComponent = /** @class */ (function () {
         this.plans.updatePlan(this.plan, id)
             .subscribe(function () { return _this.router.navigateByUrl('/plans'); });
     };
-    PlanItemComponent.prototype.onUpload = function () {
-        // this.http is the injected HttpClient 
-        alert("onupload!");
-    };
+    // onUpload() {
+    //   // this.http is the injected HttpClient 
+    //   alert("onupload!");
+    // }
     PlanItemComponent.prototype.onSubmit = function (form) {
         //console.log("====="+this.selectedValue);
         //this.loading = true;
@@ -1502,7 +1506,7 @@ module.exports = ".register-container {\n    max-width: 500px;\n    margin: 50px
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"register-container\">\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email> \n    </div>\n\n    <!-- <div class=\"inline fields\">\n        <label>Interested training plan:</label>\n          <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n          <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n          <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n    </div> -->\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n\n  </form>\n\n    <mat-form-field>\n        <mat-select placeholder=\"Plan selection\" [formControl]=\"planControl\" [(ngModel)]=\"selectedValue\" name = \"plans\">\n          <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.title\">\n            {{plan.title}}\n          </mat-option>\n        </mat-select>\n        <!-- <mat-hint>{{planControl.value?.name}}</mat-hint> -->\n    </mat-form-field>\n</div>"
+module.exports = "<div class=\"register-container\">\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email> \n    </div>\n\n    <div class=\"field\">\n      <label>Upload</label>\n      <input \n      style=\"display: none\" \n      type=\"file\" (change)=\"onFileChanged($event)\" \n      #fileInput>\n      <button type='button' (click)=\"fileInput.click()\">Select File</button>\n      <!-- <button (click)=\"onUpload()\">Upload!</button>         -->\n    </div>\n    <!-- <div class=\"inline fields\">\n        <label>Interested training plan:</label>\n          <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n          <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n          <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n    </div> -->\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n\n  </form>\n\n    <mat-form-field>\n        <mat-select placeholder=\"Plan selection\" [formControl]=\"planControl\" [(ngModel)]=\"selectedValue\" name = \"plans\">\n          <mat-option *ngFor=\"let plan of plans\" [value]=\"plan.title\">\n            {{plan.title}}\n          </mat-option>\n        </mat-select>\n        <!-- <mat-hint>{{planControl.value?.name}}</mat-hint> -->\n    </mat-form-field>\n</div>"
 
 /***/ }),
 
@@ -1563,6 +1567,10 @@ var RegisterComponent = /** @class */ (function () {
         console.log("getting plans!");
         this.planservice.getPlans().subscribe(function (plans) { return _this.plans = plans; });
     };
+    RegisterComponent.prototype.onFileChanged = function (event) {
+        this.selectedFile = event.target.files[0];
+        console.log(this.selectedFile.name);
+    };
     RegisterComponent.prototype.onSubmit = function (form) {
         var _this = this;
         //console.log("====="+this.selectedValue);
@@ -1576,7 +1584,7 @@ var RegisterComponent = /** @class */ (function () {
             email: formInput.email,
             plan: this.selectedValue
         };
-        this.customerService.postCustomer(customer)
+        this.customerService.postCustomer(customer, this.selectedFile)
             .subscribe(function (data) {
             console.log('posting new data');
             form.reset();

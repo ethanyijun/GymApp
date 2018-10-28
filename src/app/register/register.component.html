@@ -17,6 +17,15 @@
       <input type="text" name="email" placeholder="Email" ngModel email> 
     </div>
 
+    <div class="field">
+      <label>Upload</label>
+      <input 
+      style="display: none" 
+      type="file" (change)="onFileChanged($event)" 
+      #fileInput>
+      <button type='button' (click)="fileInput.click()">Select File</button>
+      <!-- <button (click)="onUpload()">Upload!</button>         -->
+    </div>
     <!-- <div class="inline fields">
         <label>Interested training plan:</label>
           <input type="radio" required name="type" value="A" ngModel> A-Slim<br>

@@ -37,9 +37,9 @@ export class PlanItemComponent implements OnInit {
   }
 
   // upload icon
-  onFileChanged(event) {
-    this.selectedFile = event.target.files[0]
-  }
+  // onFileChanged(event) {
+  //   this.selectedFile = event.target.files[0]
+  // }
 
   getPlan(id: string): void {
   //  console.log("getting customer id: "+id);
@@ -74,10 +74,10 @@ export class PlanItemComponent implements OnInit {
       
   }
 
-  onUpload() {
-    // this.http is the injected HttpClient 
-    alert("onupload!");
-  }
+  // onUpload() {
+  //   // this.http is the injected HttpClient 
+  //   alert("onupload!");
+  // }
 
   onSubmit(form: NgForm) {
 

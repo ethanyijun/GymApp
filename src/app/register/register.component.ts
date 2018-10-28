@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
 
   plans: Plan[];
   selectedValue: string;
+  selectedFile: File;
   // plans: Plan[] = [
   //   {name: 'Yoga', description: 'Yoga description'},
   //   {name: 'Gain weight', description: 'Gain weight description'},
@@ -51,7 +52,13 @@ export class RegisterComponent implements OnInit {
     );
   
   }
-  
+
+    onFileChanged(event) {
+    this.selectedFile = event.target.files[0];
+    
+    console.log(this.selectedFile.name);
+  }
+
   onSubmit(form: NgForm) {
 
     //console.log("====="+this.selectedValue);
@@ -67,7 +74,7 @@ export class RegisterComponent implements OnInit {
       plan: this.selectedValue
     };
 
-    this.customerService.postCustomer(customer)
+    this.customerService.postCustomer(customer,this.selectedFile)
     .subscribe(data => {
       console.log('posting new data');
       form.reset();
