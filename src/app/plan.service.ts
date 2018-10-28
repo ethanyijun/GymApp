@@ -67,6 +67,11 @@ export class PlanService {
       return this.http.post<Plan>(this.url, plan, this.httpOptions);
     }
 
+    // postIcon(selectedFile): Observable<T>{
+    //   this.http.post('my-backend.com/file-upload', selectedFile)
+    //   .subscribe();
+    // }
+
     private handleError<T> (operation = 'operation', result?: T) {
       return (error: any): Observable<T> => {
   

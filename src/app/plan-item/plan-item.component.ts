@@ -17,6 +17,9 @@ export class PlanItemComponent implements OnInit {
   private route: ActivatedRoute,
   private location: Location,
   private router: Router) { }
+  selectedFile: File;
+
+
   @Input() plan: Plan;
  // @Input() isDone: boolean;
   ngOnInit() {
@@ -31,6 +34,11 @@ export class PlanItemComponent implements OnInit {
       }
 
     });
+  }
+
+  // upload icon
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0]
   }
 
   getPlan(id: string): void {
@@ -64,6 +72,11 @@ export class PlanItemComponent implements OnInit {
     this.plans.updatePlan(this.plan,id)
     .subscribe(() => this.router.navigateByUrl('/plans'));
       
+  }
+
+  onUpload() {
+    // this.http is the injected HttpClient 
+    alert("onupload!");
   }
 
   onSubmit(form: NgForm) {

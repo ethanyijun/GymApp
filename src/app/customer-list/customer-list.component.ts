@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { getRandomString } from 'selenium-webdriver/safari';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { MyDialogComponent } from '../my-dialog/my-dialog.component';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-customer-list',
@@ -19,18 +20,21 @@ export class CustomerListComponent implements OnInit {
   selectedCustomer: Customer;
   constructor(private customerService: CustomerService,
     private activatedRoute: ActivatedRoute,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private spinnerService: Ng4LoadingSpinnerService) { }
 
 
 
 
 
   getCustomers(plan): void {
+    this.spinnerService.show();
     console.log("getting customers!");
-    this.customerService.getCustomers(plan).subscribe(
+    this.customerService.getCustomers(plan).toPromise().then(
       customers => this.customers = customers
-    );
-
+    ).then(()=>{
+       this.spinnerService.hide();
+      });
   }
 
   ngOnInit() {

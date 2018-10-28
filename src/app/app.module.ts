@@ -22,7 +22,7 @@ import { PlanListComponent } from './plan-list/plan-list.component';
 import { PlanItemComponent } from './plan-item/plan-item.component';
 import { MyDialogComponent } from './my-dialog/my-dialog.component';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
-
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,8 @@ import { MatDialogModule, MatButtonModule } from '@angular/material';
     RouterModule,
     MatDialogModule,
     MatButtonModule,
-   BrowserAnimationsModule
+    BrowserAnimationsModule,
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   entryComponents: [
     MyDialogComponent

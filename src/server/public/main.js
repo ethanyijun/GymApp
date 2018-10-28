@@ -102,7 +102,7 @@ module.exports = ".mat-elevation-z0{box-shadow:0 0 0 0 rgba(0,0,0,.2),0 0 0 0 rg
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <nav>\n    <a routerLink=\"register\">Register your first account</a>\n    <a routerLink=\"login\">  Sign in</a>\n  </nav> -->\n  <nav>\n    <a [routerLink]=\"['/yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a>\n    <!-- <a [routerLink]=\"['/customers', 'yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a> -->\n    <a [routerLink]=\"['/gain_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/2.png\" class=\"icon\" />\n    </a>\n    <a [routerLink]=\"['/lose_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/3.png\" class=\"icon\" />\n    </a>\n  </nav>\n  <!-- <section>\n    <header>\n      <h1>Customer Watch List</h1>\n      <p class=\"description\">Keeping track of the customer.</p>\n    </header>\n  </section> -->\n<app-menu-bar></app-menu-bar>\n\n<!-- \n<app-menu-bar></app-menu-bar>\n<router-outlet></router-outlet> -->\n"
+module.exports = "<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <nav>\n    <a routerLink=\"register\">Register your first account</a>\n    <a routerLink=\"login\">  Sign in</a>\n  </nav> -->\n  <nav>\n    <a [routerLink]=\"['/yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a>\n    <!-- <a [routerLink]=\"['/customers', 'yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a> -->\n    <a [routerLink]=\"['/gain_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/2.png\" class=\"icon\" />\n    </a>\n    <a [routerLink]=\"['/lose_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/3.png\" class=\"icon\" />\n    </a>\n  </nav>\n  <!-- <section>\n    <header>\n      <h1>Customer Watch List</h1>\n      <p class=\"description\">Keeping track of the customer.</p>\n    </header>\n  </section> -->\n  \n<app-menu-bar></app-menu-bar>\n\n<!-- \n<app-menu-bar></app-menu-bar>\n<router-outlet></router-outlet> -->\n"
 
 /***/ }),
 
@@ -174,12 +174,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./plan-list/plan-list.component */ "./src/app/plan-list/plan-list.component.ts");
 /* harmony import */ var _plan_item_plan_item_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./plan-item/plan-item.component */ "./src/app/plan-item/plan-item.component.ts");
 /* harmony import */ var _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./my-dialog/my-dialog.component */ "./src/app/my-dialog/my-dialog.component.ts");
+/* harmony import */ var ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ng4-loading-spinner */ "./node_modules/ng4-loading-spinner/ng4-loading-spinner.umd.js");
+/* harmony import */ var ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_22__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -233,7 +236,8 @@ var AppModule = /** @class */ (function () {
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatDialogModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatButtonModule"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__["BrowserAnimationsModule"]
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__["BrowserAnimationsModule"],
+                ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_22__["Ng4LoadingSpinnerModule"].forRoot()
             ],
             entryComponents: [
                 _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_21__["MyDialogComponent"]
@@ -478,7 +482,7 @@ module.exports = ".container {\n  margin-top: 50px;\n}\n\n.customer-item{\n  pad
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui container\">\n    <div class=\"ui grid\">\n      <div *ngFor=\"let customer of customers\">         \n        <div class=\"ui cards customer-item\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <br>\n                <div class=\"description\">\n                  <label class=\"header\">Email: </label>\n                  {{customer.email}}\n                </div>\n                <div class=\"description\">\n                  <label class=\"header\">Plan: </label>\n                  {{customer.plan}}\n                </div>\n                <br>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui three buttons\">\n                  <button class=\"ui basic green button\">Approve</button>\n                  <a routerLink=\"/detail/{{customer._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                  <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n                </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n"
+module.exports = "<div class=\"ui container\">\n    <ng4-loading-spinner> </ng4-loading-spinner>\n    <div class=\"ui grid\">\n      <div *ngFor=\"let customer of customers\">         \n        <div class=\"ui cards customer-item\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <br>\n                <div class=\"description\">\n                  <label class=\"header\">Email: </label>\n                  {{customer.email}}\n                </div>\n                <div class=\"description\">\n                  <label class=\"header\">Plan: </label>\n                  {{customer.plan}}\n                </div>\n                <br>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui three buttons\">\n                  <button class=\"ui basic green button\">Approve</button>\n                  <a routerLink=\"/detail/{{customer._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                  <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n                </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -497,6 +501,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customer_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../customer.service */ "./src/app/customer.service.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../my-dialog/my-dialog.component */ "./src/app/my-dialog/my-dialog.component.ts");
+/* harmony import */ var ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng4-loading-spinner */ "./node_modules/ng4-loading-spinner/ng4-loading-spinner.umd.js");
+/* harmony import */ var ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -511,16 +517,21 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var CustomerListComponent = /** @class */ (function () {
-    function CustomerListComponent(customerService, activatedRoute, dialog) {
+    function CustomerListComponent(customerService, activatedRoute, dialog, spinnerService) {
         this.customerService = customerService;
         this.activatedRoute = activatedRoute;
         this.dialog = dialog;
+        this.spinnerService = spinnerService;
     }
     CustomerListComponent.prototype.getCustomers = function (plan) {
         var _this = this;
+        this.spinnerService.show();
         console.log("getting customers!");
-        this.customerService.getCustomers(plan).subscribe(function (customers) { return _this.customers = customers; });
+        this.customerService.getCustomers(plan).toPromise().then(function (customers) { return _this.customers = customers; }).then(function () {
+            _this.spinnerService.hide();
+        });
     };
     CustomerListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -577,7 +588,8 @@ var CustomerListComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_customer_service__WEBPACK_IMPORTED_MODULE_2__["CustomerService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"]])
+            _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"],
+            ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__["Ng4LoadingSpinnerService"]])
     ], CustomerListComponent);
     return CustomerListComponent;
 }());
@@ -1061,7 +1073,7 @@ module.exports = ".plan-item{\n    padding-left: 35px;\n    padding-bottom: 25px
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui container\">\n  \n  <!-- <ng-template *ngIf=\"isDone;then showPlan; else notShowPlan\">\n  </ng-template> -->\n\n  <div *ngIf=\"plan; else notshow\">\n    <div class=\"ui big form plan-item\">\n      <br>\n      <h2> {{plan.title}} Details</h2>\n\n\n      <div class=\"field\">\n          <label>Title:\n            <input [(ngModel)]=\"plan.title\" placeholder=\"title\"/>\n          </label>\n      </div>\n      <div class=\"field\">\n        <label>Coach:\n          <input [(ngModel)]=\"plan.coach\" placeholder=\"coach\"/>\n        </label>\n      </div>\n\n      <div class=\"field\">\n          <label>Type:\n            <input [(ngModel)]=\"plan.type\" placeholder=\"type\"/>\n          </label>\n      </div>\n\n\n      <br>\n      <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n      <button class=\"ui primary button\" (click)=\"save()\">save</button>\n    </div>\n  </div>\n\n  <ng-template #notshow>\n    <div class=\"plan-container\">\n      <form name=\"planForm\" class=\"ui big form\" #planForm=\"ngForm\" (ngSubmit)=\"onSubmit(planForm)\">\n          <div class=\"field\">\n            <label>Title</label>\n            <input type=\"text\" name=\"title\" placeholder=\"title\" ngModel>\n          </div>\n          <div class=\"field\">\n            <label>Coach</label>\n            <input type=\"text\" name=\"coach\" placeholder=\"coach\" ngModel>\n          </div>\n          <div class=\"field\">\n            <label>Type</label>\n            <input type=\"text\" name=\"type\" placeholder=\"type\" ngModel>\n          </div>\n      \n          <!-- <div class=\"inline fields\">\n              <label>Interested training plan:</label>\n                <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n                <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n                <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n          </div> -->\n          <button type=\"submit\" class=\"ui primary button float right floated\">Submit</button>\n      \n        </form>\n    </div>\n\n  <!-- \n\n    <div class=\"ui big form plan-item\">\n      <br>\n      <h2>New plan: </h2>\n\n      <div class=\"field\">\n        <label>Title</label>\n        <input type=\"text\" name=\"title\" placeholder=\"title\" ngModel>\n      </div>\n      <div class=\"field\">\n        <label>Coach</label>\n        <input type=\"text\" name=\"coach\" placeholder=\"coach\" ngModel>\n      </div>\n      <div class=\"field\">\n        <label>Type</label>\n        <input type=\"text\" name=\"type\" placeholder=\"type\" ngModel>\n      </div>\n\n\n      <br>\n      <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n      <button class=\"ui primary button\" (click)=\"save(plan.title)\">save</button>\n    </div> -->\n  </ng-template>\n</div>\n"
+module.exports = "\n<div class=\"ui container\">\n  \n  <!-- <ng-template *ngIf=\"isDone;then showPlan; else notShowPlan\">\n  </ng-template> -->\n\n  <div *ngIf=\"plan; else notshow\">\n    <div class=\"ui big form plan-item\">\n      <br>\n      <h2> {{plan.title}} Details</h2>\n\n\n      <div class=\"field\">\n          <label>Title:\n            <input [(ngModel)]=\"plan.title\" placeholder=\"title\"/>\n          </label>\n      </div>\n      <div class=\"field\">\n        <label>Coach:\n          <input [(ngModel)]=\"plan.coach\" placeholder=\"coach\"/>\n        </label>\n      </div>\n\n      <div class=\"field\">\n          <label>Type:\n            <input [(ngModel)]=\"plan.type\" placeholder=\"type\"/>\n          </label>\n      </div>\n\n\n      <br>\n      <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n      <button class=\"ui primary button\" (click)=\"save()\">save</button>\n    </div>\n  </div>\n\n  <ng-template #notshow>\n    <div class=\"plan-container\">\n      <form name=\"planForm\" class=\"ui big form\" #planForm=\"ngForm\" (ngSubmit)=\"onSubmit(planForm)\">\n          <div class=\"field\">\n            <label>Title</label>\n            <input type=\"text\" name=\"title\" placeholder=\"title\" ngModel>\n          </div>\n          <div class=\"field\">\n            <label>Coach</label>\n            <input type=\"text\" name=\"coach\" placeholder=\"coach\" ngModel>\n          </div>\n          <div class=\"field\">\n            <label>Type</label>\n            <input type=\"text\" name=\"type\" placeholder=\"type\" ngModel>\n          </div>\n          <div class=\"field\">\n            <label>Upload</label>\n            <input \n            style=\"display: none\" \n            type=\"file\" (change)=\"onFileChanged($event)\" \n            #fileInput>\n            <button (click)=\"fileInput.click()\">Select File</button>\n            <button (click)=\"onUpload()\">Upload!</button>        \n          </div>\n          <!-- <div class=\"inline fields\">\n              <label>Interested training plan:</label>\n                <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n                <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n                <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n          </div> -->\n          <button type=\"submit\" class=\"ui primary button float right floated\">Submit</button>\n      \n        </form>\n    </div>\n\n  <!-- \n\n    <div class=\"ui big form plan-item\">\n      <br>\n      <h2>New plan: </h2>\n\n      <div class=\"field\">\n        <label>Title</label>\n        <input type=\"text\" name=\"title\" placeholder=\"title\" ngModel>\n      </div>\n      <div class=\"field\">\n        <label>Coach</label>\n        <input type=\"text\" name=\"coach\" placeholder=\"coach\" ngModel>\n      </div>\n      <div class=\"field\">\n        <label>Type</label>\n        <input type=\"text\" name=\"type\" placeholder=\"type\" ngModel>\n      </div>\n\n\n      <br>\n      <button class=\"ui button\" (click)=\"goBack()\">go back</button>\n      <button class=\"ui primary button\" (click)=\"save(plan.title)\">save</button>\n    </div> -->\n  </ng-template>\n</div>\n"
 
 /***/ }),
 
@@ -1115,6 +1127,10 @@ var PlanItemComponent = /** @class */ (function () {
             }
         });
     };
+    // upload icon
+    PlanItemComponent.prototype.onFileChanged = function (event) {
+        this.selectedFile = event.target.files[0];
+    };
     PlanItemComponent.prototype.getPlan = function (id) {
         var _this = this;
         //  console.log("getting customer id: "+id);
@@ -1142,6 +1158,10 @@ var PlanItemComponent = /** @class */ (function () {
         //   .subscribe(() => this.goBack());
         this.plans.updatePlan(this.plan, id)
             .subscribe(function () { return _this.router.navigateByUrl('/plans'); });
+    };
+    PlanItemComponent.prototype.onUpload = function () {
+        // this.http is the injected HttpClient 
+        alert("onupload!");
     };
     PlanItemComponent.prototype.onSubmit = function (form) {
         //console.log("====="+this.selectedValue);
@@ -1203,7 +1223,7 @@ module.exports = ".container {\n    margin-top: 50px;\n  }\n  \n.plan-item{\n  p
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui container\">\n  <div class=\"ui grid\">\n    <div *ngFor=\"let plan of plans\">         \n      <div class=\"ui cards plan-item\">\n        <div class=\"card\">\n          <div class=\"content\">\n              <div class=\"header\">\n                {{plan.title}}\n              </div>\n              <br>\n              <div class=\"description\">\n                <label class=\"header\">Coach: </label>\n                {{plan.coach}}\n              </div>\n              <div class=\"description\">\n                <label class=\"header\">type: </label>\n                {{plan.type}}\n              </div>\n              <br>\n            <div class=\"extra content\" buttons>\n              <div class=\"ui two buttons\">\n                <div><a class=\"modify-button\" routerLink=\"/plan-detail/{{plan._id}}\"><button class=\"ui positive basic button\">Modify</button></a>\n                </div>\n                <div><button class=\"ui negative basic button\" (click)=\"deletePlan(plan._id)\">Delete</button></div>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"ui container\">\n  <ng4-loading-spinner> </ng4-loading-spinner>\n  <div class=\"ui grid\">\n    <div *ngFor=\"let plan of plans\">         \n      <div class=\"ui cards plan-item\">\n        <div class=\"card\">\n          <div class=\"content\">\n              <div class=\"header\">\n                {{plan.title}}\n              </div>\n              <br>\n              <div class=\"description\">\n                <label class=\"header\">Coach: </label>\n                {{plan.coach}}\n              </div>\n              <div class=\"description\">\n                <label class=\"header\">type: </label>\n                {{plan.type}}\n              </div>\n              <br>\n            <div class=\"extra content\" buttons>\n              <div class=\"ui two buttons\">\n                <div><a class=\"modify-button\" routerLink=\"/plan-detail/{{plan._id}}\"><button class=\"ui positive basic button\">Modify</button></a>\n                </div>\n                <div><button class=\"ui negative basic button\" (click)=\"deletePlan(plan._id)\">Delete</button></div>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1222,6 +1242,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../my-dialog/my-dialog.component */ "./src/app/my-dialog/my-dialog.component.ts");
+/* harmony import */ var ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng4-loading-spinner */ "./node_modules/ng4-loading-spinner/ng4-loading-spinner.umd.js");
+/* harmony import */ var ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1231,16 +1253,53 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
 
 
 
 
 
 var PlanListComponent = /** @class */ (function () {
-    function PlanListComponent(planservice, activatedRoute, dialog) {
+    function PlanListComponent(planservice, activatedRoute, dialog, spinnerService) {
         this.planservice = planservice;
         this.activatedRoute = activatedRoute;
         this.dialog = dialog;
+        this.spinnerService = spinnerService;
     }
     PlanListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1250,10 +1309,26 @@ var PlanListComponent = /** @class */ (function () {
             _this.getPlans();
         });
     };
+    PlanListComponent.prototype.delay = function (ms) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, new Promise(function (resolve) { return setTimeout(function () { return resolve(); }, ms); }).then(function () { return console.log("fired"); })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     PlanListComponent.prototype.getPlans = function () {
         var _this = this;
+        this.spinnerService.show();
         console.log("getting plans!");
-        this.planservice.getPlans().subscribe(function (plans) { return _this.plans = plans; });
+        this.planservice.getPlans().subscribe(function (plans) {
+            _this.plans = plans;
+            _this.spinnerService.hide();
+        });
     };
     //deletePlan(id: string): void{
     //   this.openModal(id);
@@ -1295,7 +1370,8 @@ var PlanListComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_plan_service__WEBPACK_IMPORTED_MODULE_1__["PlanService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"]])
+            _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"],
+            ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__["Ng4LoadingSpinnerService"]])
     ], PlanListComponent);
     return PlanListComponent;
 }());
@@ -1376,6 +1452,10 @@ var PlanService = /** @class */ (function () {
     PlanService.prototype.postPlan = function (plan) {
         return this.http.post(this.url, plan, this.httpOptions);
     };
+    // postIcon(selectedFile): Observable<T>{
+    //   this.http.post('my-backend.com/file-upload', selectedFile)
+    //   .subscribe();
+    // }
     PlanService.prototype.handleError = function (operation, result) {
         var _this = this;
         if (operation === void 0) { operation = 'operation'; }
@@ -1587,7 +1667,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/aip/GymApp/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/newAIP/AIP/NewAIP/aip/src/main.ts */"./src/main.ts");
 
 
 /***/ })

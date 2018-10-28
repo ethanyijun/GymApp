@@ -4,7 +4,7 @@ import { PlanService } from '../plan.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { MyDialogComponent } from '../my-dialog/my-dialog.component';
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-plan-list',
@@ -15,7 +15,8 @@ export class PlanListComponent implements OnInit {
   plans: Plan[];
   constructor(private planservice: PlanService,
   private activatedRoute: ActivatedRoute,
-  public dialog: MatDialog) { }
+  public dialog: MatDialog,
+  private spinnerService: Ng4LoadingSpinnerService) { }
   plan: Plan;
 
   ngOnInit() {
@@ -27,11 +28,19 @@ export class PlanListComponent implements OnInit {
       });
   }
 
+  async delay(ms: number) {
+    await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
+}
   getPlans(): void {
+    this.spinnerService.show();
     console.log("getting plans!");
+
+    
     this.planservice.getPlans().subscribe(
-      plans => this.plans = plans
-    );
+      plans => {
+        this.plans = plans
+        this.spinnerService.hide();
+    });
   }
   
   //deletePlan(id: string): void{
