@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Plan } from '../Plan';
+import { Plan } from '../Model/Plan';
 import { PlanService } from '../plan.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material';

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../customer.service';
 import { NgForm } from '@angular/forms';
-import { Customer } from '../customer';
+import { Customer } from '../Model/Customer';
 import { Router } from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
-import { Plan } from '../Plan';
+import { Plan } from '../Model/Plan';
 import { PlanService } from '../plan.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
   plans: Plan[];
   selectedValue: string;
   selectedFile: File;
+  fileName: string;
   // plans: Plan[] = [
   //   {name: 'Yoga', description: 'Yoga description'},
   //   {name: 'Gain weight', description: 'Gain weight description'},
@@ -55,7 +56,7 @@ export class RegisterComponent implements OnInit {
 
     onFileChanged(event) {
     this.selectedFile = event.target.files[0];
-    
+    this.fileName = this.selectedFile.name;
     console.log(this.selectedFile.name);
   }
 

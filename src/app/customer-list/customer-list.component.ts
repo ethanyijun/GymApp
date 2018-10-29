@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer } from '../customer';
+import { Customer } from '../Model/Customer';
 import { ActivatedRoute } from '@angular/router';
 import { CustomerService } from '../customer.service';
 import { Observable } from 'rxjs';

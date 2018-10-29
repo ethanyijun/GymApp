@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Plan } from '../Plan';
+import { Plan } from '../Model/Plan';
 import { PlanService } from '../plan.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
