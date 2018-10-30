@@ -175,9 +175,11 @@ var CustomerService = /** @class */ (function () {
     //       // });
     //  //   return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
     //   }
-    CustomerService.prototype.postCustomer = function (customer, selectedFile) {
-        var Indata = { customer: customer, imageFile: selectedFile };
-        return this.http.post(this.registerUrl, Indata, this.httpOptions);
+    CustomerService.prototype.postCustomer = function (customer) {
+        // const formData = new FormData();
+        // formData.append('image',selectedFile, selectedFile.name);
+        // var Indata = { customer: customer}
+        return this.http.post(this.registerUrl, customer, this.httpOptions);
     };
     CustomerService.prototype.saveFile = function (selectedFile) {
         return null;
@@ -1506,7 +1508,7 @@ module.exports = ".register-container {\n    max-width: 500px;\n    margin: 50px
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"register-container\">\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email> \n    </div>\n\n    <div class=\"field\">\n      <label>Upload</label>\n      <input \n      style=\"display: none\" \n      type=\"file\" (change)=\"onFileChanged($event)\" \n      #fileInput>\n      <button type='button' (click)=\"fileInput.click()\">Select File</button>\n      <label>{{fileName}}</label>\n      <!-- <button (click)=\"onUpload()\">Upload!</button>         -->\n    </div>\n    <!-- <div class=\"inline fields\">\n        <label>Interested training plan:</label>\n          <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n          <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n          <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n    </div> -->\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n\n  </form>\n\n    <mat-form-field>\n        <mat-select placeholder=\"Plan selection\" [formControl]=\"planControl\" [(ngModel)]=\"selectedValue\" name = \"plans\" required>\n          <mat-option *ngFor=\"let plan of plans\" [value]=\"plan\">\n            {{plan.title}}\n          </mat-option>\n        </mat-select>\n        <mat-hint>{{planControl.value?.content}}</mat-hint>\n    </mat-form-field>\n    <!-- <p>Plan description: {{planContent}} </p> -->\n</div>"
+module.exports = "<div class=\"register-container\">\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email> \n    </div>\n\n    <div class=\"field\">\n      <label>Upload</label>\n      <input \n      style=\"display: none\" \n      type=\"file\" (change)=\"onFileChanged($event)\" \n      #fileInput>\n      <button type='button' (click)=\"fileInput.click()\">Select File</button>\n      <label>{{fileName}}</label>\n      <!-- <button (click)=\"onUpload()\">Upload!</button>         -->\n    </div>\n    <!-- <div class=\"inline fields\">\n        <label>Interested training plan:</label>\n          <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n          <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n          <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n    </div> -->\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n\n  </form>\n\n    <mat-form-field>\n        <mat-select placeholder=\"Plan selection\" [formControl]=\"planControl\" [(ngModel)]=\"selectedValue\" name = \"plans\" required>\n          <mat-option *ngFor=\"let plan of plans\" [value]=\"plan\">\n            {{plan.title}}\n          </mat-option>\n        </mat-select>\n        <mat-hint>{{planControl.value?.content}}</mat-hint>\n    </mat-form-field>\n</div>"
 
 /***/ }),
 
@@ -1579,14 +1581,17 @@ var RegisterComponent = /** @class */ (function () {
         console.log(this.selectedValue['title']);
         var formInput = Object.assign({}, form.value);
         // console.log("---",formInput.plans);
+        //const formData = new FormData();
+        // formData.append('image',this.selectedFile, this.selectedFile.name);
         var customer = {
             firstName: formInput.firstName,
             lastName: formInput.lastName,
             phone: formInput.phone,
             email: formInput.email,
-            plan: this.selectedValue['title']
+            plan: this.selectedValue['title'],
+            profileImage: this.selectedFile
         };
-        this.customerService.postCustomer(customer, this.selectedFile)
+        this.customerService.postCustomer(customer)
             .subscribe(function (data) {
             console.log('posting new data');
             form.reset();

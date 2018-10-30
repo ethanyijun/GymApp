@@ -1,7 +1,7 @@
 const express = require('express');
 const ObjectId = require('mongodb').ObjectId;
 const router = express.Router();
-
+var Binary = require('mongodb').Binary;
 
 //get all the customer cards
 router.get('/customers', (req, res) => {
@@ -65,11 +65,21 @@ router.put('/customers/:id', (req, res) => {
 
 //register a new customer card
 router.post('/register', (req, res) => {
+    
+  //  var data = fs.readFileSync(file_path);
     const customer = req.body.customer;
+    var insert_data = {};
+    insert_data.file_data= Binary(customer.profileImage);
+
+
+
+  // const imageFd = req.body.formData;
+    console.log(insert_data);
+
     const db = req.app.locals.db;
     const customersCollection = db.collection('customers');
 
-    customersCollection.insertOne(customer, (err, r) => {
+    customersCollection.insertOne(insert_data, (err, r) => {
         if (err) {
             return res.status(500).json({ error: 'Error when inserting new record.'});
         }

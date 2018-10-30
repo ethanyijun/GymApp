@@ -63,9 +63,11 @@ export class CustomerService {
 //  //   return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
 //   }
 
-  postCustomer(customer: Customer, selectedFile): Observable<Customer> {
-    var Indata = { customer: customer, imageFile: selectedFile}
-    return this.http.post<Customer>(this.registerUrl, Indata, this.httpOptions);
+  postCustomer(customer: Customer): Observable<Customer> {
+   // const formData = new FormData();
+   // formData.append('image',selectedFile, selectedFile.name);
+    // var Indata = { customer: customer}
+    return this.http.post<Customer>(this.registerUrl, customer, this.httpOptions);
   }
 
   saveFile(selectedFile): Observable<{}> {

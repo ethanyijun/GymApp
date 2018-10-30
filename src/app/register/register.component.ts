@@ -68,15 +68,18 @@ export class RegisterComponent implements OnInit {
     console.log(this.selectedValue['title']);
     const formInput = Object.assign({}, form.value);
     // console.log("---",formInput.plans);
+    //const formData = new FormData();
+   // formData.append('image',this.selectedFile, this.selectedFile.name);
     const customer: Customer = {
       firstName: formInput.firstName,
       lastName: formInput.lastName,
       phone: formInput.phone,
       email: formInput.email,
-      plan: this.selectedValue['title']
+      plan: this.selectedValue['title'],
+      profileImage: this.selectedFile
     };
 
-    this.customerService.postCustomer(customer,this.selectedFile)
+    this.customerService.postCustomer(customer)
     .subscribe(data => {
       console.log('posting new data');
       form.reset();
