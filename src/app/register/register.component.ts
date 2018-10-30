@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../customer.service';
+import { CustomerService } from '../Service/customer.service';
 import { NgForm } from '@angular/forms';
 import { Customer } from '../Model/Customer';
 import { Router } from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 import { Plan } from '../Model/Plan';
-import { PlanService } from '../plan.service';
+import { PlanService } from '../Service/plan.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
   selectedValue: string;
   selectedFile: File;
   fileName: string;
+  content: string;
   // plans: Plan[] = [
   //   {name: 'Yoga', description: 'Yoga description'},
   //   {name: 'Gain weight', description: 'Gain weight description'},
@@ -64,7 +65,7 @@ export class RegisterComponent implements OnInit {
 
     //console.log("====="+this.selectedValue);
     this.loading = true;
-    
+    console.log(this.selectedValue['title']);
     const formInput = Object.assign({}, form.value);
     // console.log("---",formInput.plans);
     const customer: Customer = {
@@ -72,7 +73,7 @@ export class RegisterComponent implements OnInit {
       lastName: formInput.lastName,
       phone: formInput.phone,
       email: formInput.email,
-      plan: this.selectedValue
+      plan: this.selectedValue['title']
     };
 
     this.customerService.postCustomer(customer,this.selectedFile)

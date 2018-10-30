@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticateService } from '../authenticate.service';
+import { AuthenticateService } from '../Service/authenticate.service';
 
 @Component({
   selector: 'app-menu-bar',

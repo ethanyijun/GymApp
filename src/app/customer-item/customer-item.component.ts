@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, HostBinding, EventEmitter, Output } from '@angular/core';
 import { Customer } from '../Model/Customer';
-import { CustomerService } from '../customer.service';
+import { CustomerService } from '../Service/customer.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Plan } from '../Model/Plan';
 import { FormControl, Validators } from '@angular/forms';
-import { PlanService } from '../plan.service';
+import { PlanService } from '../Service/plan.service';
 
 @Component({
   templateUrl: './customer-item.component.html',

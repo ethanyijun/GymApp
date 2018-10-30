@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../Model/Customer';
 import { ActivatedRoute } from '@angular/router';
-import { CustomerService } from '../customer.service';
+import { CustomerService } from '../Service/customer.service';
 import { Observable } from 'rxjs';
 import { getRandomString } from 'selenium-webdriver/safari';
 import { MatDialog, MatDialogConfig } from '@angular/material';
