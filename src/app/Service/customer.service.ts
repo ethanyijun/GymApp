@@ -66,7 +66,8 @@ export class CustomerService {
   postCustomer(customer: Customer): Observable<Customer> {
    // const formData = new FormData();
    // formData.append('image',selectedFile, selectedFile.name);
-    // var Indata = { customer: customer}
+    var Indata = { customer: customer }
+    return this.http.post<Customer>(this.registerUrl, Indata, this.httpOptions);
 
     console.log("##"+customer);
     return this.http.post<Customer>(this.registerUrl, customer, this.httpOptions);

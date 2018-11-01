@@ -178,7 +178,8 @@ var CustomerService = /** @class */ (function () {
     CustomerService.prototype.postCustomer = function (customer) {
         // const formData = new FormData();
         // formData.append('image',selectedFile, selectedFile.name);
-        // var Indata = { customer: customer}
+        var Indata = { customer: customer };
+        return this.http.post(this.registerUrl, Indata, this.httpOptions);
         console.log("##" + customer);
         return this.http.post(this.registerUrl, customer, this.httpOptions);
     };
