@@ -179,11 +179,13 @@ var CustomerService = /** @class */ (function () {
         // const formData = new FormData();
         // formData.append('image',selectedFile, selectedFile.name);
         // var Indata = { customer: customer}
+        console.log("##" + customer);
         return this.http.post(this.registerUrl, customer, this.httpOptions);
     };
     CustomerService.prototype.saveFile = function (selectedFile) {
         return null;
     };
+    // delete one customer
     CustomerService.prototype.deleteCustomer = function (id) {
         var url = this.url + "/" + id; // DELETE api/heroes/42
         console.log(url);
@@ -191,6 +193,13 @@ var CustomerService = /** @class */ (function () {
         // .pipe(
         //   catchError(this.handleError('deleteHero'))
         // );
+    };
+    // approve one cusotmer
+    CustomerService.prototype.approveCustomer = function (customer, id) {
+        var _this = this;
+        var url = this.url + "/" + id;
+        console.log("======" + url);
+        return this.http.put(url, customer, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("appoved Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('approveCustomer')));
     };
     CustomerService.prototype.getCustomer = function (id) {
         var _this = this;
@@ -757,7 +766,7 @@ module.exports = ".container {\n  margin-top: 50px;\n}\n\n.customer-item{\n  pad
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui container\">\n    <ng4-loading-spinner> </ng4-loading-spinner>\n    <div class=\"ui grid\">\n      <div *ngFor=\"let customer of customers\">         \n        <div class=\"ui cards customer-item\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <br>\n                <div class=\"description\">\n                  <label class=\"header\">Email: </label>\n                  {{customer.email}}\n                </div>\n                <div class=\"description\">\n                  <label class=\"header\">Plan: </label>\n                  {{customer.plan}}\n                </div>\n                <br>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui three buttons\">\n                  <button class=\"ui basic green button\">Approve</button>\n                  <a routerLink=\"/detail/{{customer._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                  <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n                </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n"
+module.exports = "<div class=\"ui container\">\n    <ng4-loading-spinner> </ng4-loading-spinner>\n    <div class=\"ui grid\">\n      <div *ngFor=\"let customer of customers\">         \n        <div class=\"ui cards customer-item\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{customer.firstName}} {{customer.lastName}}\n                </div>\n                <br>\n                <div class=\"description\">\n                  <label class=\"header\">Email: </label>\n                  {{customer.email}}\n                </div>\n                <div class=\"description\">\n                  <label class=\"header\">Plan: </label>\n                  {{customer.plan}}\n                </div>\n                <br>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui three buttons\">\n                  <button class=\"ui basic green button\" (click)=\"approveCustomer(customer._id)\">Approve</button>\n                  <a routerLink=\"/detail/{{customer._id}}\"><button class=\"ui basic blue button\">Modify</button></a>\n                  <button class=\"ui basic red button\" (click)=\"deleteCustomer(customer._id)\">Delete</button>\n                </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -826,6 +835,37 @@ var CustomerListComponent = /** @class */ (function () {
     //     this.getCustomers("all");
     //   });
     // }
+    CustomerListComponent.prototype.approveCustomer = function (id) {
+        var _this = this;
+        var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
+        var customerName;
+        this.customerService.getCustomer(id).toPromise().then(function (customer) {
+            _this.selectedCustomer = customer;
+            customerName = "Approve customer: " + customer['firstName'] + ' ' + customer['lastName'];
+        }).then(function () {
+            dialogConfig.disableClose = true;
+            dialogConfig.autoFocus = true;
+            dialogConfig.data = {
+                id: 1,
+                title: customerName
+            };
+        }).then(function () {
+            var dialogRef = _this.dialog.open(_my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_4__["MyDialogComponent"], dialogConfig);
+            dialogRef.afterClosed().subscribe(function (result) {
+                if (result) {
+                    _this.selectedCustomer.approved = "Y";
+                    console.log("--");
+                    console.log(_this.selectedCustomer);
+                    _this.customerService.approveCustomer(_this.selectedCustomer, id).subscribe(function (data) {
+                        _this.getCustomers("all");
+                    });
+                }
+                console.log("Dialog was closed!");
+                console.log(result);
+            });
+        });
+    };
+    // delete one customer
     CustomerListComponent.prototype.deleteCustomer = function (id) {
         var _this = this;
         var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
@@ -1589,7 +1629,8 @@ var RegisterComponent = /** @class */ (function () {
             phone: formInput.phone,
             email: formInput.email,
             plan: this.selectedValue['title'],
-            profileImage: this.selectedFile
+            profileImage: this.selectedFile,
+            approved: 'N'
         };
         this.customerService.postCustomer(customer)
             .subscribe(function (data) {

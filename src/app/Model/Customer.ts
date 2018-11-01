@@ -5,4 +5,5 @@ export interface Customer {
     email: string;
     plan: string;
     profileImage: File;
+    approved: string;
 }

@@ -67,13 +67,15 @@ export class CustomerService {
    // const formData = new FormData();
    // formData.append('image',selectedFile, selectedFile.name);
     // var Indata = { customer: customer}
+
+    console.log("##"+customer);
     return this.http.post<Customer>(this.registerUrl, customer, this.httpOptions);
   }
 
   saveFile(selectedFile): Observable<{}> {
     return null;
   }
-
+  // delete one customer
   deleteCustomer (id: string): Observable<{}> {
     const url = `${this.url}/${id}`; // DELETE api/heroes/42
     console.log(url);
@@ -81,6 +83,16 @@ export class CustomerService {
       // .pipe(
       //   catchError(this.handleError('deleteHero'))
       // );
+  }
+
+  // approve one cusotmer
+  approveCustomer(customer: Customer, id: string): Observable<Customer> {
+    const url = `${this.url}/${id}`;
+    console.log("======"+url);
+    return this.http.put(url, customer, this.httpOptions).pipe(
+      tap(_ => this.log(`appoved Customer`)),
+      catchError(this.handleError<any>('approveCustomer'))
+    );
   }
   
   getCustomer(id: string): Observable<Customer> {

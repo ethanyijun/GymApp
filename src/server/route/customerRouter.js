@@ -3,7 +3,7 @@ const ObjectId = require('mongodb').ObjectId;
 const router = express.Router();
 var Binary = require('mongodb').Binary;
 
-//get all the customer cards
+//get the customer cards
 router.get('/customers', (req, res) => {
     let plan = req.query.plan;
     var plan_db;
@@ -25,11 +25,11 @@ router.get('/customers', (req, res) => {
     const customersCollection = db.collection('customers');
 
     if(plan == "all"){
-        customersCollection.find({ }).toArray((err, docs) => {
+        customersCollection.find({ "approved": 'N' }).toArray((err, docs) => {
             return res.json(docs);
         })        
     }else{
-        customersCollection.find({ "plan": plan_db }).toArray((err, docs) => {
+        customersCollection.find({ "plan": plan_db, "approved": 'Y' }).toArray((err, docs) => {
             return res.json(docs);
         })
     }
@@ -55,7 +55,8 @@ router.put('/customers/:id', (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        plan: req.body.plan
+        plan: req.body.plan,
+        approved: req.body.approved
       };
 
     customersCollection.findOneAndUpdate({ _id : ObjectId(req.params.id)}, { $set: updatedCustomer } ,function(err,customer){
@@ -69,17 +70,18 @@ router.post('/register', (req, res) => {
   //  var data = fs.readFileSync(file_path);
     const customer = req.body.customer;
     var insert_data = {};
-    insert_data.file_data= Binary(customer.profileImage);
+  //  insert_data.file_data= Binary(customer.profileImage);
 
 
 
   // const imageFd = req.body.formData;
-    console.log(insert_data);
+    console.log("customer");
+    console.log(customer);
 
     const db = req.app.locals.db;
     const customersCollection = db.collection('customers');
 
-    customersCollection.insertOne(insert_data, (err, r) => {
+    customersCollection.insertOne(customer, (err, r) => {
         if (err) {
             return res.status(500).json({ error: 'Error when inserting new record.'});
         }

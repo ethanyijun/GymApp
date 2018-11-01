@@ -76,7 +76,8 @@ export class RegisterComponent implements OnInit {
       phone: formInput.phone,
       email: formInput.email,
       plan: this.selectedValue['title'],
-      profileImage: this.selectedFile
+      profileImage: this.selectedFile,
+      approved: 'N'
     };
 
     this.customerService.postCustomer(customer)
