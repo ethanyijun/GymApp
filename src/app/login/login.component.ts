@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm) {
     const input = form.value;
 
-      console.log(input);
+    console.log(input);
     const payload = {
       username: input.username,
       password: input.password
@@ -34,9 +34,10 @@ export class LoginComponent implements OnInit {
       console.log('subscribing');
       console.log(data);
       this.authenticate.setToken(data.token);
-      console.log(data.token);
+  //localStorage.setItem('access_token',data.token);
+      console.log("??"+this.authenticate.isLoggedIn());
 
-      this.router.navigate(['/customers']);
+      this.router.navigate(['/all']);
     });
   }
 

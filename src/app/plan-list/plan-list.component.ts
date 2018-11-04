@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Plan } from '../Model/Plan';
 import { PlanService } from '../Service/plan.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { MyDialogComponent } from '../my-dialog/my-dialog.component';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
@@ -16,7 +16,8 @@ export class PlanListComponent implements OnInit {
   constructor(private planservice: PlanService,
   private activatedRoute: ActivatedRoute,
   public dialog: MatDialog,
-  private spinnerService: Ng4LoadingSpinnerService) { }
+  private spinnerService: Ng4LoadingSpinnerService,
+  private router: Router) { }
   plan: Plan;
 
   ngOnInit() {
@@ -36,10 +37,21 @@ export class PlanListComponent implements OnInit {
     console.log("getting plans!");
 
     
-    this.planservice.getPlans().subscribe(
+    this.planservice.getPlans().toPromise().then(
       plans => {
-        this.plans = plans
-        this.spinnerService.hide();
+        this.plans = plans;
+    },(err) => {
+        
+      if (err.status === 401) { 
+       // console.log(this.authenticate.isLoggedIn());
+        console.log("2222222");   
+        this.router.navigate(['/login']);}
+        else {
+          console.log("333");
+        }
+  }
+  ).then(()=>{
+     this.spinnerService.hide();
     });
   }
   

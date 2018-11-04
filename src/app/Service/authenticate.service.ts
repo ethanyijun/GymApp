@@ -14,25 +14,27 @@ import { Token } from '../Model/token';
 export class AuthenticateService {
 
    storageKey = 'authenticate-jwt';
-   loginUrl = '/login';
+   loginUrl = '/api/login';
    users: User[];
 
   constructor(private router: Router,
               private http: HttpClient) { }
 
   getAuthorizationOptions() {
+
     return {
-      headers: new HttpHeaders({
+     // headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': 'Bearer ' + this.getToken()
-      })
+   //   })
     };
   }
 
-  post(user: User): Observable<Token> {
+  post(user: User):any {
     console.log('posting');
     console.log(user);
-    return this.http.post<Token>(this.loginUrl, user);
+    return this.http.post(this.loginUrl, user);
+
   }
 
   setToken(token: string) {

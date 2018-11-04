@@ -6,7 +6,8 @@ const MongoClient = require('mongodb').MongoClient;
 const cors = require('cors');
 const customerRouter = require('./route/customerRouter');
 const planRouter = require('./route/planRouter');
-//const userRouter = require('./route/userRouter');
+const userRouter = require('./route/userRouter');
+const checkJwt = require('express-jwt');
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -17,9 +18,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
 require('dotenv').config();
-app.use('/api', customerRouter);
+          
 app.use('/api', planRouter);
-//app.use('/api', userRouter);
+app.use('/api', userRouter);
+app.use('/api', customerRouter);
+
+
+
+// app.use(checkJwt({ secret: process.env.JWT_SECRET })
+// .unless({ path: ['/api/login',
+//                 , '/login']
+//           }));
 
 
 MongoClient.connect(process.env.DB_CONN, (err, client) => {
