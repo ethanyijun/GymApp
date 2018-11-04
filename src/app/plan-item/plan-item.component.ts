@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Plan } from '../Plan';
-import { PlanService } from '../plan.service';
+import { Plan } from '../Model/Plan';
+import { PlanService } from '../Service/plan.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -44,7 +44,16 @@ export class PlanItemComponent implements OnInit {
   getPlan(id: string): void {
   //  console.log("getting customer id: "+id);
     this.plans.getPlan(id)
-    .subscribe(plan => {this.plan = plan;});
+    .toPromise().then(plan => {this.plan = plan;},(err) => {
+      console.log("status: "+err.status);  
+      if (err.status === 401) { 
+       // console.log(this.authenticate.isLoggedIn());
+        console.log("2222222");   
+        this.router.navigate(['/login']);}
+        else {
+          console.log("333");
+        }
+  });
       
   }
 

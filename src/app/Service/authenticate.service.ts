@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { User } from './user';
-import { Token } from './token';
+import { User } from '../Model/user';
+import { Token } from '../Model/token';
 
 
 @Injectable({
@@ -14,25 +14,27 @@ import { Token } from './token';
 export class AuthenticateService {
 
    storageKey = 'authenticate-jwt';
-   loginUrl = '/login';
+   loginUrl = '/api/login';
    users: User[];
 
   constructor(private router: Router,
               private http: HttpClient) { }
 
   getAuthorizationOptions() {
+
     return {
-      headers: new HttpHeaders({
+     // headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': 'Bearer ' + this.getToken()
-      })
+   //   })
     };
   }
 
-  post(user: User): Observable<Token> {
+  post(user: User):any {
     console.log('posting');
     console.log(user);
-    return this.http.post<Token>(this.loginUrl, user);
+    return this.http.post(this.loginUrl, user);
+
   }
 
   setToken(token: string) {

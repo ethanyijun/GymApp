@@ -13,11 +13,11 @@ import { JoinMemberFormComponent } from './join-member-form/join-member-form.com
 import { CustomerItemComponent } from './customer-item/customer-item.component';
 import { SuiModule } from 'ng2-semantic-ui';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
-import { CustomerService } from './customer.service';
-import { AuthenticateService } from './authenticate.service';
+import { CustomerService } from './Service/customer.service';
+import { AuthenticateService } from './Service/authenticate.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatOptionModule,MatSelectModule} from '@angular/material';
-import { MessageService } from './message.service';
+import { MessageService } from './Service/message.service';
 import { PlanListComponent } from './plan-list/plan-list.component';
 import { PlanItemComponent } from './plan-item/plan-item.component';
 import { MyDialogComponent } from './my-dialog/my-dialog.component';

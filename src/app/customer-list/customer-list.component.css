@@ -8,6 +8,14 @@
 }
 
 
+.modify-button {
+text-decoration: none;
+}
+
+.buttons {
+display: flex;
+}
+
 /* .selected {
     background-color: #CFD8DC !important;
     color: white;

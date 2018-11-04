@@ -24,6 +24,7 @@
       type="file" (change)="onFileChanged($event)" 
       #fileInput>
       <button type='button' (click)="fileInput.click()">Select File</button>
+      <label>{{fileName}}</label>
       <!-- <button (click)="onUpload()">Upload!</button>         -->
     </div>
     <!-- <div class="inline fields">
@@ -37,11 +38,11 @@
   </form>
 
     <mat-form-field>
-        <mat-select placeholder="Plan selection" [formControl]="planControl" [(ngModel)]="selectedValue" name = "plans">
-          <mat-option *ngFor="let plan of plans" [value]="plan.title">
+        <mat-select placeholder="Plan selection" [formControl]="planControl" [(ngModel)]="selectedValue" name = "plans" required>
+          <mat-option *ngFor="let plan of plans" [value]="plan">
             {{plan.title}}
           </mat-option>
         </mat-select>
-        <!-- <mat-hint>{{planControl.value?.name}}</mat-hint> -->
+        <mat-hint>{{planControl.value?.content}}</mat-hint>
     </mat-form-field>
 </div>

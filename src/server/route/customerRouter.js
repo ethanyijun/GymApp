@@ -1,9 +1,27 @@
 const express = require('express');
 const ObjectId = require('mongodb').ObjectId;
+const jwt = require ('jsonwebtoken');
 const router = express.Router();
+var Binary = require('mongodb').Binary;
+const checkJwt = require('express-jwt');
+require('dotenv').config();
 
+router.use(checkJwt({ secret: process.env.JWT_SECRET })
+.unless({ path: ['/api/login',
+                , '/login','/api/register','/api/plans','plans']
+          }));
 
-//get all the customer cards
+router.use((err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+        console.log("unauth in customer");
+        res.status(401);
+        res.json({"message" : err.name + ": " + err.message});
+        return;
+    // res.status(401).send({ error: err.message})  
+    }
+    next();
+});
+//get the customer cards
 router.get('/customers', (req, res) => {
     let plan = req.query.plan;
     var plan_db;
@@ -25,11 +43,11 @@ router.get('/customers', (req, res) => {
     const customersCollection = db.collection('customers');
 
     if(plan == "all"){
-        customersCollection.find({ }).toArray((err, docs) => {
+        customersCollection.find({ "approved": 'N' }).toArray((err, docs) => {
             return res.json(docs);
         })        
     }else{
-        customersCollection.find({ "plan": plan_db }).toArray((err, docs) => {
+        customersCollection.find({ "plan": plan_db, "approved": 'Y' }).toArray((err, docs) => {
             return res.json(docs);
         })
     }
@@ -55,7 +73,8 @@ router.put('/customers/:id', (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        plan: req.body.plan
+        plan: req.body.plan,
+        approved: req.body.approved
       };
 
     customersCollection.findOneAndUpdate({ _id : ObjectId(req.params.id)}, { $set: updatedCustomer } ,function(err,customer){
@@ -65,7 +84,18 @@ router.put('/customers/:id', (req, res) => {
 
 //register a new customer card
 router.post('/register', (req, res) => {
+    
+  //  var data = fs.readFileSync(file_path);
     const customer = req.body.customer;
+    var insert_data = {};
+  //  insert_data.file_data= Binary(customer.profileImage);
+
+
+
+  // const imageFd = req.body.formData;
+    console.log("customer");
+    console.log(customer);
+
     const db = req.app.locals.db;
     const customersCollection = db.collection('customers');
 

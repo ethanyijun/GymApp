@@ -19,10 +19,19 @@
                 </div>
                 <br>
               <div class="extra content" buttons>
-                <div class="ui three buttons">
-                  <button class="ui basic green button">Approve</button>
+
+                <div *ngIf="customer.approved=='N'" class="ui three buttons">
+                  <button class="ui basic green button" (click)="approveCustomer(customer._id)">Approve</button>
                   <a routerLink="/detail/{{customer._id}}"><button class="ui basic blue button">Modify</button></a>
                   <button class="ui basic red button" (click)="deleteCustomer(customer._id)">Delete</button>
+                </div>
+                <div *ngIf="customer.approved=='Y'" class="ui two buttons">
+                    <div>
+                        <a class="modify-button" routerLink="/detail/{{customer._id}}"><button class="ui basic blue button">Modify</button></a>
+                    </div>
+                    <div>
+                        <button class="ui basic red button" (click)="deleteCustomer(customer._id)">Delete</button>
+                    </div>   
                 </div>
             </div>
           </div>

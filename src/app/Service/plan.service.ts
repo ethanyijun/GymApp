@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Plan } from './Plan';
+import { Plan } from '../Model/Plan';
 import { MessageService } from './message.service';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -16,21 +16,16 @@ import {  HttpParams } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class PlanService {
-    url = '/api/plans';
-  
+      url = '/api/plans';
+     // httpOptions = this.authenticate.getAuthorizationOptions();
       plans: Plan[];
   
-      httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json'
-        })
-      };
   
     constructor(private http: HttpClient, private authenticate: AuthenticateService,
       private messageService: MessageService) { }
 
   
-      getPlans(): Observable<Plan[]> {
+    getPlans(): Observable<Plan[]> {
         // let params = new HttpParams().set('plan', plan);
         console.log("url in js: " + this.url);
         return this.http.get<Plan[]>(this.url);
@@ -39,7 +34,7 @@ export class PlanService {
     deletePlan (id: string): Observable<{}> {
       const url = `${this.url}/${id}`; // DELETE api/heroes/42
       console.log(url);
-      return this.http.delete(url, this.httpOptions);  
+      return this.http.delete(url, { headers: this.authenticate.getAuthorizationOptions() });  
         // .pipe(
         //   catchError(this.handleError('deleteHero'))
         // );
@@ -48,7 +43,7 @@ export class PlanService {
     updatePlan(plan: Plan, id: string): Observable<Plan> {
       const url = `${this.url}/${id}`;
       console.log("======"+url);
-      return this.http.put(url, plan, this.httpOptions).pipe(
+      return this.http.put(url, plan, { headers : this.authenticate.getAuthorizationOptions() }).pipe(
         tap(_ => this.log(`updated Customer`)),
         catchError(this.handleError<any>('updateCustomer'))
       );
@@ -57,14 +52,15 @@ export class PlanService {
     getPlan(id: string): Observable<Plan> {
       const url = `${this.url}/${id}`;
       console.log("getting: "+url);
-      return this.http.get<Plan>(url).pipe(
-        tap(_ => this.log(`fetched plan id=${id}`)),
-        catchError(this.handleError<Plan>(`getPlan id=${id}`))
-      );
+      return this.http.get<Plan>(url, { headers: this.authenticate.getAuthorizationOptions() });
+      // .pipe(
+      //   tap(_ => this.log(`fetched plan id=${id}`)),
+      //   catchError(this.handleError<Plan>(`getPlan id=${id}`))
+      // );
     }
 
     postPlan(plan: Plan): Observable<Plan> {
-      return this.http.post<Plan>(this.url, plan, this.httpOptions);
+      return this.http.post<Plan>(this.url, plan, { headers: this.authenticate.getAuthorizationOptions() });
     }
 
     // postIcon(selectedFile): Observable<T>{
@@ -88,7 +84,7 @@ export class PlanService {
   
     /** Log a HeroService message with the MessageService */
     private log(message: string) {
-      this.messageService.add(`HeroService: ${message}`);
+      this.messageService.add(`planService: ${message}`);
     }
   
 }

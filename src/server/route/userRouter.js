@@ -9,16 +9,31 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 // set these pages as no authentication needed
-router.use(checkJwt({ secret: process.env.JWT_SECRET })
-.unless({ path: ['/api/login','/api/register','/api/plans','/add-user', 
-                '/api/add-user', '/customers', '/login', '/register', 
-                '/plans', '/add-plan']
-          }));
+// router.use(checkJwt({ secret: process.env.JWT_SECRET })
+// .unless({ path: ['/api/login','/api/register','/api/plans','/add-user', 
+//                 '/api/add-user', '/customers', '/login', '/register', 
+//                 '/plans', '/add-plan']
+//           }));
 // catch the unauthorize error if the page did not authenticate
+// router.use((err, req, res, next) => {
+//     if (err.name === 'UnauthorizedError') {
+//         res.status(401).send({ error: err.message})  
+//     }
+// });
+router.use(checkJwt({ secret: process.env.JWT_SECRET })
+.unless({ path: ['/api/login',
+                , '/login','/api/register']
+          }));
+
 router.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
-        res.status(401).send({ error: err.message})  
+        console.log("unauth in user");
+        res.status(401);
+        res.json({"message" : err.name + ": " + err.message});
+        return;
+    // res.status(401).send({ error: err.message})  
     }
+    next();
 });
 
 // add a user for log in
@@ -56,6 +71,7 @@ router.post('/login', (req, res) => {
     const db = req.app.locals.db;
     const user = req.body;
     const usersCollection = db.collection('users');
+    //console.log("user name: "+user[username]);
     // search user by username in database
     usersCollection.findOne({ username: user.username }, (err, result) => {
         if (err) {
@@ -80,7 +96,7 @@ router.post('/login', (req, res) => {
         };
         // sign the token for user to login
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn:'1h'});
-
+        console.log("***"+token);
         return res.status(200).json({
             message: 'Authentication done properly',
             token: token
