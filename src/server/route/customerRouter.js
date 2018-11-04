@@ -1,8 +1,26 @@
 const express = require('express');
 const ObjectId = require('mongodb').ObjectId;
+const jwt = require ('jsonwebtoken');
 const router = express.Router();
 var Binary = require('mongodb').Binary;
+const checkJwt = require('express-jwt');
+require('dotenv').config();
 
+router.use(checkJwt({ secret: process.env.JWT_SECRET })
+.unless({ path: ['/api/login',
+                , '/login','/api/register','/api/plans','plans']
+          }));
+
+router.use((err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+        console.log("unauth in customer");
+        res.status(401);
+        res.json({"message" : err.name + ": " + err.message});
+        return;
+    // res.status(401).send({ error: err.message})  
+    }
+    next();
+});
 //get the customer cards
 router.get('/customers', (req, res) => {
     let plan = req.query.plan;

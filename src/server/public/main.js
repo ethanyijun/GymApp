@@ -48,20 +48,19 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
 var AuthenticateService = /** @class */ (function () {
     function AuthenticateService(router, http) {
         this.router = router;
         this.http = http;
         this.storageKey = 'authenticate-jwt';
-        this.loginUrl = '/login';
+        this.loginUrl = '/api/login';
     }
     AuthenticateService.prototype.getAuthorizationOptions = function () {
         return {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.getToken()
-            })
+            // headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this.getToken()
+            //   })
         };
     };
     AuthenticateService.prototype.post = function (user) {
@@ -133,55 +132,37 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
 // import 'rxjs/add/operator/map';import { catchError, map, tap } from 'rxjs/operators';
 // import { Http, Response } from '@angular/http';
 var CustomerService = /** @class */ (function () {
+    //   httpOptions = this.authenticate.getAuthorizationOptions();
     function CustomerService(http, authenticate, messageService) {
         this.http = http;
         this.authenticate = authenticate;
         this.messageService = messageService;
         this.url = '/api/customers';
         this.registerUrl = '/api/register';
-        this.httpOptions = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
-                'Content-Type': 'application/json'
-            })
-        };
     }
     CustomerService.prototype.getCustomers = function (plan) {
         //console.log("get customers in js"+this.url);
         var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]().set('plan', plan);
-        //const url = `${this.url}/${plan}`; 
+        // let params = new HttpParams();
+        // params.append('plan', plan);
         console.log("url in js: " + this.url);
-        // return this._HttpClient.get(`${API_URL}/api/v1/data/logs`, { params: params })
-        // let searchParams = new URLSearchParams();
-        // searchParams.append('plan', plan);
-        return this.http.get(this.url, { params: params });
+        //   return this.http.get<Customer[]>(this.url, { params: params });
         // .map(response => {
         //   return response.json().mediaItems;
         // });
-        //   return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
+        //  console.log("auth in js: " + this.httpOptions['Authorization']);
+        return this.http.get(this.url, { headers: this.authenticate.getAuthorizationOptions(), params: params });
     };
-    //   getCustomers(plan): Observable<Customer[]> {
-    //     console.log("get customers in js"+this.url);
-    //     let params = new HttpParams().set('plan', plan);
-    //     // return this._HttpClient.get(`${API_URL}/api/v1/data/logs`, { params: params })
-    //     // let searchParams = new URLSearchParams();
-    //     // searchParams.append('plan', plan);
-    //     return this.http.get<Customer[]>(this.url, { params: params });
-    //       // .map(response => {
-    //       //   return response.json().mediaItems;
-    //       // });
-    //  //   return this.http.get<Customer[]>(this.url, this.authenticate.getAuthorizationOptions());
-    //   }
     CustomerService.prototype.postCustomer = function (customer) {
         // const formData = new FormData();
         // formData.append('image',selectedFile, selectedFile.name);
         var Indata = { customer: customer };
-        return this.http.post(this.registerUrl, Indata, this.httpOptions);
-        console.log("##" + customer);
-        return this.http.post(this.registerUrl, customer, this.httpOptions);
+        return this.http.post(this.registerUrl, Indata, { headers: this.authenticate.getAuthorizationOptions() });
+        // console.log("##"+customer);
+        // return this.http.post<Customer>(this.registerUrl, customer, this.httpOptions);
     };
     CustomerService.prototype.saveFile = function (selectedFile) {
         return null;
@@ -190,7 +171,7 @@ var CustomerService = /** @class */ (function () {
     CustomerService.prototype.deleteCustomer = function (id) {
         var url = this.url + "/" + id; // DELETE api/heroes/42
         console.log(url);
-        return this.http.delete(url, this.httpOptions);
+        return this.http.delete(url, { headers: this.authenticate.getAuthorizationOptions() });
         // .pipe(
         //   catchError(this.handleError('deleteHero'))
         // );
@@ -200,19 +181,19 @@ var CustomerService = /** @class */ (function () {
         var _this = this;
         var url = this.url + "/" + id;
         console.log("======" + url);
-        return this.http.put(url, customer, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("appoved Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('approveCustomer')));
+        return this.http.put(url, customer, { headers: this.authenticate.getAuthorizationOptions() }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("appoved Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('approveCustomer')));
     };
     CustomerService.prototype.getCustomer = function (id) {
         var _this = this;
         var url = this.url + "/" + id;
         console.log("getting: " + url);
-        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("fetched customer id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError("getCustomer id=" + id)));
+        return this.http.get(url, { headers: this.authenticate.getAuthorizationOptions() }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("fetched customer id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError("getCustomer id=" + id)));
     };
     CustomerService.prototype.updateCustomer = function (customer, id) {
         var _this = this;
         var url = this.url + "/" + id;
         console.log("======" + url);
-        return this.http.put(url, customer, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("updated Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('updateCustomer')));
+        return this.http.put(url, customer, { headers: this.authenticate.getAuthorizationOptions() }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("updated Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('updateCustomer')));
     };
     CustomerService.prototype.handleError = function (operation, result) {
         var _this = this;
@@ -313,18 +294,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
 var PlanService = /** @class */ (function () {
     function PlanService(http, authenticate, messageService) {
         this.http = http;
         this.authenticate = authenticate;
         this.messageService = messageService;
         this.url = '/api/plans';
-        this.httpOptions = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
-                'Content-Type': 'application/json'
-            })
-        };
     }
     PlanService.prototype.getPlans = function () {
         // let params = new HttpParams().set('plan', plan);
@@ -334,7 +309,7 @@ var PlanService = /** @class */ (function () {
     PlanService.prototype.deletePlan = function (id) {
         var url = this.url + "/" + id; // DELETE api/heroes/42
         console.log(url);
-        return this.http.delete(url, this.httpOptions);
+        return this.http.delete(url, { headers: this.authenticate.getAuthorizationOptions() });
         // .pipe(
         //   catchError(this.handleError('deleteHero'))
         // );
@@ -343,16 +318,16 @@ var PlanService = /** @class */ (function () {
         var _this = this;
         var url = this.url + "/" + id;
         console.log("======" + url);
-        return this.http.put(url, plan, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("updated Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('updateCustomer')));
+        return this.http.put(url, plan, { headers: this.authenticate.getAuthorizationOptions() }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("updated Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('updateCustomer')));
     };
     PlanService.prototype.getPlan = function (id) {
         var _this = this;
         var url = this.url + "/" + id;
         console.log("getting: " + url);
-        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("fetched plan id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError("getPlan id=" + id)));
+        return this.http.get(url, { headers: this.authenticate.getAuthorizationOptions() }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("fetched plan id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError("getPlan id=" + id)));
     };
     PlanService.prototype.postPlan = function (plan) {
-        return this.http.post(this.url, plan, this.httpOptions);
+        return this.http.post(this.url, plan, { headers: this.authenticate.getAuthorizationOptions() });
     };
     // postIcon(selectedFile): Observable<T>{
     //   this.http.post('my-backend.com/file-upload', selectedFile)
@@ -788,6 +763,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../my-dialog/my-dialog.component */ "./src/app/my-dialog/my-dialog.component.ts");
 /* harmony import */ var ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng4-loading-spinner */ "./node_modules/ng4-loading-spinner/ng4-loading-spinner.umd.js");
 /* harmony import */ var ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _Service_authenticate_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Service/authenticate.service */ "./src/app/Service/authenticate.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -803,24 +779,38 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var CustomerListComponent = /** @class */ (function () {
-    function CustomerListComponent(customerService, activatedRoute, dialog, spinnerService) {
+    function CustomerListComponent(customerService, activatedRoute, dialog, spinnerService, router, authenticate) {
         this.customerService = customerService;
         this.activatedRoute = activatedRoute;
         this.dialog = dialog;
         this.spinnerService = spinnerService;
+        this.router = router;
+        this.authenticate = authenticate;
     }
     CustomerListComponent.prototype.getCustomers = function (plan) {
         var _this = this;
         this.spinnerService.show();
         console.log("getting customers!");
-        this.customerService.getCustomers(plan).toPromise().then(function (customers) { return _this.customers = customers; }).then(function () {
+        this.customerService.getCustomers(plan).toPromise().then(function (customers) { return _this.customers = customers; }, function (err) {
+            if (err.status === 401) {
+                console.log(_this.authenticate.isLoggedIn());
+                console.log("2222222");
+                _this.router.navigate(['/login']);
+            }
+            else {
+                console.log("333");
+            }
+        }).then(function () {
             _this.spinnerService.hide();
         });
     };
     CustomerListComponent.prototype.ngOnInit = function () {
         var _this = this;
         console.log(this.activatedRoute.snapshot.params.plan);
+        this.loggedIn = this.authenticate.isLoggedIn();
+        console.log("...." + this.loggedIn);
         this.activatedRoute.params.subscribe(function (params) {
             var plan = _this.activatedRoute.snapshot.params.plan;
             _this.getCustomers(plan);
@@ -905,7 +895,9 @@ var CustomerListComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_Service_customer_service__WEBPACK_IMPORTED_MODULE_2__["CustomerService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
             _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"],
-            ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__["Ng4LoadingSpinnerService"]])
+            ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__["Ng4LoadingSpinnerService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _Service_authenticate_service__WEBPACK_IMPORTED_MODULE_6__["AuthenticateService"]])
     ], CustomerListComponent);
     return CustomerListComponent;
 }());
@@ -1045,8 +1037,9 @@ var LoginComponent = /** @class */ (function () {
             console.log('subscribing');
             console.log(data);
             _this.authenticate.setToken(data.token);
-            console.log(data.token);
-            _this.router.navigate(['/customers']);
+            //localStorage.setItem('access_token',data.token);
+            console.log("??" + _this.authenticate.isLoggedIn());
+            _this.router.navigate(['/all']);
         });
     };
     LoginComponent = __decorate([
@@ -1446,11 +1439,12 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 var PlanListComponent = /** @class */ (function () {
-    function PlanListComponent(planservice, activatedRoute, dialog, spinnerService) {
+    function PlanListComponent(planservice, activatedRoute, dialog, spinnerService, router) {
         this.planservice = planservice;
         this.activatedRoute = activatedRoute;
         this.dialog = dialog;
         this.spinnerService = spinnerService;
+        this.router = router;
     }
     PlanListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1476,8 +1470,18 @@ var PlanListComponent = /** @class */ (function () {
         var _this = this;
         this.spinnerService.show();
         console.log("getting plans!");
-        this.planservice.getPlans().subscribe(function (plans) {
+        this.planservice.getPlans().toPromise().then(function (plans) {
             _this.plans = plans;
+        }, function (err) {
+            if (err.status === 401) {
+                // console.log(this.authenticate.isLoggedIn());
+                console.log("2222222");
+                _this.router.navigate(['/login']);
+            }
+            else {
+                console.log("333");
+            }
+        }).then(function () {
             _this.spinnerService.hide();
         });
     };
@@ -1522,7 +1526,8 @@ var PlanListComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_Service_plan_service__WEBPACK_IMPORTED_MODULE_1__["PlanService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
             _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"],
-            ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__["Ng4LoadingSpinnerService"]])
+            ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__["Ng4LoadingSpinnerService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], PlanListComponent);
     return PlanListComponent;
 }());
@@ -1724,7 +1729,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/aip/GymApp/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/newAIP/AIP/NewAIP/aip/src/main.ts */"./src/main.ts");
 
 
 /***/ })
