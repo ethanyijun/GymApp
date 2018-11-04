@@ -321,10 +321,13 @@ var PlanService = /** @class */ (function () {
         return this.http.put(url, plan, { headers: this.authenticate.getAuthorizationOptions() }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("updated Customer"); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('updateCustomer')));
     };
     PlanService.prototype.getPlan = function (id) {
-        var _this = this;
         var url = this.url + "/" + id;
         console.log("getting: " + url);
-        return this.http.get(url, { headers: this.authenticate.getAuthorizationOptions() }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (_) { return _this.log("fetched plan id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError("getPlan id=" + id)));
+        return this.http.get(url, { headers: this.authenticate.getAuthorizationOptions() });
+        // .pipe(
+        //   tap(_ => this.log(`fetched plan id=${id}`)),
+        //   catchError(this.handleError<Plan>(`getPlan id=${id}`))
+        // );
     };
     PlanService.prototype.postPlan = function (plan) {
         return this.http.post(this.url, plan, { headers: this.authenticate.getAuthorizationOptions() });
@@ -347,7 +350,7 @@ var PlanService = /** @class */ (function () {
     };
     /** Log a HeroService message with the MessageService */
     PlanService.prototype.log = function (message) {
-        this.messageService.add("HeroService: " + message);
+        this.messageService.add("planService: " + message);
     };
     PlanService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' }),
@@ -1279,7 +1282,17 @@ var PlanItemComponent = /** @class */ (function () {
         var _this = this;
         //  console.log("getting customer id: "+id);
         this.plans.getPlan(id)
-            .subscribe(function (plan) { _this.plan = plan; });
+            .toPromise().then(function (plan) { _this.plan = plan; }, function (err) {
+            console.log("status: " + err.status);
+            if (err.status === 401) {
+                // console.log(this.authenticate.isLoggedIn());
+                console.log("2222222");
+                _this.router.navigate(['/login']);
+            }
+            else {
+                console.log("333");
+            }
+        });
     };
     PlanItemComponent.prototype.goBack = function () {
         this.location.back();
@@ -1729,7 +1742,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/newAIP/AIP/NewAIP/aip/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/aip/GymApp/src/main.ts */"./src/main.ts");
 
 
 /***/ })

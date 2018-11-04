@@ -52,10 +52,12 @@ export class PlanService {
     getPlan(id: string): Observable<Plan> {
       const url = `${this.url}/${id}`;
       console.log("getting: "+url);
-      return this.http.get<Plan>(url, { headers: this.authenticate.getAuthorizationOptions() }).pipe(
-        tap(_ => this.log(`fetched plan id=${id}`)),
-        catchError(this.handleError<Plan>(`getPlan id=${id}`))
-      );
+
+      return this.http.get<Plan>(url, { headers: this.authenticate.getAuthorizationOptions() });
+      // .pipe(
+      //   tap(_ => this.log(`fetched plan id=${id}`)),
+      //   catchError(this.handleError<Plan>(`getPlan id=${id}`))
+      // );
     }
 
     postPlan(plan: Plan): Observable<Plan> {
@@ -83,7 +85,7 @@ export class PlanService {
   
     /** Log a HeroService message with the MessageService */
     private log(message: string) {
-      this.messageService.add(`HeroService: ${message}`);
+      this.messageService.add(`planService: ${message}`);
     }
   
 }
