@@ -1,0 +1,8 @@
+.alert {
+    background-color: tomato;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+}
