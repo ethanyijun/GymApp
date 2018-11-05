@@ -504,7 +504,7 @@ var PlanService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".alert {\n    background-color: tomato;\n    height: 40px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    font-size: 17px;\n}"
+module.exports = ".alert {\n    padding: 20px;\n    background-color: #f44336; /* Red */\n    color: white;\n    margin-bottom: 15px;\n    border-radius: 8px;\n}\n\n/* The close button */\n\n.closebtn {\n    margin-left: 15px;\n    color: white;\n    font-weight: bold;\n    float: right;\n    font-size: 22px;\n    line-height: 20px;\n    cursor: pointer;\n    transition: 0.3s;\n}\n\n/* When moving the mouse over the close button */\n\n.closebtn:hover {\n    color: black;\n}"
 
 /***/ }),
 
@@ -515,7 +515,7 @@ module.exports = ".alert {\n    background-color: tomato;\n    height: 40px;\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let alert of alerts\" class=\"{{ cssClass(alert) }} alert-dismissable alert\">\n    {{alert.message}}&nbsp;\n    <a class=\"close\" (click)=\"removeAlert(alert)\">&times;</a>\n</div>"
+module.exports = "<!-- <div *ngFor=\"let alert of alerts\" class=\"{{ cssClass(alert) }} alert-dismissable alert\">\n    {{alert.message}}&nbsp;\n    <a class=\"close\" (click)=\"removeAlert(alert)\">&times;</a>\n</div> -->\n<div *ngFor=\"let alert of alerts\" class=\"{{ cssClass(alert) }} alert-dismissable alert\">\n    <span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span> \n    {{alert.message}}\n</div>"
 
 /***/ }),
 
