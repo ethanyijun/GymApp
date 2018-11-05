@@ -443,7 +443,7 @@ module.exports = ".mat-elevation-z0{box-shadow:0 0 0 0 rgba(0,0,0,.2),0 0 0 0 rg
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <nav>\n    <a routerLink=\"register\">Register your first account</a>\n    <a routerLink=\"login\">  Sign in</a>\n  </nav> -->\n  <nav>\n    <a [routerLink]=\"['/yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a>\n    <!-- <a [routerLink]=\"['/customers', 'yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a> -->\n    <a [routerLink]=\"['/gain_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/2.png\" class=\"icon\" />\n    </a>\n    <a [routerLink]=\"['/lose_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/3.png\" class=\"icon\" />\n    </a>\n  </nav>\n  <!-- <section>\n    <header>\n      <h1>Customer Watch List</h1>\n      <p class=\"description\">Keeping track of the customer.</p>\n    </header>\n  </section> -->\n  \n<app-menu-bar></app-menu-bar>\n\n<!-- \n<app-menu-bar></app-menu-bar>\n<router-outlet></router-outlet> -->\n"
+module.exports = "<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <nav>\n    <a routerLink=\"register\">Register your first account</a>\n    <a routerLink=\"login\">  Sign in</a>\n  </nav> -->\n  <nav *ngIf = \"authenticate.isLoggedIn()\">\n    <a [routerLink]=\"['/yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a>\n    <!-- <a [routerLink]=\"['/customers', 'yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a> -->\n    <a [routerLink]=\"['/gain_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/2.png\" class=\"icon\" />\n    </a>\n    <a [routerLink]=\"['/lose_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/3.png\" class=\"icon\" />\n    </a>\n  </nav>\n  <!-- <section>\n    <header>\n      <h1>Customer Watch List</h1>\n      <p class=\"description\">Keeping track of the customer.</p>\n    </header>\n  </section> -->\n  \n<app-menu-bar></app-menu-bar>\n\n<!-- \n<app-menu-bar></app-menu-bar>\n<router-outlet></router-outlet> -->\n"
 
 /***/ }),
 
@@ -458,15 +458,21 @@ module.exports = "<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _Service_authenticate_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Service/authenticate.service */ "./src/app/Service/authenticate.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(authenticate) {
+        this.authenticate = authenticate;
         this.title = 'gym';
     }
     AppComponent = __decorate([
@@ -474,7 +480,8 @@ var AppComponent = /** @class */ (function () {
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [_Service_authenticate_service__WEBPACK_IMPORTED_MODULE_1__["AuthenticateService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -1079,7 +1086,7 @@ module.exports = "button.ui.primary.button.logout {\n    width: 125px;\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container\">\n    <div class=\"item\">\n      <a [routerLink]=\"['/all']\" aria-label=\"Customer Dashboard\">\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n      </a>\n    </div>\n    <div class=\"header item\">\n      <h1>Customer Dashboard</h1>\n    </div>\n      <!-- <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\"> -->\n    <div class=\"item\">\n      <a routerLink=\"../register\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign Up\n          </i>\n        </button>\n      </a>\n        <!-- <div class=\"item\"> -->\n      <a routerLink=\"../login\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign In\n          </i>\n        </button>\n      </a>\n      <a routerLink=\"../plans\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Plan list\n          </i>\n        </button>\n      </a>\n      <a routerLink=\"../newplan\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            New plan\n          </i>\n        </button>\n      </a>\n      <!-- </div> -->\n    </div>\n    <!-- <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\"> -->\n    <div class=\"right menu\">\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n    </div>\n  </div>\n \n</div>\n\n<div class=\"ui container\">\n    <router-outlet></router-outlet> \n</div>\n\n"
+module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container\">\n    <div class=\"item\" *ngIf = \"authenticate.isLoggedIn()\">\n      <a [routerLink]=\"['/all']\" aria-label=\"Customer Dashboard\">\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n      </a>\n    </div>\n    <div *ngIf = \"authenticate.isLoggedIn()\" class=\"header item\">\n      <h1>Customer Dashboard</h1>\n    </div>\n    <div *ngIf = \"authenticate.isLoggedOut()\" class=\"header item\">\n      <h1>\n        Welcome to Fitness Anytime!\n      </h1>\n    </div>\n      <!-- <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\"> -->\n    <div class=\"item\">\n      <a routerLink=\"../register\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign Up\n          </i>\n        </button>\n      </a>\n        <!-- <div class=\"item\"> -->\n      <a routerLink=\"../login\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign In\n          </i>\n        </button>\n      </a>\n      <a routerLink=\"../plans\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Plan list\n          </i>\n        </button>\n      </a>\n      <a routerLink=\"../newplan\" *ngIf = \"authenticate.isLoggedIn()\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            New plan\n          </i>\n        </button>\n      </a>\n      <!-- </div> -->\n    </div>\n    <!-- <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\"> -->\n    <div class=\"right menu\">\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n    </div>\n  </div>\n \n</div>\n\n<div class=\"ui container\">\n    <router-outlet></router-outlet> \n</div>\n\n"
 
 /***/ }),
 
@@ -1380,7 +1387,7 @@ module.exports = ".container {\n    margin-top: 50px;\n  }\n  \n.plan-item{\n  p
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui container\">\n  <ng4-loading-spinner> </ng4-loading-spinner>\n  <div class=\"ui grid\">\n    <div *ngFor=\"let plan of plans\">         \n      <div class=\"ui cards plan-item\">\n        <div class=\"card\">\n          <div class=\"content\">\n              <div class=\"header\">\n                {{plan.title}}\n              </div>\n              <br>\n              <div class=\"description\">\n                <label class=\"header\">Coach: </label>\n                {{plan.coach}}\n              </div>\n              <div class=\"description\">\n                <label class=\"header\">type: </label>\n                {{plan.type}}\n              </div>\n              <br>\n            <div class=\"extra content\" buttons>\n              <div class=\"ui two buttons\">\n                <div><a class=\"modify-button\" routerLink=\"/plan-detail/{{plan._id}}\"><button class=\"ui positive basic button\">Modify</button></a>\n                </div>\n                <div><button class=\"ui negative basic button\" (click)=\"deletePlan(plan._id)\">Delete</button></div>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"ui container\">\n  <ng4-loading-spinner> </ng4-loading-spinner>\n  <div class=\"ui grid\">\n    <div *ngFor=\"let plan of plans\">         \n      <div class=\"ui cards plan-item\">\n        <div class=\"card\">\n          <div class=\"content\">\n              <div class=\"header\">\n                {{plan.title}}\n              </div>\n              <br>\n              <div class=\"description\">\n                <label class=\"header\">Coach: </label>\n                {{plan.coach}}\n              </div>\n              <div class=\"description\">\n                <label class=\"header\">type: </label>\n                {{plan.type}}\n              </div>\n              <br>\n            <div class=\"extra content\" buttons>\n              <div class=\"ui two buttons\">\n                <div *ngIf = \"authenticate.isLoggedIn()\"><a class=\"modify-button\" routerLink=\"/plan-detail/{{plan._id}}\"><button class=\"ui positive basic button\">Modify</button></a>\n                </div>\n                <div *ngIf = \"authenticate.isLoggedIn()\"><button class=\"ui negative basic button\" (click)=\"deletePlan(plan._id)\">Delete</button></div>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1401,6 +1408,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../my-dialog/my-dialog.component */ "./src/app/my-dialog/my-dialog.component.ts");
 /* harmony import */ var ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng4-loading-spinner */ "./node_modules/ng4-loading-spinner/ng4-loading-spinner.umd.js");
 /* harmony import */ var ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _Service_authenticate_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Service/authenticate.service */ "./src/app/Service/authenticate.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1451,13 +1459,15 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var PlanListComponent = /** @class */ (function () {
-    function PlanListComponent(planservice, activatedRoute, dialog, spinnerService, router) {
+    function PlanListComponent(planservice, activatedRoute, dialog, spinnerService, router, authenticate) {
         this.planservice = planservice;
         this.activatedRoute = activatedRoute;
         this.dialog = dialog;
         this.spinnerService = spinnerService;
         this.router = router;
+        this.authenticate = authenticate;
     }
     PlanListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1498,9 +1508,6 @@ var PlanListComponent = /** @class */ (function () {
             _this.spinnerService.hide();
         });
     };
-    //deletePlan(id: string): void{
-    //   this.openModal(id);
-    //}
     PlanListComponent.prototype.deletePlan = function (id) {
         var _this = this;
         var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
@@ -1540,7 +1547,8 @@ var PlanListComponent = /** @class */ (function () {
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
             _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"],
             ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_5__["Ng4LoadingSpinnerService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _Service_authenticate_service__WEBPACK_IMPORTED_MODULE_6__["AuthenticateService"]])
     ], PlanListComponent);
     return PlanListComponent;
 }());
@@ -1658,7 +1666,7 @@ var RegisterComponent = /** @class */ (function () {
             _this.newCustomer = data;
             console.log('new data posted');
         });
-        this.router.navigateByUrl('/all');
+        this.router.navigateByUrl('/');
     };
     RegisterComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

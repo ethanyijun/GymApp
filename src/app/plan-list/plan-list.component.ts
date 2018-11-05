@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { MyDialogComponent } from '../my-dialog/my-dialog.component';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { AuthenticateService } from '../Service/authenticate.service';
 
 @Component({
   selector: 'app-plan-list',
@@ -17,7 +18,8 @@ export class PlanListComponent implements OnInit {
   private activatedRoute: ActivatedRoute,
   public dialog: MatDialog,
   private spinnerService: Ng4LoadingSpinnerService,
-  private router: Router) { }
+  private router: Router,
+  private authenticate:AuthenticateService ) { }
   plan: Plan;
 
   ngOnInit() {
@@ -55,39 +57,38 @@ export class PlanListComponent implements OnInit {
     });
   }
   
-  //deletePlan(id: string): void{
-  //   this.openModal(id);
-  //}
 
 
-  deletePlan(id: string) {
-    const dialogConfig = new MatDialogConfig();
-    var planTitle: string;
+deletePlan(id: string) {
+      const dialogConfig = new MatDialogConfig();
+      var planTitle: string;
 
-    this.planservice.getPlan(id).toPromise().then(plan => { 
-      this.plan = plan;
-      console.log("--");
-      console.log(plan);
-      planTitle = "Delete plan: " + plan['title'];
-    }).then(()=>{
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      dialogConfig.data = {
-      id: 1,
-      title: planTitle
-      };
-    }).then(()=>{
-      const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
-      dialogRef.afterClosed().subscribe(result => {
-        if(result){
-           this.planservice.deletePlan(id).subscribe(data=>{
-           this.getPlans();
-         });
-        }
-       console.log("Dialog was closed!")
-       console.log(result)
+      this.planservice.getPlan(id).toPromise().then(plan => { 
+        this.plan = plan;
+        console.log("--");
+        console.log(plan);
+        planTitle = "Delete plan: " + plan['title'];
+      }
+      ).then(()=>{
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+        id: 1,
+        title: planTitle
+        };
+      }).then(()=>{
+        const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe(result => {
+          if(result){
+            this.planservice.deletePlan(id).subscribe(data=>{
+            this.getPlans();
+          }
+          );
+          }
+        console.log("Dialog was closed!")
+        console.log(result)
+        });
       });
-    });
   }
 }
 

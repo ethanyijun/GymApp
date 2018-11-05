@@ -88,6 +88,6 @@ export class RegisterComponent implements OnInit {
       console.log('new data posted');
     });
 
-    this.router.navigateByUrl('/all');
+    this.router.navigateByUrl('/');
   }
 }
