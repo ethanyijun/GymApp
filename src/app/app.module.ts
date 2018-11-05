@@ -23,6 +23,10 @@ import { PlanItemComponent } from './plan-item/plan-item.component';
 import { MyDialogComponent } from './my-dialog/my-dialog.component';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { AlertComponent } from './_directives/index';
+import { AlertService } from './Service/index';
+import { PlanService } from './Service/plan.service';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +39,8 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     MenuBarComponent,
     PlanListComponent,
     PlanItemComponent,
-    MyDialogComponent
+    MyDialogComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +67,7 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
       MatOptionModule,
       FormsModule
   ],
-  providers: [CustomerService, AuthenticateService, MessageService],
+  providers: [CustomerService, AuthenticateService, MessageService, PlanService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

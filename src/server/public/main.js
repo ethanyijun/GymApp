@@ -23,6 +23,122 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 
 /***/ }),
 
+/***/ "./src/app/Model/alert.ts":
+/*!********************************!*\
+  !*** ./src/app/Model/alert.ts ***!
+  \********************************/
+/*! exports provided: Alert, AlertType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Alert", function() { return Alert; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AlertType", function() { return AlertType; });
+var Alert = /** @class */ (function () {
+    function Alert(init) {
+        Object.assign(this, init);
+    }
+    return Alert;
+}());
+
+var AlertType;
+(function (AlertType) {
+    AlertType[AlertType["Success"] = 0] = "Success";
+    AlertType[AlertType["Error"] = 1] = "Error";
+    AlertType[AlertType["Info"] = 2] = "Info";
+    AlertType[AlertType["Warning"] = 3] = "Warning";
+})(AlertType || (AlertType = {}));
+
+
+/***/ }),
+
+/***/ "./src/app/Service/alert.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/Service/alert.service.ts ***!
+  \******************************************/
+/*! exports provided: AlertService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AlertService", function() { return AlertService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _Model_alert__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Model/alert */ "./src/app/Model/alert.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+//import 'rxjs/add/operator/filter';
+
+
+var AlertService = /** @class */ (function () {
+    function AlertService(router) {
+        var _this = this;
+        this.router = router;
+        this.subject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.keepAfterRouteChange = false;
+        // clear alert messages on route change unless 'keepAfterRouteChange' flag is true
+        router.events.subscribe(function (event) {
+            if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationStart"]) {
+                if (_this.keepAfterRouteChange) {
+                    // only keep for a single route change
+                    _this.keepAfterRouteChange = false;
+                }
+                else {
+                    // clear alert messages
+                    _this.clear();
+                }
+            }
+        });
+    }
+    // subscribe to alerts
+    AlertService.prototype.getAlert = function (alertId) {
+        return this.subject.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (x) { return x && x.alertId === alertId; }));
+    };
+    // convenience methods
+    AlertService.prototype.success = function (message) {
+        this.alert(new _Model_alert__WEBPACK_IMPORTED_MODULE_4__["Alert"]({ message: message, type: _Model_alert__WEBPACK_IMPORTED_MODULE_4__["AlertType"].Success }));
+    };
+    AlertService.prototype.error = function (message) {
+        this.alert(new _Model_alert__WEBPACK_IMPORTED_MODULE_4__["Alert"]({ message: message, type: _Model_alert__WEBPACK_IMPORTED_MODULE_4__["AlertType"].Error }));
+    };
+    AlertService.prototype.info = function (message) {
+        this.alert(new _Model_alert__WEBPACK_IMPORTED_MODULE_4__["Alert"]({ message: message, type: _Model_alert__WEBPACK_IMPORTED_MODULE_4__["AlertType"].Info }));
+    };
+    AlertService.prototype.warn = function (message) {
+        this.alert(new _Model_alert__WEBPACK_IMPORTED_MODULE_4__["Alert"]({ message: message, type: _Model_alert__WEBPACK_IMPORTED_MODULE_4__["AlertType"].Warning }));
+    };
+    // main alert method    
+    AlertService.prototype.alert = function (alert) {
+        this.keepAfterRouteChange = alert.keepAfterRouteChange;
+        this.subject.next(alert);
+    };
+    // clear alerts
+    AlertService.prototype.clear = function (alertId) {
+        this.subject.next(new _Model_alert__WEBPACK_IMPORTED_MODULE_4__["Alert"]({ alertId: alertId }));
+    };
+    AlertService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+    ], AlertService);
+    return AlertService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/Service/authenticate.service.ts":
 /*!*************************************************!*\
   !*** ./src/app/Service/authenticate.service.ts ***!
@@ -225,6 +341,23 @@ var CustomerService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/Service/index.ts":
+/*!**********************************!*\
+  !*** ./src/app/Service/index.ts ***!
+  \**********************************/
+/*! exports provided: AlertService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _alert_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./alert.service */ "./src/app/Service/alert.service.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AlertService", function() { return _alert_service__WEBPACK_IMPORTED_MODULE_0__["AlertService"]; });
+
+
+
+
+/***/ }),
+
 /***/ "./src/app/Service/message.service.ts":
 /*!********************************************!*\
   !*** ./src/app/Service/message.service.ts ***!
@@ -364,6 +497,125 @@ var PlanService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/_directives/alert.component.css":
+/*!*************************************************!*\
+  !*** ./src/app/_directives/alert.component.css ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".alert {\n    background-color: tomato;\n    height: 40px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    font-size: 17px;\n}"
+
+/***/ }),
+
+/***/ "./src/app/_directives/alert.component.html":
+/*!**************************************************!*\
+  !*** ./src/app/_directives/alert.component.html ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngFor=\"let alert of alerts\" class=\"{{ cssClass(alert) }} alert-dismissable alert\">\n    {{alert.message}}&nbsp;\n    <a class=\"close\" (click)=\"removeAlert(alert)\">&times;</a>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/_directives/alert.component.ts":
+/*!************************************************!*\
+  !*** ./src/app/_directives/alert.component.ts ***!
+  \************************************************/
+/*! exports provided: AlertComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AlertComponent", function() { return AlertComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _Model_alert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Model/alert */ "./src/app/Model/alert.ts");
+/* harmony import */ var _Service_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Service/index */ "./src/app/Service/index.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AlertComponent = /** @class */ (function () {
+    function AlertComponent(alertService) {
+        this.alertService = alertService;
+        this.alerts = [];
+    }
+    AlertComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.alertService.getAlert(this.id).subscribe(function (alert) {
+            if (!alert.message) {
+                // clear alerts when an empty alert is received
+                _this.alerts = [];
+                return;
+            }
+            // add alert to array
+            _this.alerts.push(alert);
+        });
+    };
+    AlertComponent.prototype.removeAlert = function (alert) {
+        this.alerts = this.alerts.filter(function (x) { return x !== alert; });
+    };
+    AlertComponent.prototype.cssClass = function (alert) {
+        if (!alert) {
+            return;
+        }
+        // return css class based on alert type
+        switch (alert.type) {
+            case _Model_alert__WEBPACK_IMPORTED_MODULE_1__["AlertType"].Success:
+                return 'alert alert-success';
+            case _Model_alert__WEBPACK_IMPORTED_MODULE_1__["AlertType"].Error:
+                return 'alert alert-danger';
+            case _Model_alert__WEBPACK_IMPORTED_MODULE_1__["AlertType"].Info:
+                return 'alert alert-info';
+            case _Model_alert__WEBPACK_IMPORTED_MODULE_1__["AlertType"].Warning:
+                return 'alert alert-warning';
+        }
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", String)
+    ], AlertComponent.prototype, "id", void 0);
+    AlertComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'alert',
+            template: __webpack_require__(/*! ./alert.component.html */ "./src/app/_directives/alert.component.html"),
+            styles: [__webpack_require__(/*! ./alert.component.css */ "./src/app/_directives/alert.component.css")]
+        }),
+        __metadata("design:paramtypes", [_Service_index__WEBPACK_IMPORTED_MODULE_2__["AlertService"]])
+    ], AlertComponent);
+    return AlertComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/_directives/index.ts":
+/*!**************************************!*\
+  !*** ./src/app/_directives/index.ts ***!
+  \**************************************/
+/*! exports provided: AlertComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _alert_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./alert.component */ "./src/app/_directives/alert.component.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AlertComponent", function() { return _alert_component__WEBPACK_IMPORTED_MODULE_0__["AlertComponent"]; });
+
+
+
+
+/***/ }),
+
 /***/ "./src/app/app-routing.module.ts":
 /*!***************************************!*\
   !*** ./src/app/app-routing.module.ts ***!
@@ -443,7 +695,7 @@ module.exports = ".mat-elevation-z0{box-shadow:0 0 0 0 rgba(0,0,0,.2),0 0 0 0 rg
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <nav>\n    <a routerLink=\"register\">Register your first account</a>\n    <a routerLink=\"login\">  Sign in</a>\n  </nav> -->\n  <nav *ngIf = \"authenticate.isLoggedIn()\">\n    <a [routerLink]=\"['/yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a>\n    <!-- <a [routerLink]=\"['/customers', 'yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a> -->\n    <a [routerLink]=\"['/gain_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/2.png\" class=\"icon\" />\n    </a>\n    <a [routerLink]=\"['/lose_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/3.png\" class=\"icon\" />\n    </a>\n  </nav>\n  <!-- <section>\n    <header>\n      <h1>Customer Watch List</h1>\n      <p class=\"description\">Keeping track of the customer.</p>\n    </header>\n  </section> -->\n  \n<app-menu-bar></app-menu-bar>\n\n<!-- \n<app-menu-bar></app-menu-bar>\n<router-outlet></router-outlet> -->\n"
+module.exports = "<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <nav>\n    <a routerLink=\"register\">Register your first account</a>\n    <a routerLink=\"login\">  Sign in</a>\n  </nav> -->\n  <nav *ngIf = \"authenticate.isLoggedIn()\">\n    <a [routerLink]=\"['/yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a>\n    <!-- <a [routerLink]=\"['/customers', 'yoga']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/1.png\" class=\"icon\" />\n    </a> -->\n    <a [routerLink]=\"['/gain_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/2.png\" class=\"icon\" />\n    </a>\n    <a [routerLink]=\"['/lose_weight']\" routerLinkActive=\"active\">\n      <img src=\"../assets/media/3.png\" class=\"icon\" />\n    </a>\n  </nav>\n  <!-- <section>\n    <header>\n      <h1>Customer Watch List</h1>\n      <p class=\"description\">Keeping track of the customer.</p>\n    </header>\n  </section> -->\n\n<app-menu-bar></app-menu-bar>\n\n<!-- \n<app-menu-bar></app-menu-bar>\n<router-outlet></router-outlet> -->\n"
 
 /***/ }),
 
@@ -524,12 +776,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./my-dialog/my-dialog.component */ "./src/app/my-dialog/my-dialog.component.ts");
 /* harmony import */ var ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ng4-loading-spinner */ "./node_modules/ng4-loading-spinner/ng4-loading-spinner.umd.js");
 /* harmony import */ var ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(ng4_loading_spinner__WEBPACK_IMPORTED_MODULE_22__);
+/* harmony import */ var _directives_index__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./_directives/index */ "./src/app/_directives/index.ts");
+/* harmony import */ var _Service_index__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./Service/index */ "./src/app/Service/index.ts");
+/* harmony import */ var _Service_plan_service__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./Service/plan.service */ "./src/app/Service/plan.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -569,7 +827,8 @@ var AppModule = /** @class */ (function () {
                 _menu_bar_menu_bar_component__WEBPACK_IMPORTED_MODULE_13__["MenuBarComponent"],
                 _plan_list_plan_list_component__WEBPACK_IMPORTED_MODULE_19__["PlanListComponent"],
                 _plan_item_plan_item_component__WEBPACK_IMPORTED_MODULE_20__["PlanItemComponent"],
-                _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_21__["MyDialogComponent"]
+                _my_dialog_my_dialog_component__WEBPACK_IMPORTED_MODULE_21__["MyDialogComponent"],
+                _directives_index__WEBPACK_IMPORTED_MODULE_23__["AlertComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -596,7 +855,7 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatOptionModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"]
             ],
-            providers: [_Service_customer_service__WEBPACK_IMPORTED_MODULE_14__["CustomerService"], _Service_authenticate_service__WEBPACK_IMPORTED_MODULE_15__["AuthenticateService"], _Service_message_service__WEBPACK_IMPORTED_MODULE_18__["MessageService"]],
+            providers: [_Service_customer_service__WEBPACK_IMPORTED_MODULE_14__["CustomerService"], _Service_authenticate_service__WEBPACK_IMPORTED_MODULE_15__["AuthenticateService"], _Service_message_service__WEBPACK_IMPORTED_MODULE_18__["MessageService"], _Service_plan_service__WEBPACK_IMPORTED_MODULE_25__["PlanService"], _Service_index__WEBPACK_IMPORTED_MODULE_24__["AlertService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
     ], AppModule);
@@ -997,7 +1256,7 @@ module.exports = ".login-container {\n    max-width: 500px;\n    margin: 50px au
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"login-container\">\n  <form class=\"ui big form\" #loginForm=\"ngForm\" (ngSubmit)=\"onSubmit(loginForm)\">\n    <div class=\"field\">\n    <label>Username</label>\n    <input type=\"text\" name=\"username\" placeholder=\"Enter your username\" ngModel>\n  </div>\n  <div class=\"field\">\n    <label>Password</label>\n    <input type=\"password\" name=\"password\" placeholder=\"Enter your password\" ngModel>\n  </div>\n  \n  <button type=\"submit\" class=\"ui primary button float right floated\">Login</button>\n  </form>\n  </div>\n  "
+module.exports = "<div class=\"login-container\">\n  <alert></alert>  \n  <!-- <alert></alert> -->\n  <form class=\"ui big form\" #loginForm=\"ngForm\" (ngSubmit)=\"onSubmit(loginForm)\">\n    <div class=\"field\">\n    <label>Username</label>\n    <input type=\"text\" name=\"username\" placeholder=\"Enter your username\" ngModel>\n  </div>\n  <div class=\"field\">\n    <label>Password</label>\n    <input type=\"password\" name=\"password\" placeholder=\"Enter your password\" ngModel>\n  </div>\n  \n  <button type=\"submit\" class=\"ui primary button float right floated\">Login</button>\n  </form>\n  </div>\n  "
 
 /***/ }),
 
@@ -1014,6 +1273,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _Service_authenticate_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Service/authenticate.service */ "./src/app/Service/authenticate.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _Service_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Service/index */ "./src/app/Service/index.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1026,10 +1286,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(authenticate, router) {
+    function LoginComponent(authenticate, router, alertService) {
         this.authenticate = authenticate;
         this.router = router;
+        this.alertService = alertService;
     }
     LoginComponent.prototype.ngOnInit = function () {
     };
@@ -1043,13 +1305,23 @@ var LoginComponent = /** @class */ (function () {
         };
         console.log('onSubmit');
         this.authenticate.post(payload)
-            .subscribe(function (data) {
+            .toPromise().then(function (data) {
             console.log('subscribing');
             console.log(data);
             _this.authenticate.setToken(data.token);
             //localStorage.setItem('access_token',data.token);
             console.log("??" + _this.authenticate.isLoggedIn());
+            // this.authenticate.isLoggedIn()?   this.alertService.success("login success!"):  this.alertService.success("Login incorrect!");
             _this.router.navigate(['/all']);
+        }, function (err) {
+            if (err.status === 401) {
+                console.log(_this.authenticate.isLoggedIn());
+                console.log("2222222");
+                _this.alertService.info("Login incorrect!");
+            }
+            else {
+                console.log("333");
+            }
         });
     };
     LoginComponent = __decorate([
@@ -1059,7 +1331,8 @@ var LoginComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/login/login.component.css")]
         }),
         __metadata("design:paramtypes", [_Service_authenticate_service__WEBPACK_IMPORTED_MODULE_1__["AuthenticateService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _Service_index__WEBPACK_IMPORTED_MODULE_3__["AlertService"]])
     ], LoginComponent);
     return LoginComponent;
 }());
