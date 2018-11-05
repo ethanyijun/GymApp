@@ -1649,7 +1649,7 @@ var PlanItemComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n    margin-top: 50px;\n  }\n  \n.plan-item{\n  padding-left: 0px;\n  padding-bottom: 25px;\n}\n  \n.modify-button {\n  text-decoration: none;\n}\n  \n.buttons {\n  display: flex;\n}\n\n"
+module.exports = ".container {\n    margin-top: 50px;\n  }\n  \n.plan-item{\n  padding-left: 0px;\n  padding-bottom: 25px;\n}\n  \n.modify-button {\n  text-decoration: none;\n}\n  \n.buttons {\n  display: flex;\n}\n  \n.plans {\n  display: flex;\n  justify-content: center;\n}\n"
 
 /***/ }),
 
@@ -1660,7 +1660,7 @@ module.exports = ".container {\n    margin-top: 50px;\n  }\n  \n.plan-item{\n  p
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui container\">\n  <ng4-loading-spinner> </ng4-loading-spinner>\n  <div class=\"ui grid\">\n    <div *ngFor=\"let plan of plans\">         \n      <div class=\"ui cards plan-item\">\n        <div class=\"card\">\n          <div class=\"content\">\n              <div class=\"header\">\n                {{plan.title}}\n              </div>\n              <br>\n              <div class=\"description\">\n                <label class=\"header\">Coach: </label>\n                {{plan.coach}}\n              </div>\n              <div class=\"description\">\n                <label class=\"header\">type: </label>\n                {{plan.type}}\n              </div>\n              <br>\n            <div class=\"extra content\" buttons>\n              <div class=\"ui two buttons\">\n                <div *ngIf = \"authenticate.isLoggedIn()\"><a class=\"modify-button\" routerLink=\"/plan-detail/{{plan._id}}\"><button class=\"ui positive basic button\">Modify</button></a>\n                </div>\n                <div *ngIf = \"authenticate.isLoggedIn()\"><button class=\"ui negative basic button\" (click)=\"deletePlan(plan._id)\">Delete</button></div>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"ui container\">\n  <ng4-loading-spinner> </ng4-loading-spinner>\n    <div class=\"ui grid\" *ngIf = \"authenticate.isLoggedIn()\">\n      <div *ngFor=\"let plan of plans\">         \n        <div class=\"ui cards plan-item\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{plan.title}}\n                </div>\n                <br>\n                <div class=\"description\">\n                  <label class=\"header\">Coach: </label>\n                  {{plan.coach}}\n                </div>\n                <div class=\"description\">\n                  <label class=\"header\">type: </label>\n                  {{plan.type}}\n                </div>\n                <br>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui two buttons\">\n                  <div><a class=\"modify-button\" routerLink=\"/plan-detail/{{plan._id}}\"><button class=\"ui positive basic button\">Modify</button></a>\n                  </div>\n                  <div><button class=\"ui negative basic button\" (click)=\"deletePlan(plan._id)\">Delete</button></div>\n                </div>\n               </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"ui grid plans\" *ngIf = \"authenticate.isLoggedOut()\">\n      <div *ngFor=\"let plan of plans\">         \n        <div class=\"ui cards plan-item\">\n          <div class=\"card\">\n            <div class=\"content\">\n                <div class=\"header\">\n                  {{plan.title}}\n                </div>\n                <br>\n                <div class=\"description\">\n                  <label class=\"header\">Coach: </label>\n                  {{plan.coach}}\n                </div>\n                <div class=\"description\">\n                  <label class=\"header\">type: </label>\n                  {{plan.type}}\n                </div>\n                <br>\n              <div class=\"extra content\" buttons>\n                <div class=\"ui two buttons\">\n                  <div *ngIf = \"authenticate.isLoggedIn()\"><a class=\"modify-button\" routerLink=\"/plan-detail/{{plan._id}}\"><button class=\"ui positive basic button\">Modify</button></a>\n                  </div>\n                  <div *ngIf = \"authenticate.isLoggedIn()\"><button class=\"ui negative basic button\" (click)=\"deletePlan(plan._id)\">Delete</button></div>\n                </div>\n               </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -2023,7 +2023,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/newAIP/AIP/NewAIP/aip/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/aip/GymApp/src/main.ts */"./src/main.ts");
 
 
 /***/ })
