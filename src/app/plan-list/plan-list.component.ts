@@ -19,7 +19,7 @@ export class PlanListComponent implements OnInit {
   public dialog: MatDialog,
   private spinnerService: Ng4LoadingSpinnerService,
   private router: Router,
-  private authenticate:AuthenticateService ) { }
+  public authenticate:AuthenticateService ) { }
   plan: Plan;
 
   ngOnInit() {
