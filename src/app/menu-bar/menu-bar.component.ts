@@ -8,7 +8,7 @@ import { AuthenticateService } from '../Service/authenticate.service';
 })
 export class MenuBarComponent implements OnInit {
 
-  constructor(private authenticate: AuthenticateService) { }
+  constructor(public authenticate: AuthenticateService) { }
 
   ngOnInit() {
   }

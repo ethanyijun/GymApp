@@ -7,6 +7,6 @@ import { AuthenticateService } from './Service/authenticate.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private authenticate: AuthenticateService) { }
+  constructor(public authenticate: AuthenticateService) { }
   title = 'gym';
 }
