@@ -1,5 +1,5 @@
 <div class="ui menu header">
-  <div class="ui container">
+  <div class="ui container header-content">
     <div class="item" *ngIf = "authenticate.isLoggedIn()">
       <a [routerLink]="['/all']" aria-label="Customer Dashboard">
         <i class="icon users large blue" aria-hidden="true"></i>
@@ -10,7 +10,7 @@
     </div>
     <div *ngIf = "authenticate.isLoggedOut()" class="header item">
       <h1>
-        Welcome to Fitness Anytime!
+        Welcome to Mordern Fitness!
       </h1>
     </div>
       <!-- <div class="item" *ngIf="authenticate.isLoggedOut()"> -->
@@ -47,7 +47,7 @@
       <!-- </div> -->
     </div>
     <!-- <div class="right menu" *ngIf="authenticate.isLoggedIn()"> -->
-    <div class="right menu">
+    <div class="right menu" *ngIf = "authenticate.isLoggedIn()">
       <button class="ui primary button logout" (click)="logout()">logout</button>
     </div>
   </div>

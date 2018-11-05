@@ -1348,7 +1348,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "button.ui.primary.button.logout {\n    width: 125px;\n}"
+module.exports = "button.ui.primary.button.logout {\n    width: 125px;\n}\n\n.header-content {\n    display: flex;\n    justify-content: center;\n}"
 
 /***/ }),
 
@@ -1359,7 +1359,7 @@ module.exports = "button.ui.primary.button.logout {\n    width: 125px;\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container\">\n    <div class=\"item\" *ngIf = \"authenticate.isLoggedIn()\">\n      <a [routerLink]=\"['/all']\" aria-label=\"Customer Dashboard\">\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n      </a>\n    </div>\n    <div *ngIf = \"authenticate.isLoggedIn()\" class=\"header item\">\n      <h1>Customer Dashboard</h1>\n    </div>\n    <div *ngIf = \"authenticate.isLoggedOut()\" class=\"header item\">\n      <h1>\n        Welcome to Fitness Anytime!\n      </h1>\n    </div>\n      <!-- <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\"> -->\n    <div class=\"item\">\n      <a routerLink=\"../register\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign Up\n          </i>\n        </button>\n      </a>\n        <!-- <div class=\"item\"> -->\n      <a routerLink=\"../login\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign In\n          </i>\n        </button>\n      </a>\n      <a routerLink=\"../plans\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Plan list\n          </i>\n        </button>\n      </a>\n      <a routerLink=\"../newplan\" *ngIf = \"authenticate.isLoggedIn()\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            New plan\n          </i>\n        </button>\n      </a>\n      <!-- </div> -->\n    </div>\n    <!-- <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\"> -->\n    <div class=\"right menu\">\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n    </div>\n  </div>\n \n</div>\n\n<div class=\"ui container\">\n    <router-outlet></router-outlet> \n</div>\n\n"
+module.exports = "<div class=\"ui menu header\">\n  <div class=\"ui container header-content\">\n    <div class=\"item\" *ngIf = \"authenticate.isLoggedIn()\">\n      <a [routerLink]=\"['/all']\" aria-label=\"Customer Dashboard\">\n        <i class=\"icon users large blue\" aria-hidden=\"true\"></i>\n      </a>\n    </div>\n    <div *ngIf = \"authenticate.isLoggedIn()\" class=\"header item\">\n      <h1>Customer Dashboard</h1>\n    </div>\n    <div *ngIf = \"authenticate.isLoggedOut()\" class=\"header item\">\n      <h1>\n        Welcome to Mordern Fitness!\n      </h1>\n    </div>\n      <!-- <div class=\"item\" *ngIf=\"authenticate.isLoggedOut()\"> -->\n    <div class=\"item\">\n      <a routerLink=\"../register\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign Up\n          </i>\n        </button>\n      </a>\n        <!-- <div class=\"item\"> -->\n      <a routerLink=\"../login\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Sign In\n          </i>\n        </button>\n      </a>\n      <a routerLink=\"../plans\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            Plan list\n          </i>\n        </button>\n      </a>\n      <a routerLink=\"../newplan\" *ngIf = \"authenticate.isLoggedIn()\">\n        <button class=\"ui basic button\">\n          <i class=\"add user icon\" aria-hideen=\"true\">\n            New plan\n          </i>\n        </button>\n      </a>\n      <!-- </div> -->\n    </div>\n    <!-- <div class=\"right menu\" *ngIf=\"authenticate.isLoggedIn()\"> -->\n    <div class=\"right menu\" *ngIf = \"authenticate.isLoggedIn()\">\n      <button class=\"ui primary button logout\" (click)=\"logout()\">logout</button>\n    </div>\n  </div>\n \n</div>\n\n<div class=\"ui container\">\n    <router-outlet></router-outlet> \n</div>\n\n"
 
 /***/ }),
 
@@ -2023,7 +2023,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/aip/GymApp/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yijungai/Desktop/newAIP/AIP/NewAIP/aip/src/main.ts */"./src/main.ts");
 
 
 /***/ })
