@@ -24,13 +24,6 @@ app.use('/api', userRouter);
 app.use('/api', customerRouter);
 
 
-
-// app.use(checkJwt({ secret: process.env.JWT_SECRET })
-// .unless({ path: ['/api/login',
-//                 , '/login']
-//           }));
-
-
 MongoClient.connect(process.env.DB_CONN, (err, client) => {
 
     console.log('connected to mongodb...');

@@ -8,18 +8,6 @@ const bcrypt = require('bcrypt');
 // require the file which storing the configuration
 require('dotenv').config();
 
-// set these pages as no authentication needed
-// router.use(checkJwt({ secret: process.env.JWT_SECRET })
-// .unless({ path: ['/api/login','/api/register','/api/plans','/add-user', 
-//                 '/api/add-user', '/customers', '/login', '/register', 
-//                 '/plans', '/add-plan']
-//           }));
-// catch the unauthorize error if the page did not authenticate
-// router.use((err, req, res, next) => {
-//     if (err.name === 'UnauthorizedError') {
-//         res.status(401).send({ error: err.message})  
-//     }
-// });
 router.use(checkJwt({ secret: process.env.JWT_SECRET })
 .unless({ path: ['/api/login',
                 , '/login','/api/register']
@@ -71,7 +59,6 @@ router.post('/login', (req, res) => {
     const db = req.app.locals.db;
     const user = req.body;
     const usersCollection = db.collection('users');
-    //console.log("user name: "+user[username]);
     // search user by username in database
     usersCollection.findOne({ username: user.username }, (err, result) => {
         if (err) {

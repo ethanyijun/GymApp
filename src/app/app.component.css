@@ -29,3 +29,6 @@
   }
   section > header .description {
     font-style: italic;}
+  app-menu-bar {
+      width: 100%;
+  }
