@@ -12,7 +12,6 @@ export class MenuBarComponent implements OnInit {
 
   ngOnInit() {
   }
-
   logout() {
     this.authenticate.logOut();
   }
