@@ -6,7 +6,7 @@
     <a routerLink="register">Register your first account</a>
     <a routerLink="login">  Sign in</a>
   </nav> -->
-  <nav>
+  <nav *ngIf = "authenticate.isLoggedIn()">
     <a [routerLink]="['/yoga']" routerLinkActive="active">
       <img src="../assets/media/1.png" class="icon" />
     </a>
