@@ -85,15 +85,17 @@ export class RegisterComponent implements OnInit {
     };
 
     this.customerService.postCustomer(customer)
-    .subscribe(data => {
+    .toPromise().then(data => {
       console.log('posting new data');
       form.reset();
       this.newCustomer = data;
       console.log('new data posted');
-      if(this.authenticateService.isLoggedOut()){
+    }).then(()=>{
+      if(this.authenticateService.isLoggedIn()){
+        this.router.navigateByUrl('/all');
+      }else{
         this.alertService.success("Register success!");
       }
     });
-    this.router.navigateByUrl('/');
   }
 }

@@ -1953,16 +1953,19 @@ var RegisterComponent = /** @class */ (function () {
             approved: 'N'
         };
         this.customerService.postCustomer(customer)
-            .subscribe(function (data) {
+            .toPromise().then(function (data) {
             console.log('posting new data');
             form.reset();
             _this.newCustomer = data;
             console.log('new data posted');
-            if (_this.authenticateService.isLoggedOut()) {
+        }).then(function () {
+            if (_this.authenticateService.isLoggedIn()) {
+                _this.router.navigateByUrl('/all');
+            }
+            else {
                 _this.alertService.success("Register success!");
             }
         });
-        this.router.navigateByUrl('/');
     };
     RegisterComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
