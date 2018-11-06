@@ -1518,6 +1518,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _Service_plan_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Service/plan.service */ "./src/app/Service/plan.service.ts");
+/* harmony import */ var _Service_authenticate_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Service/authenticate.service */ "./src/app/Service/authenticate.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1532,27 +1533,36 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var PlanItemComponent = /** @class */ (function () {
-    function PlanItemComponent(plans, route, location, router) {
+    function PlanItemComponent(plans, route, location, router, authenticate) {
         this.plans = plans;
         this.route = route;
         this.location = location;
         this.router = router;
+        this.authenticate = authenticate;
     }
     // @Input() isDone: boolean;
     PlanItemComponent.prototype.ngOnInit = function () {
         var _this = this;
         var id;
-        this.route.params.subscribe(function (params) {
-            id = params['id'];
-            if (id === undefined) {
-                console.log("undddd");
-            }
-            else {
-                _this.getPlan(id);
-                console.log("deeeee");
-            }
-        });
+        if (this.authenticate.isLoggedIn()) {
+            this.route.params.subscribe(function (params) {
+                id = params['id'];
+                // if(id === undefined){
+                //   console.log("undddd");
+                // }else{
+                if (id !== undefined) {
+                    console.log("deeeee");
+                    _this.getPlan(id);
+                }
+                //   console.log("deeeee");
+                // }
+            });
+        }
+        else {
+            this.router.navigate(['/login']);
+        }
     };
     // upload icon
     // onFileChanged(event) {
@@ -1611,14 +1621,17 @@ var PlanItemComponent = /** @class */ (function () {
             coach: formInput.coach,
             type: formInput.type,
         };
-        this.plans.postPlan(plan)
-            .subscribe(function (data) {
-            console.log('posting new plan');
-            form.reset();
-            _this.plan = data;
-            console.log('new plan posted');
-            _this.router.navigateByUrl('/plans');
-        });
+        console.log(this.authenticate.isLoggedIn());
+        if (this.authenticate.isLoggedIn()) {
+            this.plans.postPlan(plan)
+                .subscribe(function (data) {
+                console.log('posting new plan');
+                form.reset();
+                _this.plan = data;
+                console.log('new plan posted');
+                _this.router.navigateByUrl('/plans');
+            });
+        }
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -1633,7 +1646,8 @@ var PlanItemComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_Service_plan_service__WEBPACK_IMPORTED_MODULE_3__["PlanService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
             _angular_common__WEBPACK_IMPORTED_MODULE_1__["Location"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _Service_authenticate_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticateService"]])
     ], PlanItemComponent);
     return PlanItemComponent;
 }());

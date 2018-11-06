@@ -5,6 +5,7 @@ import { Plan } from '../Model/Plan';
 import { PlanService } from '../Service/plan.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticateService } from '../Service/authenticate.service';
 
 @Component({
   selector: 'app-plan-item',
@@ -16,7 +17,8 @@ export class PlanItemComponent implements OnInit {
   constructor(private plans: PlanService, 
   private route: ActivatedRoute,
   private location: Location,
-  private router: Router) { }
+  private router: Router,
+  public authenticate: AuthenticateService) { }
   selectedFile: File;
 
 
@@ -24,16 +26,27 @@ export class PlanItemComponent implements OnInit {
  // @Input() isDone: boolean;
   ngOnInit() {
     let id;
-    this.route.params.subscribe(params => {
-      id = params['id'];
-      if(id === undefined){
-        console.log("undddd");
-      }else{
-        this.getPlan(id);
-        console.log("deeeee");
-      }
+    if(this.authenticate.isLoggedIn()){
+      this.route.params.subscribe(params => {
+        id = params['id'];
+        // if(id === undefined){
+        //   console.log("undddd");
+        // }else{
+          if(id !== undefined){
+            console.log("deeeee");
+            this.getPlan(id);
+          }
 
-    });
+        //   console.log("deeeee");
+        // }
+      });
+    }
+    else{
+      this.router.navigate(['/login']);
+      
+    }
+
+
   }
 
   // upload icon
@@ -100,15 +113,19 @@ export class PlanItemComponent implements OnInit {
       coach: formInput.coach,
       type: formInput.type,
     };
+    console.log(this.authenticate.isLoggedIn());
+    if(this.authenticate.isLoggedIn()){
 
-    this.plans.postPlan(plan)
-    .subscribe(data => {
-      console.log('posting new plan');
-      form.reset();
-      this.plan = data;
-      console.log('new plan posted');
-      this.router.navigateByUrl('/plans');
-    });
+      this.plans.postPlan(plan)
+      .subscribe(data => {
+        console.log('posting new plan');
+        form.reset();
+        this.plan = data;
+        console.log('new plan posted');
+        this.router.navigateByUrl('/plans');
+      });
+    }
+
 
     
   }
