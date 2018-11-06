@@ -23,7 +23,7 @@
         </button>
       </a>
         <!-- <div class="item"> -->
-      <a routerLink="../login">
+      <a routerLink="../login" *ngIf = "authenticate.isLoggedOut()">
         <button class="ui basic button">
           <i class="add user icon" aria-hideen="true">
             Sign In
