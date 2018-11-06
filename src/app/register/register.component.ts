@@ -7,6 +7,8 @@ import {FormControl, Validators} from '@angular/forms';
 import { Plan } from '../Model/Plan';
 import { PlanService } from '../Service/plan.service';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from '../Service/index';
+import { AuthenticateService } from '../Service/authenticate.service';
 
 @Component({
   selector: 'app-register',
@@ -36,7 +38,9 @@ export class RegisterComponent implements OnInit {
   constructor(private customerService: CustomerService,
     private planservice: PlanService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private alertService: AlertService,
+    public authenticateService: AuthenticateService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
@@ -86,8 +90,10 @@ export class RegisterComponent implements OnInit {
       form.reset();
       this.newCustomer = data;
       console.log('new data posted');
+      if(this.authenticateService.isLoggedOut()){
+        this.alertService.success("Register success!");
+      }
     });
-
     this.router.navigateByUrl('/');
   }
 }

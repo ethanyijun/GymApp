@@ -1,9 +1,16 @@
 .alert {
     padding: 20px;
-    background-color: #f44336; /* Red */
     color: white;
     margin-bottom: 15px;
     border-radius: 8px;
+}
+
+.alert-info {
+    background-color: #f44336; /* Red */
+}
+
+.alert-success {
+    background-color: limegreen;
 }
 
 /* The close button */

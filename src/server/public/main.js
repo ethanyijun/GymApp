@@ -504,7 +504,7 @@ var PlanService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".alert {\n    padding: 20px;\n    background-color: #f44336; /* Red */\n    color: white;\n    margin-bottom: 15px;\n    border-radius: 8px;\n}\n\n/* The close button */\n\n.closebtn {\n    margin-left: 15px;\n    color: white;\n    font-weight: bold;\n    float: right;\n    font-size: 22px;\n    line-height: 20px;\n    cursor: pointer;\n    transition: 0.3s;\n}\n\n/* When moving the mouse over the close button */\n\n.closebtn:hover {\n    color: black;\n}"
+module.exports = ".alert {\n    padding: 20px;\n    color: white;\n    margin-bottom: 15px;\n    border-radius: 8px;\n}\n\n.alert-info {\n    background-color: #f44336; /* Red */\n}\n\n.alert-success {\n    background-color: limegreen;\n}\n\n/* The close button */\n\n.closebtn {\n    margin-left: 15px;\n    color: white;\n    font-weight: bold;\n    float: right;\n    font-size: 22px;\n    line-height: 20px;\n    cursor: pointer;\n    transition: 0.3s;\n}\n\n/* When moving the mouse over the close button */\n\n.closebtn:hover {\n    color: black;\n}"
 
 /***/ }),
 
@@ -515,7 +515,7 @@ module.exports = ".alert {\n    padding: 20px;\n    background-color: #f44336; /
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div *ngFor=\"let alert of alerts\" class=\"{{ cssClass(alert) }} alert-dismissable alert\">\n    {{alert.message}}&nbsp;\n    <a class=\"close\" (click)=\"removeAlert(alert)\">&times;</a>\n</div> -->\n<div *ngFor=\"let alert of alerts\" class=\"{{ cssClass(alert) }} alert-dismissable alert\">\n    <span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span> \n    {{alert.message}}\n</div>"
+module.exports = "<!-- <div *ngFor=\"let alert of alerts\" class=\"{{ cssClass(alert) }} alert-dismissable alert\">\n    {{alert.message}}&nbsp;\n    <a class=\"close\" (click)=\"removeAlert(alert)\">&times;</a>\n</div> -->\n<div *ngFor=\"let alert of alerts\" class=\"{{ cssClass(alert) }} alert-dismissable\">\n    <span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span> \n    {{alert.message}}\n</div>"
 
 /***/ }),
 
@@ -1862,7 +1862,7 @@ module.exports = ".register-container {\n    max-width: 500px;\n    margin: 50px
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"register-container\">\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email> \n    </div>\n\n    <div class=\"field\">\n      <label>Upload</label>\n      <input \n      style=\"display: none\" \n      type=\"file\" (change)=\"onFileChanged($event)\" \n      #fileInput>\n      <button type='button' (click)=\"fileInput.click()\">Select File</button>\n      <label>{{fileName}}</label>\n      <!-- <button (click)=\"onUpload()\">Upload!</button>         -->\n    </div>\n    <!-- <div class=\"inline fields\">\n        <label>Interested training plan:</label>\n          <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n          <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n          <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n    </div> -->\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n\n  </form>\n\n    <mat-form-field>\n        <mat-select placeholder=\"Plan selection\" [formControl]=\"planControl\" [(ngModel)]=\"selectedValue\" name = \"plans\" required>\n          <mat-option *ngFor=\"let plan of plans\" [value]=\"plan\">\n            {{plan.title}}\n          </mat-option>\n        </mat-select>\n        <mat-hint>{{planControl.value?.content}}</mat-hint>\n    </mat-form-field>\n</div>"
+module.exports = "<div class=\"register-container\">\n  <alert></alert>\n  <form name=\"registerForm\" class=\"ui big form\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm)\">\n    <div class=\"field\">\n      <label>First Name</label>\n      <input type=\"text\" name=\"firstName\" placeholder=\"First Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Last Name</label>\n      <input type=\"text\" name=\"lastName\" placeholder=\"Last Name\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Phone</label>\n      <input type=\"text\" name=\"phone\" placeholder=\"Phone\" ngModel>\n    </div>\n    <div class=\"field\">\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" placeholder=\"Email\" ngModel email> \n    </div>\n\n    <div class=\"field\">\n      <label>Upload</label>\n      <input \n      style=\"display: none\" \n      type=\"file\" (change)=\"onFileChanged($event)\" \n      #fileInput>\n      <button type='button' (click)=\"fileInput.click()\">Select File</button>\n      <label>{{fileName}}</label>\n      <!-- <button (click)=\"onUpload()\">Upload!</button>         -->\n    </div>\n    <!-- <div class=\"inline fields\">\n        <label>Interested training plan:</label>\n          <input type=\"radio\" required name=\"type\" value=\"A\" ngModel> A-Slim<br>\n          <input type=\"radio\" required name=\"type\" value=\"B\" ngModel> B-Muscle<br>\n          <input type=\"radio\" required name=\"type\" value=\"C\" ngModel> C-Fitness<br>\n    </div> -->\n    <button type=\"submit\" class=\"ui primary button float right floated\">Register</button>\n\n  </form>\n\n    <mat-form-field>\n        <mat-select placeholder=\"Plan selection\" [formControl]=\"planControl\" [(ngModel)]=\"selectedValue\" name = \"plans\" required>\n          <mat-option *ngFor=\"let plan of plans\" [value]=\"plan\">\n            {{plan.title}}\n          </mat-option>\n        </mat-select>\n        <mat-hint>{{planControl.value?.content}}</mat-hint>\n    </mat-form-field>\n</div>"
 
 /***/ }),
 
@@ -1881,6 +1881,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _Service_plan_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Service/plan.service */ "./src/app/Service/plan.service.ts");
+/* harmony import */ var _Service_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Service/index */ "./src/app/Service/index.ts");
+/* harmony import */ var _Service_authenticate_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Service/authenticate.service */ "./src/app/Service/authenticate.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1896,13 +1898,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var RegisterComponent = /** @class */ (function () {
     // customers: Customer[];
-    function RegisterComponent(customerService, planservice, activatedRoute, router) {
+    function RegisterComponent(customerService, planservice, activatedRoute, router, alertService, authenticateService) {
         this.customerService = customerService;
         this.planservice = planservice;
         this.activatedRoute = activatedRoute;
         this.router = router;
+        this.alertService = alertService;
+        this.authenticateService = authenticateService;
         // plans: Plan[] = [
         //   {name: 'Yoga', description: 'Yoga description'},
         //   {name: 'Gain weight', description: 'Gain weight description'},
@@ -1952,6 +1958,9 @@ var RegisterComponent = /** @class */ (function () {
             form.reset();
             _this.newCustomer = data;
             console.log('new data posted');
+            if (_this.authenticateService.isLoggedOut()) {
+                _this.alertService.success("Register success!");
+            }
         });
         this.router.navigateByUrl('/');
     };
@@ -1964,7 +1973,9 @@ var RegisterComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_Service_customer_service__WEBPACK_IMPORTED_MODULE_1__["CustomerService"],
             _Service_plan_service__WEBPACK_IMPORTED_MODULE_4__["PlanService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _Service_index__WEBPACK_IMPORTED_MODULE_5__["AlertService"],
+            _Service_authenticate_service__WEBPACK_IMPORTED_MODULE_6__["AuthenticateService"]])
     ], RegisterComponent);
     return RegisterComponent;
 }());
