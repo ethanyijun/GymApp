@@ -1314,13 +1314,18 @@ var LoginComponent = /** @class */ (function () {
             // this.authenticate.isLoggedIn()?   this.alertService.success("login success!"):  this.alertService.success("Login incorrect!");
             _this.router.navigate(['/all']);
         }, function (err) {
+            _this.alertService.clear();
             if (err.status === 401) {
                 console.log(_this.authenticate.isLoggedIn());
                 console.log("2222222");
                 _this.alertService.info("Login incorrect!");
             }
-            else {
+            else if (err.status == 404) {
+                _this.alertService.info("User not exist!");
                 console.log("333");
+            }
+            else {
+                _this.alertService.info("Login failed!");
             }
         });
     };

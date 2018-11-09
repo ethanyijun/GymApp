@@ -39,13 +39,18 @@ export class LoginComponent implements OnInit {
 
      // this.authenticate.isLoggedIn()?   this.alertService.success("login success!"):  this.alertService.success("Login incorrect!");
       this.router.navigate(['/all']);
-    },(err) => {   
+    },(err) => {
+      this.alertService.clear();   
       if (err.status === 401) { 
         console.log(this.authenticate.isLoggedIn());
         console.log("2222222");   
         this.alertService.info("Login incorrect!");}
-        else {
+        else if (err.status == 404) {
+          this.alertService.info("User not exist!");
           console.log("333");
+        }
+        else {
+          this.alertService.info("Login failed!");
         }
     });
   }
